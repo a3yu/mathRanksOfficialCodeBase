@@ -1,0 +1,26 @@
+{
+  "trigger": true,
+  "modules": [
+    "verification-link"
+  ],
+  "parentResource": "mathrankscodebase8d2a84d6",
+  "functionName": "mathrankscodebase8d2a84d6CustomMessage",
+  "resourceName": "mathrankscodebase8d2a84d6CustomMessage",
+  "parentStack": "auth",
+  "triggerEnvs": [
+    {
+      "key": "RESOURCENAME",
+      "value": "resourceName"
+    }
+  ],
+  "triggerDir": "C:\\Users\\adnyu\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\CustomMessage",
+  "triggerTemplate": "CustomMessage.json.ejs",
+  "triggerEventPath": "CustomMessage.event.json",
+  "roleName": "mathrankscodebase8d2a84d6CustomMessage",
+  "skipEdit": true,
+  "REDIRECTURL": "www.mathranks.com",
+  "EMAILSUBJECT": "Security Verification",
+  "EMAILMESSAGE": "",
+  "RESOURCENAME": "resourceName",
+  "enableCors": false
+}

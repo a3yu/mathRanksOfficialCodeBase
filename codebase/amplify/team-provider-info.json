@@ -10,6 +10,20 @@
       "StackName": "amplify-mathrankscodebase-dev-215432",
       "StackId": "arn:aws:cloudformation:us-east-2:160728409712:stack/amplify-mathrankscodebase-dev-215432/73fe7140-03bd-11ec-ae1f-02dba6ea5a04",
       "AmplifyAppId": "dmjg8b3ifkwwo"
+    },
+    "categories": {
+      "function": {
+        "mathrankscodebase8d2a84d6CustomMessage": {
+          "REDIRECTURL": "www.mathranks.com",
+          "EMAILSUBJECT": "Security Verification",
+          "EMAILMESSAGE": "",
+          "deploymentBucketName": "amplify-mathrankscodebase-dev-215432-deployment",
+          "s3Key": "amplify-builds/mathrankscodebase8d2a84d6CustomMessage-32614b54415261426851-build.zip"
+        }
+      },
+      "auth": {
+        "mathrankscodebase8d2a84d6": {}
+      }
     }
   }
 }

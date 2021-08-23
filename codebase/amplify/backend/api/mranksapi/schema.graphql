@@ -1,0 +1,27 @@
+type Announcement
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete, read] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  announcementID: ID!
+  announcement: Announcement @connection(fields: ["announcementID"])
+}
+
+type Contest
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete, read] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  contestID: ID!
+  contest: Contest @connection(fields: ["contestID"])
+}
