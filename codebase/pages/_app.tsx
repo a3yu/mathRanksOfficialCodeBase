@@ -5,6 +5,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 import Navbar from "../components/Navigation";
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "../src/aws-exports";
+
+Amplify.configure({ ...awsconfig, ssr: true });
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
