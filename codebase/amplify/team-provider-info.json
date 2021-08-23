@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mathrankscodebase-dev-215432-authRole",
+      "UnauthRoleArn": "arn:aws:iam::160728409712:role/amplify-mathrankscodebase-dev-215432-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::160728409712:role/amplify-mathrankscodebase-dev-215432-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-mathrankscodebase-dev-215432-deployment",
+      "UnauthRoleName": "amplify-mathrankscodebase-dev-215432-unauthRole",
+      "StackName": "amplify-mathrankscodebase-dev-215432",
+      "StackId": "arn:aws:cloudformation:us-east-2:160728409712:stack/amplify-mathrankscodebase-dev-215432/73fe7140-03bd-11ec-ae1f-02dba6ea5a04",
+      "AmplifyAppId": "dmjg8b3ifkwwo"
+    }
+  }
+}

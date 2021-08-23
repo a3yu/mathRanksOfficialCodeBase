@@ -1,0 +1,46 @@
+$black-main: #3b3b3b;
+$font-color: #c5c4c4;
+$font-color-hover: #7e7e7e;
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+.logo {
+  transform: scale(0.25);
+  display: block;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  margin-left: -10.5em;
+  margin-top: -0.75em;
+  height: 50px;
+  margin-right: -11em;
+}
+.logo:hover {
+  cursor: pointer;
+}
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: $black-main;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: $font-color;
+    text-align: center;
+    padding: 14px 18px;
+    text-decoration: none;
+    font-family: "Merriweather Sans", sans-serif;
+    font-size: 0.9em;
+  }
+  a:hover {
+    color: $font-color-hover;
+  }
+}
