@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "mathrankscodebase8d2a84d6_identitypool_8d2a84d6",
+    "identityPoolName": "mathrankscodebased3f2d09b_identitypool_d3f2d09b",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "mathra8d2a84d6",
-    "userPoolName": "mathrankscodebase8d2a84d6_userpool_8d2a84d6",
+    "resourceNameTruncated": "mathrad3f2d09b",
+    "userPoolName": "mathrankscodebased3f2d09b_userpool_d3f2d09b",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,11 +18,9 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email",
-        "name"
+        "email"
     ],
     "aliasAttributes": [
-        "email",
         "preferred_username"
     ],
     "userpoolClientGenerateSecret": false,
@@ -33,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "mathra8d2a84d6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "mathrad3f2d09b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8d2a84d6",
-    "resourceName": "mathrankscodebase8d2a84d6",
+    "sharedId": "d3f2d09b",
+    "resourceName": "mathrankscodebased3f2d09b",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -51,26 +49,14 @@
         ]
     },
     "useDefault": "default",
-    "triggers": "{\n  \"CustomMessage\": [\n    \"verification-link\"\n  ]\n}",
+    "triggers": "{}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
-    "verificationBucketName": "mathrankscodebase8d2a84d6verificationbucket",
     "usernameCaseSensitive": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"CustomMessage\",\n    \"lambdaFunctionName\": \"mathrankscodebase8d2a84d6CustomMessage\"\n  }\n]",
     "breakCircularDependency": true,
     "permissions": [],
-    "dependsOn": [
-        {
-            "category": "function",
-            "resourceName": "mathrankscodebase8d2a84d6CustomMessage",
-            "triggerProvider": "Cognito",
-            "attributes": [
-                "Arn",
-                "Name"
-            ]
-        }
-    ]
+    "dependsOn": []
 }

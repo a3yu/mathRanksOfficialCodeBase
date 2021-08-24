@@ -43,4 +43,15 @@ $font-color-hover: #7e7e7e;
   a:hover {
     color: $font-color-hover;
   }
+  .account {
+    display: block;
+    color: $font-color;
+    text-align: center;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Merriweather Sans", sans-serif;
+    li {
+      float: right;
+    }
+  }
 }

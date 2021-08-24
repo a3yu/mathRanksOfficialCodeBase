@@ -45,6 +45,18 @@ export default function Navbar() {
             <a>Ranking</a>
           </Link>
         </li>
+        <ul className={styles.account}>
+          <li>
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup">
+              <a>Sign Up</a>
+            </Link>
+          </li>
+        </ul>
       </ul>
     </div>
   );

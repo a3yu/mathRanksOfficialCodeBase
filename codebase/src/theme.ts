@@ -52,7 +52,7 @@ const theme = createTheme({
       "Noto Color Emoji",
     ].join(","),
     h1: {
-      fontSize: "4rem",
+      fontSize: "2.75rem",
       fontWeight: 700,
       lineHeight: 1,
       color: "#fff",
@@ -81,6 +81,7 @@ const theme = createTheme({
       color: "#9CA3AF",
     },
   },
+  spacing: 8,
 });
 
 export default responsiveFontSizes(theme);
