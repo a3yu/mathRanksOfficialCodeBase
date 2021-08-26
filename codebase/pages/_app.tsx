@@ -8,6 +8,7 @@ import Navbar from "../components/Navigation";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
+import "../styles/globals.scss";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 

@@ -67,7 +67,7 @@ const theme = createTheme({
     h3: {
       color: "#fff",
       fontWeight: 500,
-      fontSize: "1.25rem",
+      fontSize: "1.1rem",
       lineHeight: 1.75,
     },
     body1: {

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  Button,
-  Container,
-  Grid,
-  Snackbar,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 import { Alert } from "@material-ui/lab";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
