@@ -5,6 +5,16 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Link from "next/link";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import {
+  Paper,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography,
+} from "@material-ui/core";
+import { typography } from "@material-ui/system";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardHeader: {
       backgroundColor: "#337AB7",
-      height: 50,
+      height: 40,
     },
     cardHeaderCont: {
       backgroundColor: "#EEEEEE",
@@ -30,6 +40,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: -30,
       marginTop: -18,
       marginBottom: -18,
+    },
+    cardContentContests: {
+      color: "#3f3f3f",
+      marginTop: -11,
     },
     list: {
       listStyle: "none",
@@ -42,6 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
         color: "#23527c",
       },
     },
+    tableHeadText: { fontSize: 14, fontStyle: "none" },
+    tableCellText: { fontSize: 12.5 },
+    tableHead: {
+      marginBottom: -10,
+    },
     left: {
       [theme.breakpoints.up("md")]: { marginLeft: 2 },
     },
@@ -53,6 +72,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       color: "#000080",
+    },
+    pastContest: {
+      marginBottom: -10,
+      marginTop: 15,
+      fontSize: 13.5,
+      color: "#337AB7",
+      "&:hover": {
+        color: "#23527c",
+      },
     },
   })
 );
@@ -115,7 +143,41 @@ export default function Home() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card className={classes.paper}>xs=5</Card>
+            <Card className={classes.paper}>
+              {" "}
+              <CardHeader
+                className={classes.cardHeader}
+                titleTypographyProps={{ variant: "h3" }}
+                title="Upcoming Contests"
+              />
+              <CardContent className={classes.cardContentContests}>
+                <Table size="small">
+                  <TableHead className={classes.tableHead}>
+                    <TableRow>
+                      <TableCell className={classes.tableHeadText}>
+                        Name
+                      </TableCell>
+                      <TableCell className={classes.tableHeadText}>
+                        Time
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableCell className={classes.tableCellText}>
+                      Hello
+                    </TableCell>
+                    <TableCell className={classes.tableCellText}>
+                      HelloAgain
+                    </TableCell>
+                  </TableBody>
+                </Table>
+                <Typography className={classes.pastContest}>
+                  <Link href="/">
+                    <a className={classes.pastContest}>Past Contests</a>
+                  </Link>
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
           <Grid item xs={12}>
             <Card className={classes.paper}>xs=3</Card>
