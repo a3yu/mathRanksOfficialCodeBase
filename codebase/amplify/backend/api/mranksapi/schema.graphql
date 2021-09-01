@@ -1,27 +1,67 @@
-type Announcement
-  @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, read, update, delete, read] }
-      { allow: private, operations: [read] }
-    ]
-  ) {
-  id: ID!
-  title: String!
-  announcementID: ID!
-  announcement: Announcement @connection(fields: ["announcementID"])
-}
-
 type Contest
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, read, update, delete, read] }
+      { allow: owner, operations: [create, update, delete, read] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
   contestID: ID!
-  contest: Contest @connection(fields: ["contestID"])
+  contestContentAnn: String!
+  title: String!
+  ps1: String
+  ps2: String
+  ps3: String
+  ps4: String
+  ps5: String
+  q1: String
+  q2: String
+  q3: String
+  q4: String
+  q5: String
+  q6: String
+  q7: String
+  q8: String
+  q9: String
+  q10: String
+  a1: String
+  a2: String
+  a3: String
+  a4: String
+  a5: String
+  a6: String
+  a7: String
+  a8: String
+  a9: String
+  a10: String
+  answerAttemps: [ContestAnswer]
+    @connection(keyName: "byContest", fields: ["id"])
+}
+
+type ContestAnswer
+  @model
+  @key(name: "byContest", fields: ["contestID", "content"])
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, update, delete, read] }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  contestAnswerID: ID!
+  score: Int!
+  ca1: Int
+  ca2: Int
+  ca3: Int
+  ca4: Int
+  ca5: Int
+  ca6: Int
+  ca7: Int
+  ca8: Int
+  ca9: Int
+  ca10: Int
+  contest: Post @connection(fields: ["contestID"])
 }

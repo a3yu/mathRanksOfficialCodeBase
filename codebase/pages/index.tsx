@@ -7,6 +7,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Link from "next/link";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const markdown = `You are invited to MathRanks Contest #1 sponsored by Raytheon and MathWorks!\n\n- Time: 60 minutes \n\n- Number of Problems: 6 \n\n- Time: 7:30 PM CST \n\n We are excited for the first contest! See you there!`;
 import {
   Paper,
   TableBody,
@@ -14,8 +18,7 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import { typography } from "@material-ui/system";
-
+import { StylesContext } from "@material-ui/styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -28,11 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
     },
     cardHeader: {
-      backgroundColor: "#337AB7",
-      height: 40,
+      backgroundColor: "#04AA6D",
+      height: 50,
     },
     cardHeaderCont: {
-      backgroundColor: "#EEEEEE",
+      backgroundColor: "#04AA6D",
       height: 50,
     },
     cardContentList: {
@@ -50,8 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     ul: {
       fontSize: 14,
-      textDecoration: "none",
-      color: "#337AB7",
+      color: "#282A35",
       "&:hover": {
         color: "#23527c",
       },
@@ -69,9 +71,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardContentText: {
       fontSize: 14,
+      marginTop: -10,
+      marginBottom: -10,
     },
     title: {
-      color: "#000080",
+      color: "#fffff",
+      fontWeight: 655,
+      textDecoration: "underline",
+      textUnderlineOffset: ".05em",
     },
     pastContest: {
       marginBottom: -10,
@@ -82,6 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
         color: "#23527c",
       },
     },
+    sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
 );
 
@@ -102,15 +110,48 @@ export default function Home() {
                 title="[Raytheon, MathWorks] MathRanks Contest #1"
               />
               <CardContent className={classes.cardContentText}>
-                You are invited to the Raytheon MathWorks Contest #1!
+                <ReactMarkdown
+                  children={markdown}
+                  remarkPlugins={[remarkGfm]}
+                />
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card className={classes.paper}>xs=7</Card>
-          </Grid>
+            <Card>
+              <CardHeader
+                className={classes.cardHeaderCont}
+                titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.title,
+                }}
+                title="[Raytheon, MathWorks] MathRanks Contest #1"
+              />
+              <CardContent className={classes.cardContentText}>
+                <ReactMarkdown
+                  children={markdown}
+                  remarkPlugins={[remarkGfm]}
+                />
+              </CardContent>
+            </Card>
+          </Grid>{" "}
           <Grid item xs={12}>
-            <Card className={classes.paper}>xs=7</Card>
+            <Card>
+              <CardHeader
+                className={classes.cardHeaderCont}
+                titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.title,
+                }}
+                title="[Raytheon, MathWorks] MathRanks Contest #1"
+              />
+              <CardContent className={classes.cardContentText}>
+                <ReactMarkdown
+                  children={markdown}
+                  remarkPlugins={[remarkGfm]}
+                />
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
@@ -171,16 +212,21 @@ export default function Home() {
                     </TableCell>
                   </TableBody>
                 </Table>
-                <Typography className={classes.pastContest}>
-                  <Link href="/">
-                    <a className={classes.pastContest}>Past Contests</a>
-                  </Link>
-                </Typography>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card className={classes.paper}>xs=3</Card>
+            <Card>
+              <CardHeader
+                className={classes.cardHeader}
+                titleTypographyProps={{ variant: "h3" }}
+                title="Ranking"
+              />
+              <CardContent className={classes.cardContentList}></CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} className={classes.sectionX}>
+            <Card></Card>
           </Grid>
         </Grid>
       </Grid>

@@ -1,5 +1,5 @@
-$black-main: #3b3b3b;
-$font-color: #c5c4c4;
+$black-main: #282a35;
+$font-color: #ffffff;
 $font-color-hover: #7e7e7e;
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
 .logo {
@@ -11,7 +11,7 @@ $font-color-hover: #7e7e7e;
   left: 0;
   margin-left: -10.5em;
   margin-top: -0.75em;
-  height: 50px;
+  height: 60px;
   margin-right: -11em;
 }
 .logo:hover {
@@ -38,7 +38,7 @@ $font-color-hover: #7e7e7e;
     padding: 14px 18px;
     text-decoration: none;
     font-family: "Merriweather Sans", sans-serif;
-    font-size: 0.9em;
+    font-size: 1em;
   }
   a:hover {
     color: $font-color-hover;
