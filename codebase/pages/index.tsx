@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { listContests } from "../src/graphql/queries";
-import { TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
+import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import { Contest, ListContestsQuery } from "../src/API";
 const useStyles = makeStyles((theme: Theme) =>
@@ -116,7 +116,7 @@ export default function Home() {
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
           {contests.map((contest) => (
-            <Grid item xs={12}>
+            <Grid item xs={12} key={contest.id}>
               <Card className={classes.cardClass}>
                 <CardHeader
                   className={classes.cardHeaderCont}
