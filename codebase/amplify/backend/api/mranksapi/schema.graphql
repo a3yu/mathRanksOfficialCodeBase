@@ -36,13 +36,13 @@ type Contest
   a8: String
   a9: String
   a10: String
-  answerAttemps: [ContestAnswer]
-    @connection(keyName: "byContest", fields: ["id"])
+  answerAttempts: [ContestAnswer]
+    @connection(keyName: "answerContest", fields: ["id"])
 }
 
 type ContestAnswer
   @model
-  @key(name: "byContest", fields: ["contestID", "content"])
+  @key(name: "answerContest", fields: ["contestAnswerID", "score"])
   @auth(
     rules: [
       { allow: owner, operations: [create, update, delete, read] }
@@ -63,5 +63,6 @@ type ContestAnswer
   ca8: Int
   ca9: Int
   ca10: Int
-  contest: Post @connection(fields: ["contestID"])
+  contestID: ID!
+  contest: Contest @connection(fields: ["contestID"])
 }

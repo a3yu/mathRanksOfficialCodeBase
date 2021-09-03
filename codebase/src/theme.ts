@@ -4,11 +4,11 @@ import { responsiveFontSizes } from "@material-ui/core/styles";
 const theme = createTheme({
   palette: {
     common: { black: "#000", white: "#fff" },
-    background: { paper: "#fff", default: "#fafafa" },
+    background: { paper: "#fff", default: "#F0F5F5" },
     primary: {
       light: "rgba(217, 237, 247, 1)",
-      main: "rgba(51, 122, 183, 1)",
-      dark: "rgba(0, 0, 128, 1)",
+      main: "#345abf",
+      dark: "#14234B",
       contrastText: "#fff",
     },
     secondary: {

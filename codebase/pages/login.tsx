@@ -10,6 +10,7 @@ import { Alert } from "@material-ui/lab";
 import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
+import { useUser } from "../context/AuthContext";
 
 interface IFormInput {
   username: string;
@@ -20,7 +21,7 @@ export default function Login() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [signInError, setSignInError] = useState<string>("");
-
+  const user = useUser();
   const {
     register,
     formState: { errors },
@@ -37,14 +38,12 @@ export default function Login() {
       setOpen(true);
     }
   };
-
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
     setOpen(false);
   };
-
   return (
     <div className={styles.container}>
       <Container>

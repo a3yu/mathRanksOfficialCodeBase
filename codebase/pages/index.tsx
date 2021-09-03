@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       flexGrow: 1,
-      marginTop: 80,
+      marginTop: 85,
       margin: 65,
     },
     paper: {
@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
     },
     cardHeader: {
-      backgroundColor: "#04AA6D",
-      height: 50,
+      backgroundColor: "#0048ba",
+      height: 38,
     },
     cardHeaderCont: {
-      backgroundColor: "#04AA6D",
-      height: 50,
+      backgroundColor: "#0048ba",
+      height: 38,
     },
     cardContentList: {
       color: "#3f3f3f",
@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     ul: {
       fontSize: 14,
-      color: "#282A35",
+      fontWeight: 300,
+      color: "#263580",
       "&:hover": {
         color: "#23527c",
       },
@@ -76,9 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       color: "#fffff",
-      fontWeight: 655,
-      textDecoration: "underline",
-      textUnderlineOffset: ".05em",
+      fontSize: "1em",
     },
     pastContest: {
       marginBottom: -10,
@@ -88,6 +87,13 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:hover": {
         color: "#23527c",
       },
+    },
+    titleSide: {
+      color: "#fffff",
+      fontSize: "1em",
+    },
+    cardClass: {
+      borderRadius: 2.5,
     },
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
@@ -100,7 +106,7 @@ export default function Home() {
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.cardClass}>
               <CardHeader
                 className={classes.cardHeaderCont}
                 titleTypographyProps={{ variant: "h3" }}
@@ -110,15 +116,14 @@ export default function Home() {
                 title="[Raytheon, MathWorks] MathRanks Contest #1"
               />
               <CardContent className={classes.cardContentText}>
-                <ReactMarkdown
-                  children={markdown}
-                  remarkPlugins={[remarkGfm]}
-                />
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {markdown}
+                </ReactMarkdown>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.cardClass}>
               <CardHeader
                 className={classes.cardHeaderCont}
                 titleTypographyProps={{ variant: "h3" }}
@@ -128,15 +133,14 @@ export default function Home() {
                 title="[Raytheon, MathWorks] MathRanks Contest #1"
               />
               <CardContent className={classes.cardContentText}>
-                <ReactMarkdown
-                  children={markdown}
-                  remarkPlugins={[remarkGfm]}
-                />
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {markdown}
+                </ReactMarkdown>
               </CardContent>
             </Card>
           </Grid>{" "}
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.cardClass}>
               <CardHeader
                 className={classes.cardHeaderCont}
                 titleTypographyProps={{ variant: "h3" }}
@@ -146,20 +150,22 @@ export default function Home() {
                 title="[Raytheon, MathWorks] MathRanks Contest #1"
               />
               <CardContent className={classes.cardContentText}>
-                <ReactMarkdown
-                  children={markdown}
-                  remarkPlugins={[remarkGfm]}
-                />
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {markdown}
+                </ReactMarkdown>
               </CardContent>
             </Card>
           </Grid>
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.cardClass}>
               <CardHeader
                 className={classes.cardHeader}
                 titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.titleSide,
+                }}
                 title="Information"
               />
               <CardContent className={classes.cardContentList}>
@@ -184,11 +190,14 @@ export default function Home() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card className={classes.paper}>
+            <Card className={classes.cardClass}>
               {" "}
               <CardHeader
                 className={classes.cardHeader}
                 titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.titleSide,
+                }}
                 title="Upcoming Contests"
               />
               <CardContent className={classes.cardContentContests}>
@@ -216,17 +225,20 @@ export default function Home() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.cardClass}>
               <CardHeader
                 className={classes.cardHeader}
                 titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.titleSide,
+                }}
                 title="Ranking"
               />
               <CardContent className={classes.cardContentList}></CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} className={classes.sectionX}>
-            <Card></Card>
+            <Card className={classes.cardClass}></Card>
           </Grid>
         </Grid>
       </Grid>
