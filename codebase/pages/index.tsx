@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -9,16 +9,10 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
-const markdown = `You are invited to MathRanks Contest #1 sponsored by Raytheon and MathWorks!\n\n- Time: 60 minutes \n\n- Number of Problems: 6 \n\n- Time: 7:30 PM CST \n\n We are excited for the first contest! See you there!`;
-import {
-  Paper,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
-import { StylesContext } from "@material-ui/styles";
+import { listContests } from "../src/graphql/queries";
+import { TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
+import API from "@aws-amplify/api";
+import { Contest, ListContestsQuery } from "../src/API";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -98,64 +92,48 @@ const useStyles = makeStyles((theme: Theme) =>
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
 );
-
+const markdown = "Hello";
 export default function Home() {
   const classes = useStyles();
+  const [contests, setContests] = useState<Contest[]>([]);
+  useEffect(() => {
+    const fetchContests = async (): Promise<Contest[]> => {
+      const allContests = (await API.graphql({ query: listContests })) as {
+        data: ListContestsQuery;
+        errors: any[];
+      };
+      if (allContests.data) {
+        setContests(allContests.data.listContests.items as Contest[]);
+        return allContests.data.listContests.items as Contest[];
+      } else {
+        throw new Error("Couldn't get contests");
+      }
+    };
+    fetchContests();
+  }, []);
   return (
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeaderCont}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.title,
-                }}
-                title="[Raytheon, MathWorks] MathRanks Contest #1"
-              />
-              <CardContent className={classes.cardContentText}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {markdown}
-                </ReactMarkdown>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeaderCont}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.title,
-                }}
-                title="[Raytheon, MathWorks] MathRanks Contest #1"
-              />
-              <CardContent className={classes.cardContentText}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {markdown}
-                </ReactMarkdown>
-              </CardContent>
-            </Card>
-          </Grid>{" "}
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeaderCont}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.title,
-                }}
-                title="[Raytheon, MathWorks] MathRanks Contest #1"
-              />
-              <CardContent className={classes.cardContentText}>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {markdown}
-                </ReactMarkdown>
-              </CardContent>
-            </Card>
-          </Grid>
+          {contests.map((contest) => (
+            <Grid item xs={12}>
+              <Card className={classes.cardClass}>
+                <CardHeader
+                  className={classes.cardHeaderCont}
+                  titleTypographyProps={{ variant: "h3" }}
+                  classes={{
+                    title: classes.title,
+                  }}
+                  title={contest.title}
+                />
+                <CardContent className={classes.cardContentText}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {contest.contestContentAnn}
+                  </ReactMarkdown>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>

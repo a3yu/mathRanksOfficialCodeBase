@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Auth } from "@aws-amplify/auth";
 import { useUser } from "../context/AuthContext";
-import { sign } from "crypto";
 
 export default function Navbar() {
   const { user } = useUser();

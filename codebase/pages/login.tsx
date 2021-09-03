@@ -7,17 +7,18 @@ import Snackbar from "@material-ui/core/Snackbar";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Alert } from "@material-ui/lab";
-import { Auth } from "aws-amplify";
+import { Auth, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
 import { useUser } from "../context/AuthContext";
+import { GetServerSideProps } from "next";
 
 interface IFormInput {
   username: string;
   password: string;
 }
 
-export default function Login() {
+function Login() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [signInError, setSignInError] = useState<string>("");
@@ -99,3 +100,13 @@ export default function Login() {
     </div>
   );
 }
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const { Auth } = withSSRContext({ req });
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    res.writeHead(302, { Location: "/" });
+    res.end();
+  } catch (err) {}
+  return { props: {} };
+};
+export default Login;

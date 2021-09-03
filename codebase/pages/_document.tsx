@@ -1,18 +1,17 @@
 import React from "react";
+// Modules
 import Document, { Html, Head, Main, NextScript } from "next/document";
+// MUI Core
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../src/theme";
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
         <Head>
-          {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
           />
         </Head>
         <body>
@@ -25,7 +24,7 @@ export default class MyDocument extends Document {
 }
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with server-side generation (SSG).
+// it's compatible with server-side rendering (SSR).
 MyDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
@@ -69,3 +68,5 @@ MyDocument.getInitialProps = async (ctx) => {
     ],
   };
 };
+
+export default MyDocument;
