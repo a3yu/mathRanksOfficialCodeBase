@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { GetServerSideProps } from "next";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -93,24 +94,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 const markdown = "Hello";
-export default function Home() {
+function Home(props) {
+  const { contests } = props;
   const classes = useStyles();
-  const [contests, setContests] = useState<Contest[]>([]);
-  useEffect(() => {
-    const fetchContests = async (): Promise<Contest[]> => {
-      const allContests = (await API.graphql({ query: listContests })) as {
-        data: ListContestsQuery;
-        errors: any[];
-      };
-      if (allContests.data) {
-        setContests(allContests.data.listContests.items as Contest[]);
-        return allContests.data.listContests.items as Contest[];
-      } else {
-        throw new Error("Couldn't get contests");
-      }
-    };
-    fetchContests();
-  }, []);
+  useEffect(() => {}, []);
   return (
     <div className={classes.container}>
       <Grid container>
@@ -223,3 +210,16 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getStaticProps() {
+  const allContests = (await API.graphql({ query: listContests })) as {
+    data: ListContestsQuery;
+    errors: any[];
+  };
+  return {
+    props: {
+      contests: allContests.data.listContests.items,
+    },
+  };
+}
+export default Home;
