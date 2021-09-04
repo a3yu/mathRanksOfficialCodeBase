@@ -102,25 +102,28 @@ function Home(props) {
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
-          {contests.map((contest) => (
-            <Grid item xs={12} key={contest.id}>
-              <Card className={classes.cardClass}>
-                <CardHeader
-                  className={classes.cardHeaderCont}
-                  titleTypographyProps={{ variant: "h3" }}
-                  classes={{
-                    title: classes.title,
-                  }}
-                  title={contest.title}
-                />
-                <CardContent className={classes.cardContentText}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {contest.contestContentAnn}
-                  </ReactMarkdown>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+          {contests
+            .slice(0)
+            .reverse()
+            .map((contest) => (
+              <Grid item xs={12} key={contest.id}>
+                <Card className={classes.cardClass}>
+                  <CardHeader
+                    className={classes.cardHeaderCont}
+                    titleTypographyProps={{ variant: "h3" }}
+                    classes={{
+                      title: classes.title,
+                    }}
+                    title={contest.title}
+                  />
+                  <CardContent className={classes.cardContentText}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {contest.contestContentAnn}
+                    </ReactMarkdown>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>

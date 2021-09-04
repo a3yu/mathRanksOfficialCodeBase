@@ -10,6 +10,7 @@ export const createContest = /* GraphQL */ `
     createContest(input: $input, condition: $condition) {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -73,6 +74,7 @@ export const updateContest = /* GraphQL */ `
     updateContest(input: $input, condition: $condition) {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -136,6 +138,7 @@ export const deleteContest = /* GraphQL */ `
     deleteContest(input: $input, condition: $condition) {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -216,6 +219,7 @@ export const createContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -279,6 +283,7 @@ export const updateContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -342,6 +347,7 @@ export const deleteContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1

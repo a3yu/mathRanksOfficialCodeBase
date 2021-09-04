@@ -7,6 +7,7 @@ export const onCreateContest = /* GraphQL */ `
     onCreateContest {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -67,6 +68,7 @@ export const onUpdateContest = /* GraphQL */ `
     onUpdateContest {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -127,6 +129,7 @@ export const onDeleteContest = /* GraphQL */ `
     onDeleteContest {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -204,6 +207,7 @@ export const onCreateContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -264,6 +268,7 @@ export const onUpdateContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -324,6 +329,7 @@ export const onDeleteContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1

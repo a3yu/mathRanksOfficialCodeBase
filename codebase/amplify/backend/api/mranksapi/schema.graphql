@@ -1,5 +1,6 @@
 type Contest
   @model
+  @key(name: "bySort", fields: ["contestID", "sort"])
   @auth(
     rules: [
       { allow: owner, operations: [create, update, delete, read] }
@@ -9,6 +10,7 @@ type Contest
   ) {
   id: ID!
   contestID: ID!
+  sort: Int!
   contestContentAnn: String!
   title: String!
   ps1: String

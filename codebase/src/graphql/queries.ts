@@ -7,6 +7,7 @@ export const getContest = /* GraphQL */ `
     getContest(id: $id) {
       id
       contestID
+      sort
       contestContentAnn
       title
       ps1
@@ -72,6 +73,7 @@ export const listContests = /* GraphQL */ `
       items {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -132,6 +134,7 @@ export const getContestAnswer = /* GraphQL */ `
       contest {
         id
         contestID
+        sort
         contestContentAnn
         title
         ps1
@@ -197,6 +200,7 @@ export const listContestAnswers = /* GraphQL */ `
         contest {
           id
           contestID
+          sort
           contestContentAnn
           title
           ps1
