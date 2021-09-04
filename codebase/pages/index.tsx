@@ -10,10 +10,11 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { listContests } from "../src/graphql/queries";
+import { listContests, getContest } from "../src/graphql/queries";
 import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import { Contest, ListContestsQuery } from "../src/API";
+import { isTemplateSpan } from "typescript";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -102,28 +103,25 @@ function Home(props) {
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
-          {contests
-            .slice(0)
-            .reverse()
-            .map((contest) => (
-              <Grid item xs={12} key={contest.id}>
-                <Card className={classes.cardClass}>
-                  <CardHeader
-                    className={classes.cardHeaderCont}
-                    titleTypographyProps={{ variant: "h3" }}
-                    classes={{
-                      title: classes.title,
-                    }}
-                    title={contest.title}
-                  />
-                  <CardContent className={classes.cardContentText}>
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                      {contest.contestContentAnn}
-                    </ReactMarkdown>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
+          {contests.slice(0, 3).map((contest) => (
+            <Grid item xs={12} key={contest.id}>
+              <Card className={classes.cardClass}>
+                <CardHeader
+                  className={classes.cardHeaderCont}
+                  titleTypographyProps={{ variant: "h3" }}
+                  classes={{
+                    title: classes.title,
+                  }}
+                  title={contest.title}
+                />
+                <CardContent className={classes.cardContentText}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {contest.contestContentAnn}
+                  </ReactMarkdown>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>
@@ -215,13 +213,25 @@ function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const allContests = (await API.graphql({ query: listContests })) as {
+  const allContests = (await API.graphql({
+    query: listContests,
+  })) as {
     data: ListContestsQuery;
     errors: any[];
   };
+  const items = allContests.data.listContests.items;
+  items.sort(function (a, b) {
+    if (a.sort > b.sort) {
+      return -1;
+    }
+    if (a.sort < b.sort) {
+      return 1;
+    }
+    return 0;
+  });
   return {
     props: {
-      contests: allContests.data.listContests.items,
+      contests: items,
     },
   };
 }
