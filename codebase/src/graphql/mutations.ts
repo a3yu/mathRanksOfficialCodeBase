@@ -38,6 +38,7 @@ export const createContest = /* GraphQL */ `
       a8
       a9
       a10
+      scheduledTime
       createdAt
       updatedAt
       owner
@@ -102,6 +103,7 @@ export const updateContest = /* GraphQL */ `
       a8
       a9
       a10
+      scheduledTime
       createdAt
       updatedAt
       owner
@@ -166,6 +168,7 @@ export const deleteContest = /* GraphQL */ `
       a8
       a9
       a10
+      scheduledTime
       createdAt
       updatedAt
       owner
@@ -247,6 +250,7 @@ export const createContestAnswer = /* GraphQL */ `
         a8
         a9
         a10
+        scheduledTime
         createdAt
         updatedAt
         owner
@@ -311,6 +315,7 @@ export const updateContestAnswer = /* GraphQL */ `
         a8
         a9
         a10
+        scheduledTime
         createdAt
         updatedAt
         owner
@@ -375,6 +380,7 @@ export const deleteContestAnswer = /* GraphQL */ `
         a8
         a9
         a10
+        scheduledTime
         createdAt
         updatedAt
         owner

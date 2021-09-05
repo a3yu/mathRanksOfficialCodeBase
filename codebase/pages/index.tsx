@@ -15,6 +15,7 @@ import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import { Contest, ListContestsQuery } from "../src/API";
 import { isTemplateSpan } from "typescript";
+import Contests from "./contests/[contNumber]";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -96,14 +97,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 const markdown = "Hello";
 function Home(props) {
-  const { contests } = props;
+  const { contestsAnn, contestsCal } = props;
   const classes = useStyles();
-  useEffect(() => {}, []);
+  console.log(contestsCal);
   return (
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
-          {contests.slice(0, 3).map((contest) => (
+          {contestsAnn.slice(0, 3).map((contest) => (
             <Grid item xs={12} key={contest.id}>
               <Card className={classes.cardClass}>
                 <CardHeader
@@ -219,8 +220,9 @@ export async function getServerSideProps() {
     data: ListContestsQuery;
     errors: any[];
   };
-  const items = allContests.data.listContests.items;
-  items.sort(function (a, b) {
+  const itemsAnn = allContests.data.listContests.items;
+  const itemsCal = allContests.data.listContests.items;
+  itemsAnn.sort(function (a, b) {
     if (a.sort > b.sort) {
       return -1;
     }
@@ -229,9 +231,14 @@ export async function getServerSideProps() {
     }
     return 0;
   });
+  const current = Math.round(Date.now() / 1000);
+  const calendar = itemsCal.filter((contest) => {
+    return contest.scheduledTime > current;
+  });
   return {
     props: {
-      contests: items,
+      contestsAnn: itemsAnn,
+      contestsCal: calendar,
     },
   };
 }
