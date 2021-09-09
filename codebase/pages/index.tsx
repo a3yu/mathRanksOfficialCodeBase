@@ -183,7 +183,7 @@ function Home(props) {
                     </TableRow>
                   </TableHead>
                   {contestsCal.map((contests) => (
-                    <TableBody>
+                    <TableBody key={contests.id}>
                       <TableCell className={classes.tableCellText}>
                         {contests.title}
                       </TableCell>

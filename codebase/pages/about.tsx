@@ -13,11 +13,11 @@ export default function About() {
       <h1 className={styles.header}>Participating in Contests</h1>
       <p className={styles.bodyText}>
         We made participating in contests as seamless as possible. Register for
-        the contest and you're set! We do not punish users for registering and
-        not attending. However, if you log into the contest (click "Start
-        Contest") on the contest day, we will have to give you a contest
-        submission worth zero points. Our classic contest format run for 50
-        minutes, however you can leave early at your will.
+        the contest and you&apos;re set! We do not punish users for registering
+        and not attending. However, if you log into the contest (click
+        &quot;Start Contest&quot;) on the contest day, we will have to give you
+        a contest submission worth zero points. Our classic contest format run
+        for 50 minutes, however you can leave early at your will.
       </p>
       <h1 className={styles.header}>How Contests Work</h1>
       <p className={styles.bodyText}>
@@ -25,17 +25,17 @@ export default function About() {
         <ol>
           <li>
             Register for the contest before the contest day by clicking
-            "Register" button on the dedicated contest page.
+            &quot;Register&quot; button on the dedicated contest page.
           </li>
           <li>
             Show up to the contest on the designated time and answer as many
-            questions as you can! To enter the contest simply click the "Enter
-            Contest" button on the designated contest page. Once this button is
-            clicked, you are now a participant and your ending score will be the
-            score you will recieve (even if you do not answer any questions).
-            All answers are designed to be integers. Once the answer box is
-            filled up, make sure to submit your answers (we do not grade live
-            for live contests to prevent cheating).{" "}
+            questions as you can! To enter the contest simply click the
+            &quot;Enter Contest&quot; button on the designated contest page.
+            Once this button is clicked, you are now a participant and your
+            ending score will be the score you will recieve (even if you do not
+            answer any questions). All answers are designed to be integers. Once
+            the answer box is filled up, make sure to submit your answers (we do
+            not grade live for live contests to prevent cheating).{" "}
           </li>
           <li>
             Final scores and account ratings will be updated shortly after the
