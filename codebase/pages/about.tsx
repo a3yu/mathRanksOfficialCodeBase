@@ -1,3 +1,4 @@
+import { style } from "@material-ui/system";
 import styles from "../styles/About.module.scss";
 export default function About() {
   return (
@@ -44,13 +45,12 @@ export default function About() {
         </ol>
       </p>
       <h1 className={styles.header}>Ranking System</h1>
-      <p className={styles.bodyText}>
-        We use{" "}
-        <a href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf">
-          Elo-MMR System
-        </a>{" "}
-        for our ranking and player rating.
-      </p>
+      <a
+        href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
+        className={styles.bodyTextA}
+      >
+        Elo-MMR System
+      </a>
     </div>
   );
 }
