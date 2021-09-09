@@ -1,10 +1,14 @@
 import { style } from "@material-ui/system";
 import styles from "../styles/About.module.scss";
+import { useEffect } from "react";
 export default function About() {
+  if (process.browser) {
+    window.scrollTo(0, 0);
+  }
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>About MathRanks</h1>
-      <p className={styles.bodyText}>
+      <p id="1" className={styles.bodyText}>
         MathRanks is a free online math competition platform designed to prepare
         students for their local math competitions and olympiads. <br />
         We carefully collect and create math problems to emulate common math
@@ -12,7 +16,7 @@ export default function About() {
         their skills in.
       </p>
       <h1 className={styles.header}>Participating in Contests</h1>
-      <p className={styles.bodyText}>
+      <p id="2" className={styles.bodyText}>
         We made participating in contests as seamless as possible. Register for
         the contest and you&apos;re set! We do not punish users for registering
         and not attending. However, if you log into the contest (click
@@ -21,7 +25,7 @@ export default function About() {
         for 50 minutes, however you can leave early at your will.
       </p>
       <h1 className={styles.header}>How Contests Work</h1>
-      <p className={styles.bodyText}>
+      <p id="3" className={styles.bodyText}>
         Participating in contests is simple.
         <ol>
           <li>
@@ -44,7 +48,9 @@ export default function About() {
           </li>
         </ol>
       </p>
-      <h1 className={styles.header}>Ranking System</h1>
+      <h1 id="4" className={styles.header}>
+        Ranking System
+      </h1>
       <a
         href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
         className={styles.bodyTextA}

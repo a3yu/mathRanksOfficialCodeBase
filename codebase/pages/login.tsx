@@ -60,7 +60,7 @@ function Login() {
           direction="column"
           alignItems="center"
           justify="center"
-          spacing={2}
+          spacing={1}
         >
           <Grid item>
             <TextField

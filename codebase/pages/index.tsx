@@ -95,6 +95,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 function Home(props) {
+  if (process.browser) {
+    window.scrollTo(0, 0);
+  }
   const { contestsAnn, contestsCal } = props;
   const classes = useStyles();
   console.log(contestsCal);
@@ -103,6 +106,10 @@ function Home(props) {
     var s = m.format("M/D/YY, h:mm A");
     return s;
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const { Component, pageProps } = props;
   return (
     <div className={classes.container}>
       <Grid container>
@@ -141,17 +148,17 @@ function Home(props) {
               <CardContent className={classes.cardContentList}>
                 <ul className={classes.list}>
                   <li>
-                    <Link href="/">
+                    <Link href="/about#1">
                       <a className={classes.ul}>Participating in Contests</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/about#2">
                       <a className={classes.ul}>How Contests Work</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/">
+                    <Link href="/about#3">
                       <a className={classes.ul}>Ranking System</a>
                     </Link>
                   </li>
