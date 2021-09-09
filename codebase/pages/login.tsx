@@ -45,6 +45,7 @@ function Login() {
     }
     setOpen(false);
   };
+  console.log(user);
   return (
     <div className={styles.container}>
       <Container>

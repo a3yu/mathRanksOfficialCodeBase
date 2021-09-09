@@ -10,12 +10,11 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { listContests, getContest } from "../src/graphql/queries";
+import { listContests } from "../src/graphql/queries";
 import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
-import { Contest, ListContestsQuery } from "../src/API";
-import { isTemplateSpan } from "typescript";
-import Contests from "./contests/[contNumber]";
+import { ListContestsQuery } from "../src/API";
+import moment from "moment";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -95,11 +94,15 @@ const useStyles = makeStyles((theme: Theme) =>
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
 );
-const markdown = "Hello";
 function Home(props) {
   const { contestsAnn, contestsCal } = props;
   const classes = useStyles();
   console.log(contestsCal);
+  const changeToDate = (epoch) => {
+    var m = moment(epoch).local();
+    var s = m.format("M/D/YY, h:mm A");
+    return s;
+  };
   return (
     <div className={classes.container}>
       <Grid container>
@@ -179,14 +182,16 @@ function Home(props) {
                       </TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    <TableCell className={classes.tableCellText}>
-                      Hello
-                    </TableCell>
-                    <TableCell className={classes.tableCellText}>
-                      HelloAgain
-                    </TableCell>
-                  </TableBody>
+                  {contestsCal.map((contests) => (
+                    <TableBody>
+                      <TableCell className={classes.tableCellText}>
+                        {contests.title}
+                      </TableCell>
+                      <TableCell className={classes.tableCellText}>
+                        {changeToDate(contests.scheduledTime)}
+                      </TableCell>
+                    </TableBody>
+                  ))}
                 </Table>
               </CardContent>
             </Card>
@@ -231,10 +236,11 @@ export async function getServerSideProps() {
     }
     return 0;
   });
-  const current = Math.round(Date.now() / 1000);
+  const current = Math.round(Date.now());
   const calendar = itemsCal.filter((contest) => {
     return contest.scheduledTime > current;
   });
+
   return {
     props: {
       contestsAnn: itemsAnn,
