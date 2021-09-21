@@ -10,9 +10,18 @@ import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
 import Footer from "../components/Footer";
 import "../styles/globals.scss";
+import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 Amplify.configure({ ...awsconfig, ssr: true });
-
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: "30px",
+  // you can also just use 'scale'
+  transition: transitions.SCALE,
+};
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 
@@ -33,13 +42,15 @@ export default function MyApp(props) {
         />
       </Head>
       <AuthContext>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-        </ThemeProvider>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <CssBaseline />
+            <Navbar />
+            <Component {...pageProps} />
+            <Footer />
+          </ThemeProvider>
+        </AlertProvider>
       </AuthContext>
     </React.Fragment>
   );

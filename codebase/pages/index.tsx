@@ -109,7 +109,6 @@ function Home(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { Component, pageProps } = props;
   return (
     <div className={classes.container}>
       <Grid container>
@@ -185,7 +184,7 @@ function Home(props) {
                         Name
                       </TableCell>
                       <TableCell className={classes.tableHeadText}>
-                        Time
+                        Time (local)
                       </TableCell>
                     </TableRow>
                   </TableHead>
