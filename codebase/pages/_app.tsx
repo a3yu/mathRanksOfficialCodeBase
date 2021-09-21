@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { useRouter } from "next/router";
 
 Amplify.configure({ ...awsconfig, ssr: true });
 const options = {
@@ -24,6 +25,9 @@ const options = {
 };
 export default function MyApp(props) {
   const { Component, pageProps } = props;
+  const noNav = ["/login", "/signup"];
+  const router = useRouter();
+  const { asPath } = router;
 
   React.useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -48,7 +52,7 @@ export default function MyApp(props) {
             <CssBaseline />
             <Navbar />
             <Component {...pageProps} />
-            <Footer />
+            {noNav.includes(asPath) ? null : <Footer />}
           </ThemeProvider>
         </AlertProvider>
       </AuthContext>

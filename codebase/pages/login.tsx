@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Login.module.scss";
 import { useUser } from "../context/AuthContext";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 
 interface IFormInput {
   username: string;
@@ -91,6 +92,9 @@ function Login() {
               Login
             </Button>
           </Grid>
+          <div className={styles.botText}>
+            <Link href="/signup">No account? Sign up!</Link>
+          </div>
         </Grid>
       </form>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

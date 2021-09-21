@@ -36,6 +36,7 @@ export const getContest = /* GraphQL */ `
       a9
       a10
       scheduledTime
+      endTime
       createdAt
       updatedAt
       owner
@@ -103,6 +104,7 @@ export const listContests = /* GraphQL */ `
         a9
         a10
         scheduledTime
+        endTime
         createdAt
         updatedAt
         owner
@@ -165,6 +167,7 @@ export const getContestAnswer = /* GraphQL */ `
         a9
         a10
         scheduledTime
+        endTime
         createdAt
         updatedAt
         owner
@@ -232,6 +235,7 @@ export const listContestAnswers = /* GraphQL */ `
           a9
           a10
           scheduledTime
+          endTime
           createdAt
           updatedAt
           owner

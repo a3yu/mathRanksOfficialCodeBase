@@ -14,6 +14,7 @@ import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 interface IFormInput {
   username: string;
   email: string;
@@ -203,6 +204,9 @@ function Signup() {
                   {showCode ? "Confirm Code" : "Sign Up"}
                 </Button>
               </Grid>
+              <div className={styles.botText}>
+                <Link href="/login">Have a account? Sign in!</Link>
+              </div>
             </Grid>
             <Snackbar
               open={open}

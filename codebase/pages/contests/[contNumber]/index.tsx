@@ -11,6 +11,7 @@ import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { withSSRContext } from "aws-amplify";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -115,6 +116,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   });
   if (rightContest.length == 0 || rightContest[0].q1 == null) {
     res.writeHead(302, { Location: "/" });
+    res.end();
+  }
+  const { Auth } = withSSRContext({ req });
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+  } catch (err) {
+    res.writeHead(302, {
+      Location: "/contests/0/error",
+    });
     res.end();
   }
   return {

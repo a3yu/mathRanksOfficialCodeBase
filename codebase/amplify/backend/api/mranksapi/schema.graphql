@@ -39,6 +39,7 @@ type Contest
   a9: String
   a10: String
   scheduledTime: Float!
+  endTime: Float!
   answerAttempts: [ContestAnswer]
     @connection(keyName: "answerContest", fields: ["id"])
 }
