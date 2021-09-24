@@ -118,6 +118,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.writeHead(302, { Location: "/" });
     res.end();
   }
+  const current = Math.round(Date.now());
+  if (rightContest.scheduledTime >= current) {
+    res.writeHead(302, {
+      Location: "/contests/0/error",
+    });
+  }
   const { Auth } = withSSRContext({ req });
   try {
     const user = await Auth.currentAuthenticatedUser();
