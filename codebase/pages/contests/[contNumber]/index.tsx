@@ -111,27 +111,28 @@ export const getServerSideProps: GetServerSideProps = async ({
     errors: any[];
   };
   const currContest = allContests.data.listContests.items;
+  const current = Math.round(Date.now());
   const rightContest = currContest.filter((contest) => {
     return contest.contestID == contNumber;
   });
   if (rightContest.length == 0 || rightContest[0].q1 == null) {
     res.writeHead(302, { Location: "/" });
     res.end();
-  }
-  const current = Math.round(Date.now());
-  if (rightContest[0].scheduledTime >= current) {
-    res.writeHead(302, {
-      Location: "/contests/0/error",
-    });
-  }
-  const { Auth } = withSSRContext({ req });
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-  } catch (err) {
+  } else if (rightContest[0].scheduledTime >= current) {
     res.writeHead(302, {
       Location: "/contests/0/error",
     });
     res.end();
+  } else {
+    const { Auth } = withSSRContext({ req });
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+    } catch (err) {
+      res.writeHead(302, {
+        Location: "/contests/0/error",
+      });
+      res.end();
+    }
   }
   return {
     props: {
