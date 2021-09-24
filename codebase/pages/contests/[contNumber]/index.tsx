@@ -119,7 +119,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.end();
   }
   const current = Math.round(Date.now());
-  if (rightContest.scheduledTime >= current) {
+  if (rightContest[0].scheduledTime >= current) {
     res.writeHead(302, {
       Location: "/contests/0/error",
     });
