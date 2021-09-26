@@ -11,21 +11,47 @@ import AuthContext from "../context/AuthContext";
 import Footer from "../components/Footer";
 import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
 import { useRouter } from "next/router";
 
 Amplify.configure({ ...awsconfig, ssr: true });
+const alertStyle = {
+  backgroundColor: "#151515",
+  color: "white",
+  padding: "10px",
+  borderRadius: "3px",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  boxShadow: "0px 2px 2px 2px rgba(0, 0, 0, 0.03)",
+  fontFamily: "Arial",
+  width: "300px",
+  boxSizing: "border-box",
+};
+const buttonStyle = {
+  marginLeft: "20px",
+  border: "none",
+  backgroundColor: "transparent",
+  cursor: "pointer",
+  color: "#FFFFFF",
+};
+const AlertTemplate = ({ style, message, close }) => (
+  <div style={{ ...alertStyle, ...style }}>
+    {message}
+    <button onClick={close} style={buttonStyle}>
+      x
+    </button>
+  </div>
+);
 const options = {
   // you can also just use 'bottom center'
-  position: positions.BOTTOM_CENTER,
+  position: positions.BOTTOM_RIGHT,
   timeout: 5000,
   offset: "30px",
-  // you can also just use 'scale'
   transition: transitions.SCALE,
 };
-export default function MyApp(props) {
+const MyApp = (props) => {
   const { Component, pageProps } = props;
-  const noNav = ["/login", "/signup"];
+  const noNav = ["/login", "/signup", "/contests/[...contNumber]"];
   const router = useRouter();
   const { asPath } = router;
 
@@ -58,9 +84,11 @@ export default function MyApp(props) {
       </AuthContext>
     </React.Fragment>
   );
-}
+};
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default MyApp;

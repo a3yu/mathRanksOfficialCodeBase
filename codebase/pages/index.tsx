@@ -15,6 +15,8 @@ import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import { ListContestsQuery } from "../src/API";
 import moment from "moment";
+import { useRouter } from "next/router";
+import { useAlert } from "react-alert";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -100,7 +102,9 @@ function Home(props) {
   }
   const { contestsAnn, contestsCal } = props;
   const classes = useStyles();
-  console.log(contestsCal);
+  const router = useRouter();
+  const alert = useAlert();
+  console.log(router.query.error);
   const changeToDate = (epoch) => {
     var m = moment(epoch).local();
     var s = m.format("M/D/YY, h:mm A");
@@ -108,6 +112,12 @@ function Home(props) {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
+    if (router.query.error) {
+      alert.show(router.query.error);
+      window.history.pushState("", "", "/");
+    }
   }, []);
   return (
     <div className={classes.container}>
@@ -233,6 +243,7 @@ export async function getServerSideProps() {
   };
   const itemsAnn = allContests.data.listContests.items;
   const itemsCal = allContests.data.listContests.items;
+
   itemsAnn.sort(function (a, b) {
     if (a.sort > b.sort) {
       return -1;
