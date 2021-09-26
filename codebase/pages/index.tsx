@@ -114,9 +114,24 @@ function Home(props) {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    if (router.query.error) {
-      alert.show(router.query.error);
-      window.history.pushState("", "", "/");
+    if (
+      router.query.error == "chns" ||
+      router.query.error == "cdne" ||
+      router.query.error == "yanl"
+    ) {
+      const error = router.query.error;
+      if (error == "cdne") {
+        alert.show("Contest does not exist.");
+        window.history.pushState("", "", "/");
+      } else if (error == "yanl") {
+        alert.show("You are not logged in");
+        window.history.pushState("", "", "/");
+      } else if (error == "chns") {
+        alert.show("Contest has not started");
+        window.history.pushState("", "", "/");
+      }
+    } else {
+      window.history.replaceState("", "", "/");
     }
   }, []);
   return (

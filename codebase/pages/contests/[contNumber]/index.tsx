@@ -116,11 +116,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     return contest.contestID == contNumber;
   });
   if (rightContest.length == 0 || rightContest[0].q1 == null) {
-    res.writeHead(302, { Location: "/?error=Contest+does+not+exist." });
+    res.writeHead(302, { Location: "/?error=cdne" });
     res.end();
   } else if (rightContest[0].scheduledTime >= current) {
     res.writeHead(302, {
-      Location: "/?error=Contest+has+not+started.",
+      Location: "/?error=chns",
     });
     res.end();
   } else {
@@ -129,7 +129,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       const user = await Auth.currentAuthenticatedUser();
     } catch (err) {
       res.writeHead(302, {
-        Location: "/?error=You+are+not+logged+in.",
+        Location: "/?error=yanl",
       });
     }
   }
