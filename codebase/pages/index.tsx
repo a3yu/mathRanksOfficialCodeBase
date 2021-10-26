@@ -14,9 +14,9 @@ import { listContests } from "../src/graphql/queries";
 import { TableBody, TableCell, TableRow } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import { ListContestsQuery } from "../src/API";
-import moment from "moment";
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
+import moment from "moment-timezone";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: -10,
     },
     title: {
-      color: "#fffff",
+      color: "#FFFFFF",
       fontSize: "1em",
     },
     pastContest: {
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     titleSide: {
-      color: "#fffff",
+      color: "#ffff",
       fontSize: "1em",
     },
     cardClass: {
@@ -106,16 +106,23 @@ function Home(props) {
   const alert = useAlert();
   console.log(router.query.error);
   const changeToDate = (epoch) => {
-    var m = moment(epoch).local();
-    var s = m.format("M/D/YY, h:mm A");
+    var offset = new Date().getTimezoneOffset();
+    var m = moment(epoch);
+    var s = m.utcOffset(-offset).format("M/D/YY, h:mm A UTC(Z)");
     return s;
   };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    if (router.query.error) {
+    if (
+      router.query.error == "Contest does not exist." ||
+      router.query.error == "Contest has not started." ||
+      router.query.error == "You are not logged in."
+    ) {
       alert.show(router.query.error);
+      window.history.pushState("", "", "/");
+    } else {
       window.history.pushState("", "", "/");
     }
   }, []);
@@ -194,7 +201,7 @@ function Home(props) {
                         Name
                       </TableCell>
                       <TableCell className={classes.tableHeadText}>
-                        Time (local)
+                        Time
                       </TableCell>
                     </TableRow>
                   </TableHead>

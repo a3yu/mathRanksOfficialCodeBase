@@ -56,3 +56,9 @@ $font-color-hover: #7e7e7e;
     }
   }
 }
+.allDiv {
+  background-color: #131a3e;
+  @media screen and (max-width: 700px) {
+    margin-bottom: -70px;
+  }
+}

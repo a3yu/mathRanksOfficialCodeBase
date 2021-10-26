@@ -1,62 +1,77 @@
-import { style } from "@material-ui/system";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 import styles from "../styles/About.module.scss";
-import { useEffect } from "react";
+
+const useStyles = makeStyles(() => ({
+  h1: {
+    padding: 15,
+  },
+  body1: {
+    padding: 15,
+  },
+}));
+
 export default function About() {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
+  const classes = useStyles();
   return (
     <div className={styles.container}>
-      <h1 className={styles.header}>About MathRanks</h1>
-      <p id="1" className={styles.bodyText}>
+      <Typography variant="h1" className={classes.h1}>
+        About MathRanks
+      </Typography>
+      <Typography variant="body1" className={classes.body1}>
         MathRanks is a free online math competition platform designed to prepare
         students for their local math competitions and olympiads. <br />
         We carefully collect and create math problems to emulate common math
         competition puzzles and setup an environment for competitors to test
         their skills in.
-      </p>
-      <h1 className={styles.header}>Participating in Contests</h1>
-      <p id="2" className={styles.bodyText}>
+      </Typography>
+      <Typography variant="h1" className={classes.h1}>
+        Participating in Contests
+      </Typography>
+      <Typography variant="body1" className={classes.body1}>
         We made participating in contests as seamless as possible. Register for
-        the contest and you&apos;re set! We do not punish users for registering
-        and not attending. However, if you log into the contest (click
-        &quot;Start Contest&quot;) on the contest day, we will have to give you
-        a contest submission worth zero points. Our classic contest format run
-        for 50 minutes, however you can leave early at your will.
-      </p>
-      <h1 className={styles.header}>How Contests Work</h1>
-      <p id="3" className={styles.bodyText}>
+        the contest, show up at the designated time, and compete! We do not
+        punish users for registering and not attending. However, if you make any
+        answer submission in the contest, that contest will be evaluated and
+        effect your rating.
+      </Typography>
+      <Typography variant="h1" className={classes.h1}>
+        Contest Format
+      </Typography>
+      <Typography variant="body1" className={classes.body1}>
         Participating in contests is simple.
         <ol>
           <li>
             Register for the contest before the contest day by clicking
-            &quot;Register&quot; button on the dedicated contest page.
+            &quot;Register&quot; button on the page displaying all contests.
           </li>
           <li>
             Show up to the contest on the designated time and answer as many
-            questions as you can! To enter the contest simply click the
-            &quot;Enter Contest&quot; button on the designated contest page.
-            Once this button is clicked, you are now a participant and your
-            ending score will be the score you will recieve (even if you do not
-            answer any questions). All answers are designed to be integers. Once
+            questions as you can! All answers are designed to be integers. Once
             the answer box is filled up, make sure to submit your answers (we do
-            not grade live for live contests to prevent cheating).{" "}
+            not grade live for live contests to prevent cheating). The contest
+            will effect your when you submit any answer.{" "}
           </li>
           <li>
             Final scores and account ratings will be updated shortly after the
             contest concludes.
           </li>
         </ol>
-      </p>
-      <h1 id="4" className={styles.header}>
+      </Typography>
+      <Typography variant="h1" className={classes.h1}>
         Ranking System
-      </h1>
-      <a
-        href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
-        className={styles.bodyTextA}
-      >
-        Elo-MMR System
-      </a>
+      </Typography>
+      <Typography variant="body1" className={classes.body1}>
+        <a
+          href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
+          className={styles.bodyTextA}
+        >
+          Elo-MMR System
+        </a>
+      </Typography>
     </div>
   );
 }
