@@ -205,7 +205,7 @@ function Signup() {
                 </Button>
               </Grid>
               <div className={styles.botText}>
-                <Link href="/login">Have a account? Sign in!</Link>
+                <Link href="/login">Have an account? Sign in!</Link>
               </div>
             </Grid>
             <Snackbar

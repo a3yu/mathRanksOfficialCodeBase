@@ -4,7 +4,7 @@ import { responsiveFontSizes } from "@material-ui/core/styles";
 const theme = createTheme({
   palette: {
     common: { black: "#000", white: "#fff" },
-    background: { paper: "#fff", default: "#F0F5F5" },
+    background: { paper: "#fff", default: "#FDFDFD" },
     primary: {
       light: "rgba(217, 237, 247, 1)",
       main: "#345abf",
