@@ -59,10 +59,10 @@ const theme = createTheme({
       fontFamily: "Segoe UI",
     },
     h2: {
-      letterSpacing: "-.025em",
       fontWeight: 700,
+      fontFamily: "Segoe UI",
       fontSize: "2.25rem",
-      lineHeight: 2.5,
+      lineHeight: 1,
       color: "#000000",
     },
     h3: {

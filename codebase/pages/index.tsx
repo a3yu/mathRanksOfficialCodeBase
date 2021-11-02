@@ -170,12 +170,12 @@ function Home(props) {
                   </li>
                   <li>
                     <Link href="/about#2">
-                      <a className={classes.ul}>How Contests Work</a>
+                      <a className={classes.ul}>Contest Format</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about#3">
-                      <a className={classes.ul}>Ranking System</a>
+                    <Link href="https://github.com/EbTech/Elo-MMR">
+                      <a className={classes.ul}>Elo System</a>
                     </Link>
                   </li>
                 </ul>

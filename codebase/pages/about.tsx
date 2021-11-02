@@ -1,13 +1,18 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import styles from "../styles/About.module.scss";
 
 const useStyles = makeStyles(() => ({
-  h1: {
-    padding: 15,
+  h2: {
+    padding: 13,
+    paddingLeft: 20,
   },
   body1: {
-    padding: 15,
+    padding: 13,
+    paddingLeft: 20,
+  },
+  container: {
+    marginTop: 70,
+    marginBottom: 50,
   },
 }));
 
@@ -17,28 +22,26 @@ export default function About() {
   }
   const classes = useStyles();
   return (
-    <div className={styles.container}>
-      <Typography variant="h1" className={classes.h1}>
+    <div className={classes.container}>
+      <Typography variant="h2" className={classes.h2}>
         About MathRanks
       </Typography>
       <Typography variant="body1" className={classes.body1}>
         MathRanks is a free online math competition platform designed to prepare
-        students for their local math competitions and olympiads. <br />
-        We carefully collect and create math problems to emulate common math
-        competition puzzles and setup an environment for competitors to test
-        their skills in.
+        students for their local math competitions and olympiads. We carefully
+        collect and create math problems to emulate common math competitions and
+        setup an environment for competitors to test their skills in.
       </Typography>
-      <Typography variant="h1" className={classes.h1}>
+      <Typography variant="h2" className={classes.h2}>
         Participating in Contests
       </Typography>
       <Typography variant="body1" className={classes.body1}>
-        We made participating in contests as seamless as possible. Register for
-        the contest, show up at the designated time, and compete! We do not
-        punish users for registering and not attending. However, if you make any
-        answer submission in the contest, that contest will be evaluated and
-        effect your rating.
+        Register for the contest, show up at the designated time, and compete!
+        We do not punish users for registering and not attending. However, if
+        you make any answer submission in the contest, that contest will be
+        evaluated and effect your rating.
       </Typography>
-      <Typography variant="h1" className={classes.h1}>
+      <Typography variant="h2" className={classes.h2}>
         Contest Format
       </Typography>
       <Typography variant="body1" className={classes.body1}>
@@ -61,17 +64,15 @@ export default function About() {
           </li>
         </ol>
       </Typography>
-      <Typography variant="h1" className={classes.h1}>
+      <Typography variant="h2" className={classes.h2}>
         Ranking System
       </Typography>
-      <Typography variant="body1" className={classes.body1}>
-        <a
-          href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
-          className={styles.bodyTextA}
-        >
-          Elo-MMR System
-        </a>
-      </Typography>
+      <a
+        href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf"
+        className={classes.body1}
+      >
+        Elo-MMR System
+      </a>
     </div>
   );
 }

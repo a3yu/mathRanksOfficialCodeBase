@@ -13,31 +13,9 @@ type Contest
   sort: Int!
   contestContentAnn: String!
   title: String!
-  ps1: String
-  ps2: String
-  ps3: String
-  ps4: String
-  ps5: String
-  q1: String
-  q2: String
-  q3: String
-  q4: String
-  q5: String
-  q6: String
-  q7: String
-  q8: String
-  q9: String
-  q10: String
-  a1: String
-  a2: String
-  a3: String
-  a4: String
-  a5: String
-  a6: String
-  a7: String
-  a8: String
-  a9: String
-  a10: String
+  authorSet: [String]
+  questionSet: [String]
+  answerSet: [String]
   scheduledTime: Float!
   endTime: Float!
   answerAttempts: [ContestAnswer]
@@ -55,18 +33,10 @@ type ContestAnswer
     ]
   ) {
   id: ID!
+  userName: String!
   contestAnswerID: ID!
   score: Int!
-  ca1: Int
-  ca2: Int
-  ca3: Int
-  ca4: Int
-  ca5: Int
-  ca6: Int
-  ca7: Int
-  ca8: Int
-  ca9: Int
-  ca10: Int
+  userAnswerSet: [String]
   contestID: ID!
   contest: Contest @connection(fields: ["contestID"])
 }

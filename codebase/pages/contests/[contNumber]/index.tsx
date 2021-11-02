@@ -77,8 +77,8 @@ function Contests(props) {
                   variant="outlined"
                   id="answer"
                   size="small"
-                  inputProps={{ style: { fontSize: 12 } }} // font size of input text
-                  InputLabelProps={{ style: { fontSize: 12 } }} // font size of input label
+                  inputProps={{ style: { fontSize: 12 } }}
+                  InputLabelProps={{ style: { fontSize: 12 } }}
                 />
                 <Button
                   className={classes.button1}
