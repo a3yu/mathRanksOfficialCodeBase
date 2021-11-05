@@ -56,7 +56,7 @@ function Contests(props) {
   return (
     <div className={classes.container}>
       {currentContest.questionSet.map((key, val) => (
-        <div>
+        <div key={key}>
           <Card className={classes.cardClass}>
             <CardHeader
               className={classes.cardHeader}
