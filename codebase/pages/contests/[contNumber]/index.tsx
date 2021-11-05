@@ -131,6 +131,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       res.writeHead(302, {
         Location: "/?error=You+are+not+logged+in.",
       });
+      res.end();
     }
   }
   return {
