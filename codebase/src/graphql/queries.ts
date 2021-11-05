@@ -10,31 +10,9 @@ export const getContest = /* GraphQL */ `
       sort
       contestContentAnn
       title
-      ps1
-      ps2
-      ps3
-      ps4
-      ps5
-      q1
-      q2
-      q3
-      q4
-      q5
-      q6
-      q7
-      q8
-      q9
-      q10
-      a1
-      a2
-      a3
-      a4
-      a5
-      a6
-      a7
-      a8
-      a9
-      a10
+      authorSet
+      questionSet
+      answerSet
       scheduledTime
       endTime
       createdAt
@@ -43,18 +21,10 @@ export const getContest = /* GraphQL */ `
       answerAttempts {
         items {
           id
+          userName
           contestAnswerID
           score
-          ca1
-          ca2
-          ca3
-          ca4
-          ca5
-          ca6
-          ca7
-          ca8
-          ca9
-          ca10
+          userAnswerSet
           contestID
           createdAt
           updatedAt
@@ -78,31 +48,9 @@ export const listContests = /* GraphQL */ `
         sort
         contestContentAnn
         title
-        ps1
-        ps2
-        ps3
-        ps4
-        ps5
-        q1
-        q2
-        q3
-        q4
-        q5
-        q6
-        q7
-        q8
-        q9
-        q10
-        a1
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-        a10
+        authorSet
+        questionSet
+        answerSet
         scheduledTime
         endTime
         createdAt
@@ -120,18 +68,10 @@ export const getContestAnswer = /* GraphQL */ `
   query GetContestAnswer($id: ID!) {
     getContestAnswer(id: $id) {
       id
+      userName
       contestAnswerID
       score
-      ca1
-      ca2
-      ca3
-      ca4
-      ca5
-      ca6
-      ca7
-      ca8
-      ca9
-      ca10
+      userAnswerSet
       contestID
       createdAt
       updatedAt
@@ -141,31 +81,9 @@ export const getContestAnswer = /* GraphQL */ `
         sort
         contestContentAnn
         title
-        ps1
-        ps2
-        ps3
-        ps4
-        ps5
-        q1
-        q2
-        q3
-        q4
-        q5
-        q6
-        q7
-        q8
-        q9
-        q10
-        a1
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-        a10
+        authorSet
+        questionSet
+        answerSet
         scheduledTime
         endTime
         createdAt
@@ -188,18 +106,10 @@ export const listContestAnswers = /* GraphQL */ `
     listContestAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        userName
         contestAnswerID
         score
-        ca1
-        ca2
-        ca3
-        ca4
-        ca5
-        ca6
-        ca7
-        ca8
-        ca9
-        ca10
+        userAnswerSet
         contestID
         createdAt
         updatedAt
@@ -209,31 +119,9 @@ export const listContestAnswers = /* GraphQL */ `
           sort
           contestContentAnn
           title
-          ps1
-          ps2
-          ps3
-          ps4
-          ps5
-          q1
-          q2
-          q3
-          q4
-          q5
-          q6
-          q7
-          q8
-          q9
-          q10
-          a1
-          a2
-          a3
-          a4
-          a5
-          a6
-          a7
-          a8
-          a9
-          a10
+          authorSet
+          questionSet
+          answerSet
           scheduledTime
           endTime
           createdAt

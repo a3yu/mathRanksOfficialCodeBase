@@ -13,31 +13,9 @@ export const createContest = /* GraphQL */ `
       sort
       contestContentAnn
       title
-      ps1
-      ps2
-      ps3
-      ps4
-      ps5
-      q1
-      q2
-      q3
-      q4
-      q5
-      q6
-      q7
-      q8
-      q9
-      q10
-      a1
-      a2
-      a3
-      a4
-      a5
-      a6
-      a7
-      a8
-      a9
-      a10
+      authorSet
+      questionSet
+      answerSet
       scheduledTime
       endTime
       createdAt
@@ -46,18 +24,10 @@ export const createContest = /* GraphQL */ `
       answerAttempts {
         items {
           id
+          userName
           contestAnswerID
           score
-          ca1
-          ca2
-          ca3
-          ca4
-          ca5
-          ca6
-          ca7
-          ca8
-          ca9
-          ca10
+          userAnswerSet
           contestID
           createdAt
           updatedAt
@@ -79,31 +49,9 @@ export const updateContest = /* GraphQL */ `
       sort
       contestContentAnn
       title
-      ps1
-      ps2
-      ps3
-      ps4
-      ps5
-      q1
-      q2
-      q3
-      q4
-      q5
-      q6
-      q7
-      q8
-      q9
-      q10
-      a1
-      a2
-      a3
-      a4
-      a5
-      a6
-      a7
-      a8
-      a9
-      a10
+      authorSet
+      questionSet
+      answerSet
       scheduledTime
       endTime
       createdAt
@@ -112,18 +60,10 @@ export const updateContest = /* GraphQL */ `
       answerAttempts {
         items {
           id
+          userName
           contestAnswerID
           score
-          ca1
-          ca2
-          ca3
-          ca4
-          ca5
-          ca6
-          ca7
-          ca8
-          ca9
-          ca10
+          userAnswerSet
           contestID
           createdAt
           updatedAt
@@ -145,31 +85,9 @@ export const deleteContest = /* GraphQL */ `
       sort
       contestContentAnn
       title
-      ps1
-      ps2
-      ps3
-      ps4
-      ps5
-      q1
-      q2
-      q3
-      q4
-      q5
-      q6
-      q7
-      q8
-      q9
-      q10
-      a1
-      a2
-      a3
-      a4
-      a5
-      a6
-      a7
-      a8
-      a9
-      a10
+      authorSet
+      questionSet
+      answerSet
       scheduledTime
       endTime
       createdAt
@@ -178,18 +96,10 @@ export const deleteContest = /* GraphQL */ `
       answerAttempts {
         items {
           id
+          userName
           contestAnswerID
           score
-          ca1
-          ca2
-          ca3
-          ca4
-          ca5
-          ca6
-          ca7
-          ca8
-          ca9
-          ca10
+          userAnswerSet
           contestID
           createdAt
           updatedAt
@@ -207,18 +117,10 @@ export const createContestAnswer = /* GraphQL */ `
   ) {
     createContestAnswer(input: $input, condition: $condition) {
       id
+      userName
       contestAnswerID
       score
-      ca1
-      ca2
-      ca3
-      ca4
-      ca5
-      ca6
-      ca7
-      ca8
-      ca9
-      ca10
+      userAnswerSet
       contestID
       createdAt
       updatedAt
@@ -228,31 +130,9 @@ export const createContestAnswer = /* GraphQL */ `
         sort
         contestContentAnn
         title
-        ps1
-        ps2
-        ps3
-        ps4
-        ps5
-        q1
-        q2
-        q3
-        q4
-        q5
-        q6
-        q7
-        q8
-        q9
-        q10
-        a1
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-        a10
+        authorSet
+        questionSet
+        answerSet
         scheduledTime
         endTime
         createdAt
@@ -273,18 +153,10 @@ export const updateContestAnswer = /* GraphQL */ `
   ) {
     updateContestAnswer(input: $input, condition: $condition) {
       id
+      userName
       contestAnswerID
       score
-      ca1
-      ca2
-      ca3
-      ca4
-      ca5
-      ca6
-      ca7
-      ca8
-      ca9
-      ca10
+      userAnswerSet
       contestID
       createdAt
       updatedAt
@@ -294,31 +166,9 @@ export const updateContestAnswer = /* GraphQL */ `
         sort
         contestContentAnn
         title
-        ps1
-        ps2
-        ps3
-        ps4
-        ps5
-        q1
-        q2
-        q3
-        q4
-        q5
-        q6
-        q7
-        q8
-        q9
-        q10
-        a1
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-        a10
+        authorSet
+        questionSet
+        answerSet
         scheduledTime
         endTime
         createdAt
@@ -339,18 +189,10 @@ export const deleteContestAnswer = /* GraphQL */ `
   ) {
     deleteContestAnswer(input: $input, condition: $condition) {
       id
+      userName
       contestAnswerID
       score
-      ca1
-      ca2
-      ca3
-      ca4
-      ca5
-      ca6
-      ca7
-      ca8
-      ca9
-      ca10
+      userAnswerSet
       contestID
       createdAt
       updatedAt
@@ -360,31 +202,9 @@ export const deleteContestAnswer = /* GraphQL */ `
         sort
         contestContentAnn
         title
-        ps1
-        ps2
-        ps3
-        ps4
-        ps5
-        q1
-        q2
-        q3
-        q4
-        q5
-        q6
-        q7
-        q8
-        q9
-        q10
-        a1
-        a2
-        a3
-        a4
-        a5
-        a6
-        a7
-        a8
-        a9
-        a10
+        authorSet
+        questionSet
+        answerSet
         scheduledTime
         endTime
         createdAt
