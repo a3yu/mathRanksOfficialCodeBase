@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
     },
     title: {
-      color: "#fffff",
+      color: "#ffffff",
       fontSize: "1em",
     },
   })
@@ -55,7 +55,7 @@ function Contests(props) {
   const { currentContest } = props;
   return (
     <div className={classes.container}>
-      {currentContest.q1 && (
+      {currentContest.questionSet.map((key, val) => (
         <div>
           <Card className={classes.cardClass}>
             <CardHeader
@@ -64,12 +64,12 @@ function Contests(props) {
               classes={{
                 title: classes.title,
               }}
-              title="Question One"
+              title={"Question " + (val + 1)}
             />
             <CardContent className={classes.cardContentText}>
               <div className={classes.question}>
                 <h2 className={classes.questionText}>
-                  <Latex>{currentContest.q1}</Latex>
+                  <Latex>{key}</Latex>
                 </h2>
               </div>
               <div>
@@ -93,7 +93,7 @@ function Contests(props) {
             </CardContent>
           </Card>
         </div>
-      )}
+      ))}
     </div>
   );
 }
@@ -115,7 +115,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const rightContest = currContest.filter((contest) => {
     return contest.contestID == contNumber;
   });
-  if (rightContest.length == 0 || rightContest[0].q1 == null) {
+  if (rightContest.length == 0 || rightContest[0].questionSet[0] == null) {
     res.writeHead(302, { Location: "/?error=Contest+does+not+exist." });
     res.end();
   } else if (rightContest[0].scheduledTime >= current) {
