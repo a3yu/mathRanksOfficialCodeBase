@@ -124,7 +124,7 @@ function Contests(props) {
   return (
     <div className={classes.container}>
       {currentContest.questionSet.map((key, val) => (
-        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" key={key}>
           <div key={key}>
             <Card className={classes.cardClass}>
               <CardHeader
