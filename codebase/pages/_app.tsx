@@ -13,7 +13,7 @@ import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { useRouter } from "next/router";
 
-Amplify.configure({ ...awsconfig, ssr: true });
+Amplify.configure({ ...awsconfig, ssr: true, cookieStore: false });
 const alertStyle = {
   backgroundColor: "#151515",
   color: "white",

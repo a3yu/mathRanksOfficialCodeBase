@@ -9,6 +9,7 @@ export default function ContestHome() {
 export async function getServerSideProps() {
   const allContests = (await API.graphql({
     query: listContests,
+    authMode: "AMAZON_COGNITO_USER_POOLS",
   })) as {
     data: ListContestsQuery;
     errors: any[];

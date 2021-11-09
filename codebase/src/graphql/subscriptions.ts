@@ -17,21 +17,6 @@ export const onCreateContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -50,21 +35,6 @@ export const onUpdateContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -83,120 +53,48 @@ export const onDeleteContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
 export const onCreateContestAnswer = /* GraphQL */ `
-  subscription OnCreateContestAnswer {
-    onCreateContestAnswer {
+  subscription OnCreateContestAnswer($userName: String!) {
+    onCreateContestAnswer(userName: $userName) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
 export const onUpdateContestAnswer = /* GraphQL */ `
-  subscription OnUpdateContestAnswer {
-    onUpdateContestAnswer {
+  subscription OnUpdateContestAnswer($userName: String!) {
+    onUpdateContestAnswer(userName: $userName) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
 export const onDeleteContestAnswer = /* GraphQL */ `
-  subscription OnDeleteContestAnswer {
-    onDeleteContestAnswer {
+  subscription OnDeleteContestAnswer($userName: String!) {
+    onDeleteContestAnswer(userName: $userName) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;

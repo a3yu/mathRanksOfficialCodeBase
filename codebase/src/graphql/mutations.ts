@@ -20,21 +20,6 @@ export const createContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -56,21 +41,6 @@ export const updateContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -92,21 +62,6 @@ export const deleteContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -117,32 +72,13 @@ export const createContestAnswer = /* GraphQL */ `
   ) {
     createContestAnswer(input: $input, condition: $condition) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
@@ -153,32 +89,13 @@ export const updateContestAnswer = /* GraphQL */ `
   ) {
     updateContestAnswer(input: $input, condition: $condition) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
@@ -189,32 +106,13 @@ export const deleteContestAnswer = /* GraphQL */ `
   ) {
     deleteContestAnswer(input: $input, condition: $condition) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;

@@ -3,7 +3,6 @@ type Contest
   @key(name: "bySort", fields: ["contestID", "sort"])
   @auth(
     rules: [
-      { allow: owner, operations: [create, update, delete, read] }
       { allow: private, operations: [read] }
       { allow: public, operations: [read] }
     ]
@@ -18,8 +17,6 @@ type Contest
   answerSet: [String]
   scheduledTime: Float!
   endTime: Float!
-  answerAttempts: [ContestAnswer]
-    @connection(keyName: "answerContest", fields: ["id"])
 }
 
 type ContestAnswer
@@ -27,16 +24,17 @@ type ContestAnswer
   @key(name: "answerContest", fields: ["contestAnswerID", "score"])
   @auth(
     rules: [
-      { allow: owner, operations: [create, update, delete, read] }
-      { allow: private, operations: [read] }
-      { allow: public, operations: [read] }
+      {
+        allow: owner
+        ownerField: "userName"
+        operations: [create, update, delete, read]
+      }
     ]
   ) {
   id: ID!
-  userName: String!
   contestAnswerID: ID!
+  userName: String!
   score: Int!
   userAnswerSet: [String]
   contestID: ID!
-  contest: Contest @connection(fields: ["contestID"])
 }

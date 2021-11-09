@@ -50,6 +50,7 @@ const theme = createTheme({
       "Segoe UI Emoji",
       "Segoe UI Symbol",
       "Noto Color Emoji",
+      "Source Code Pro",
     ].join(","),
     h1: {
       fontSize: "2.7rem",

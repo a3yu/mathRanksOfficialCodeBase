@@ -17,21 +17,6 @@ export const getContest = /* GraphQL */ `
       endTime
       createdAt
       updatedAt
-      owner
-      answerAttempts {
-        items {
-          id
-          userName
-          contestAnswerID
-          score
-          userAnswerSet
-          contestID
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -55,10 +40,6 @@ export const listContests = /* GraphQL */ `
         endTime
         createdAt
         updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
       }
       nextToken
     }
@@ -68,32 +49,13 @@ export const getContestAnswer = /* GraphQL */ `
   query GetContestAnswer($id: ID!) {
     getContestAnswer(id: $id) {
       id
-      userName
       contestAnswerID
+      userName
       score
       userAnswerSet
       contestID
       createdAt
       updatedAt
-      contest {
-        id
-        contestID
-        sort
-        contestContentAnn
-        title
-        authorSet
-        questionSet
-        answerSet
-        scheduledTime
-        endTime
-        createdAt
-        updatedAt
-        owner
-        answerAttempts {
-          nextToken
-        }
-      }
-      owner
     }
   }
 `;
@@ -106,29 +68,13 @@ export const listContestAnswers = /* GraphQL */ `
     listContestAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userName
         contestAnswerID
+        userName
         score
         userAnswerSet
         contestID
         createdAt
         updatedAt
-        contest {
-          id
-          contestID
-          sort
-          contestContentAnn
-          title
-          authorSet
-          questionSet
-          answerSet
-          scheduledTime
-          endTime
-          createdAt
-          updatedAt
-          owner
-        }
-        owner
       }
       nextToken
     }

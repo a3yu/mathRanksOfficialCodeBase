@@ -124,28 +124,6 @@ export type Contest = {
   endTime: number,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
-  answerAttempts?: ModelContestAnswerConnection | null,
-};
-
-export type ModelContestAnswerConnection = {
-  __typename: "ModelContestAnswerConnection",
-  items?:  Array<ContestAnswer | null > | null,
-  nextToken?: string | null,
-};
-
-export type ContestAnswer = {
-  __typename: "ContestAnswer",
-  id: string,
-  userName: string,
-  contestAnswerID: string,
-  score: number,
-  userAnswerSet?: Array< string | null > | null,
-  contestID: string,
-  createdAt: string,
-  updatedAt: string,
-  contest?: Contest | null,
-  owner?: string | null,
 };
 
 export type UpdateContestInput = {
@@ -167,15 +145,14 @@ export type DeleteContestInput = {
 
 export type CreateContestAnswerInput = {
   id?: string | null,
-  userName: string,
   contestAnswerID: string,
+  userName: string,
   score: number,
   userAnswerSet?: Array< string | null > | null,
   contestID: string,
 };
 
 export type ModelContestAnswerConditionInput = {
-  userName?: ModelStringInput | null,
   contestAnswerID?: ModelIDInput | null,
   score?: ModelIntInput | null,
   userAnswerSet?: ModelStringInput | null,
@@ -185,10 +162,22 @@ export type ModelContestAnswerConditionInput = {
   not?: ModelContestAnswerConditionInput | null,
 };
 
+export type ContestAnswer = {
+  __typename: "ContestAnswer",
+  id: string,
+  contestAnswerID: string,
+  userName: string,
+  score: number,
+  userAnswerSet?: Array< string | null > | null,
+  contestID: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
 export type UpdateContestAnswerInput = {
   id: string,
-  userName?: string | null,
   contestAnswerID?: string | null,
+  userName?: string | null,
   score?: number | null,
   userAnswerSet?: Array< string | null > | null,
   contestID?: string | null,
@@ -222,14 +211,20 @@ export type ModelContestConnection = {
 
 export type ModelContestAnswerFilterInput = {
   id?: ModelIDInput | null,
-  userName?: ModelStringInput | null,
   contestAnswerID?: ModelIDInput | null,
+  userName?: ModelStringInput | null,
   score?: ModelIntInput | null,
   userAnswerSet?: ModelStringInput | null,
   contestID?: ModelIDInput | null,
   and?: Array< ModelContestAnswerFilterInput | null > | null,
   or?: Array< ModelContestAnswerFilterInput | null > | null,
   not?: ModelContestAnswerFilterInput | null,
+};
+
+export type ModelContestAnswerConnection = {
+  __typename: "ModelContestAnswerConnection",
+  items?:  Array<ContestAnswer | null > | null,
+  nextToken?: string | null,
 };
 
 export type CreateContestMutationVariables = {
@@ -252,23 +247,6 @@ export type CreateContestMutation = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -292,23 +270,6 @@ export type UpdateContestMutation = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -332,23 +293,6 @@ export type DeleteContestMutation = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -361,34 +305,13 @@ export type CreateContestAnswerMutation = {
   createContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -401,34 +324,13 @@ export type UpdateContestAnswerMutation = {
   updateContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -441,34 +343,13 @@ export type DeleteContestAnswerMutation = {
   deleteContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -491,23 +372,6 @@ export type GetContestQuery = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -534,11 +398,6 @@ export type ListContestsQuery = {
       endTime: number,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
@@ -552,34 +411,13 @@ export type GetContestAnswerQuery = {
   getContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
 };
 
@@ -595,30 +433,13 @@ export type ListContestAnswersQuery = {
     items?:  Array< {
       __typename: "ContestAnswer",
       id: string,
-      userName: string,
       contestAnswerID: string,
+      userName: string,
       score: number,
       userAnswerSet?: Array< string | null > | null,
       contestID: string,
       createdAt: string,
       updatedAt: string,
-      contest?:  {
-        __typename: "Contest",
-        id: string,
-        contestID: string,
-        sort: number,
-        contestContentAnn: string,
-        title: string,
-        authorSet?: Array< string | null > | null,
-        questionSet?: Array< string | null > | null,
-        answerSet?: Array< string | null > | null,
-        scheduledTime: number,
-        endTime: number,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null,
-      owner?: string | null,
     } | null > | null,
     nextToken?: string | null,
   } | null,
@@ -639,23 +460,6 @@ export type OnCreateContestSubscription = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -674,23 +478,6 @@ export type OnUpdateContestSubscription = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -709,127 +496,59 @@ export type OnDeleteContestSubscription = {
     endTime: number,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
-    answerAttempts?:  {
-      __typename: "ModelContestAnswerConnection",
-      items?:  Array< {
-        __typename: "ContestAnswer",
-        id: string,
-        userName: string,
-        contestAnswerID: string,
-        score: number,
-        userAnswerSet?: Array< string | null > | null,
-        contestID: string,
-        createdAt: string,
-        updatedAt: string,
-        owner?: string | null,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
   } | null,
+};
+
+export type OnCreateContestAnswerSubscriptionVariables = {
+  userName: string,
 };
 
 export type OnCreateContestAnswerSubscription = {
   onCreateContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
+};
+
+export type OnUpdateContestAnswerSubscriptionVariables = {
+  userName: string,
 };
 
 export type OnUpdateContestAnswerSubscription = {
   onUpdateContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
+};
+
+export type OnDeleteContestAnswerSubscriptionVariables = {
+  userName: string,
 };
 
 export type OnDeleteContestAnswerSubscription = {
   onDeleteContestAnswer?:  {
     __typename: "ContestAnswer",
     id: string,
-    userName: string,
     contestAnswerID: string,
+    userName: string,
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     createdAt: string,
     updatedAt: string,
-    contest?:  {
-      __typename: "Contest",
-      id: string,
-      contestID: string,
-      sort: number,
-      contestContentAnn: string,
-      title: string,
-      authorSet?: Array< string | null > | null,
-      questionSet?: Array< string | null > | null,
-      answerSet?: Array< string | null > | null,
-      scheduledTime: number,
-      endTime: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      answerAttempts?:  {
-        __typename: "ModelContestAnswerConnection",
-        nextToken?: string | null,
-      } | null,
-    } | null,
-    owner?: string | null,
   } | null,
 };

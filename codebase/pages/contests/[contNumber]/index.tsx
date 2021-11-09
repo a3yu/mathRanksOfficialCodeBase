@@ -1,17 +1,30 @@
-import API from "@aws-amplify/api";
 import * as React from "react";
-import { ListContestsQuery } from "../../../src/API";
-import { listContests } from "../../../src/graphql/queries";
+import {
+  CreateContestAnswerInput,
+  CreateContestAnswerMutation,
+  GetContestAnswerQuery,
+  GetContestQuery,
+  UpdateContestAnswerInput,
+  UpdateContestAnswerMutation,
+} from "../../../src/API";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { getContest, getContestAnswer } from "../../../src/graphql/queries";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { withSSRContext } from "aws-amplify";
+import { API, withSSRContext } from "aws-amplify";
+import {
+  createContestAnswer,
+  updateContestAnswer,
+} from "../../../src/graphql/mutations";
+import { useState } from "react";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -34,11 +47,25 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "#0048ba",
       height: 38,
     },
+    input: {
+      "& input[type=number]": {
+        "-moz-appearance": "textfield",
+      },
+      "& input[type=number]::-webkit-outer-spin-button": {
+        "-webkit-appearance": "none",
+        margin: 0,
+      },
+      "& input[type=number]::-webkit-inner-spin-button": {
+        "-webkit-appearance": "none",
+        margin: 0,
+      },
+    },
     button1: {
       marginLeft: 12.5,
     },
     cardClass: {
       borderRadius: 0,
+      margin: 20,
     },
     paper: {
       textAlign: "left",
@@ -48,51 +75,104 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ffffff",
       fontSize: "1em",
     },
+    submitAns: {
+      fontFamily: "Segoe UI",
+      fontSize: ".8em",
+      fontWeight: 350,
+      marginBottom: "-.5em",
+      color: "green",
+    },
   })
 );
 function Contests(props) {
+  var localAnswerSet = props.currentAnswer;
+  const currentAnswerSet = props.currentAnswer;
+  const timeUntilInactive = props.currentContest.endTime - Date.now();
+  const [index, setIndex] = useState(0);
+  const [activeState, setActive] = useState(timeUntilInactive > 0);
   const classes = useStyles();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { currentContest } = props;
+  const onSubmit = async (data) => {
+    for (var q in data) {
+      const ind = parseInt(q) - 1;
+      if (ind == index) {
+        localAnswerSet[ind] = data[q];
+      }
+    }
+    const updateContestAnswerInput: UpdateContestAnswerInput = {
+      id: props.username + props.contID,
+      userAnswerSet: localAnswerSet,
+    };
+    const updateNewContestAnswer = (await API.graphql({
+      query: updateContestAnswer,
+      variables: { input: updateContestAnswerInput },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    })) as { data: CreateContestAnswerMutation };
+  };
+  if (activeState == true) {
+    console.log(timeUntilInactive);
+    setTimeout(function () {
+      setActive(false);
+    }, timeUntilInactive);
+  } else {
+  }
   return (
     <div className={classes.container}>
       {currentContest.questionSet.map((key, val) => (
-        <div key={key}>
-          <Card className={classes.cardClass}>
-            <CardHeader
-              className={classes.cardHeader}
-              titleTypographyProps={{ variant: "h3" }}
-              classes={{
-                title: classes.title,
-              }}
-              title={"Question " + (val + 1)}
-            />
-            <CardContent className={classes.cardContentText}>
-              <div className={classes.question}>
-                <h2 className={classes.questionText}>
-                  <Latex>{key}</Latex>
-                </h2>
-              </div>
-              <div>
-                <TextField
-                  variant="outlined"
-                  id="answer"
-                  size="small"
-                  inputProps={{ style: { fontSize: 12 } }}
-                  InputLabelProps={{ style: { fontSize: 12 } }}
-                />
-                <Button
-                  className={classes.button1}
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  size="small"
-                >
-                  Submit
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <div key={key}>
+            <Card className={classes.cardClass}>
+              <CardHeader
+                className={classes.cardHeader}
+                titleTypographyProps={{ variant: "h3" }}
+                classes={{
+                  title: classes.title,
+                }}
+                title={"Question " + (val + 1)}
+              />
+              <CardContent className={classes.cardContentText}>
+                <div className={classes.question}>
+                  <h2 className={classes.questionText}>
+                    <Latex>{key}</Latex>
+                  </h2>
+                </div>
+                <div>
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    id={"q" + (val + 1)}
+                    type="number"
+                    className={classes.input}
+                    inputProps={{
+                      style: { fontSize: 12 },
+                    }}
+                    InputLabelProps={{ style: { fontSize: 12 } }}
+                    {...register("" + (val + 1))}
+                  />
+                  <Button
+                    className={classes.button1}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    size="small"
+                    onClick={() => setIndex(val)}
+                  >
+                    Submit
+                  </Button>
+                  <Typography className={classes.submitAns}>
+                    Your Submitted Answer: {currentAnswerSet[val]}
+                  </Typography>
+                  {}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </form>
       ))}
     </div>
   );
@@ -103,28 +183,28 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }) => {
-  const contNumber = query.contNumber;
-  const allContests = (await API.graphql({
-    query: listContests,
-  })) as {
-    data: ListContestsQuery;
-    errors: any[];
-  };
-  const currContest = allContests.data.listContests.items;
+  const SSR = withSSRContext({ req });
+  const { Auth } = withSSRContext({ req });
+  const contNum = query.contNumber;
+  const contNumber = String(contNum);
+  const currContest = (await SSR.API.graphql({
+    query: getContest,
+    authMode: "AMAZON_COGNITO_USER_POOLS",
+    variables: {
+      id: contNumber,
+    },
+  })) as { data: GetContestQuery };
+  const contest = currContest.data.getContest;
   const current = Math.round(Date.now());
-  const rightContest = currContest.filter((contest) => {
-    return contest.contestID == contNumber;
-  });
-  if (rightContest.length == 0 || rightContest[0].questionSet[0] == null) {
+  if (contest == null || contest.questionSet[0] == null) {
     res.writeHead(302, { Location: "/?error=Contest+does+not+exist." });
     res.end();
-  } else if (rightContest[0].scheduledTime >= current) {
+  } else if (contest.scheduledTime >= current) {
     res.writeHead(302, {
       Location: "/?error=Contest+has+not+started.",
     });
     res.end();
   } else {
-    const { Auth } = withSSRContext({ req });
     try {
       const user = await Auth.currentAuthenticatedUser();
     } catch (err) {
@@ -134,9 +214,49 @@ export const getServerSideProps: GetServerSideProps = async ({
       res.end();
     }
   }
+
+  const user = await Auth.currentAuthenticatedUser();
+  const newAnswer = (await SSR.API.graphql({
+    query: getContestAnswer,
+    variables: {
+      id: user.username + contNumber,
+    },
+    authMode: "AMAZON_COGNITO_USER_POOLS",
+  })) as { data: GetContestAnswerQuery };
+  const answer = newAnswer.data.getContestAnswer;
+  const answerFinal = answer.userAnswerSet;
+  if (answer == null) {
+    const arr = new Array(contest.questionSet.length).fill(null);
+    const newContestAnswerInput: CreateContestAnswerInput = {
+      contestAnswerID: user.username + contNumber,
+      contestID: contNumber,
+      userName: user.username,
+      score: -1,
+      id: user.username + contNumber,
+      userAnswerSet: arr,
+    };
+    const newContestAnswer = (await SSR.API.graphql({
+      query: createContestAnswer,
+      variables: { input: newContestAnswerInput },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    })) as { data: CreateContestAnswerMutation };
+    const answerFinal = newContestAnswer.data.createContestAnswer.userAnswerSet;
+    return {
+      props: {
+        currentContest: contest,
+        currentAnswer: answerFinal,
+        username: user.username,
+        contID: contNumber,
+      },
+    };
+  }
+
   return {
     props: {
-      currentContest: rightContest[0],
+      currentContest: contest,
+      currentAnswer: answerFinal,
+      username: user.username,
+      contID: contNumber,
     },
   };
 };
