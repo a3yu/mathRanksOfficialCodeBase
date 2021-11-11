@@ -15,6 +15,8 @@ export const getContest = /* GraphQL */ `
       answerSet
       scheduledTime
       endTime
+      length
+      practice
       createdAt
       updatedAt
     }
@@ -38,6 +40,8 @@ export const listContests = /* GraphQL */ `
         answerSet
         scheduledTime
         endTime
+        length
+        practice
         createdAt
         updatedAt
       }

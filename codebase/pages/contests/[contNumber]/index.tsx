@@ -24,6 +24,8 @@ import {
   updateContestAnswer,
 } from "../../../src/graphql/mutations";
 import { useState } from "react";
+import router, { useRouter } from "next/router";
+import Countdown from "react-countdown";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,21 +84,42 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "-.5em",
       color: "green",
     },
+    resultText: {
+      fontFamily: "Segoe UI",
+      fontSize: ".9em",
+      fontWeight: 500,
+      marginBottom: "-.8em",
+    },
   })
 );
 function Contests(props) {
+  const router = useRouter();
   var localAnswerSet = props.currentAnswer;
   const currentAnswerSet = props.currentAnswer;
+  const { currentContest } = props;
+  var statusAns = new Array(currentContest.questionSet.length).fill(false);
   const timeUntilInactive = props.currentContest.endTime - Date.now();
   const [index, setIndex] = useState(0);
   const [activeState, setActive] = useState(timeUntilInactive > 0);
   const classes = useStyles();
+  const practice = currentContest.practice;
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { currentContest } = props;
+  if (practice == true) {
+    for (let index = 0; index < currentContest.questionSet.length; index++) {
+      if (localAnswerSet[index] == currentContest.answerSet[index]) {
+        statusAns[index] = true;
+      } else if (localAnswerSet[index] == null) {
+        statusAns[index] = null;
+      } else {
+        statusAns[index] = false;
+      }
+    }
+  }
+  console.log(statusAns);
   const onSubmit = async (data) => {
     for (var q in data) {
       const ind = parseInt(q) - 1;
@@ -108,18 +131,42 @@ function Contests(props) {
       id: props.username + props.contID,
       userAnswerSet: localAnswerSet,
     };
-    const updateNewContestAnswer = (await API.graphql({
-      query: updateContestAnswer,
-      variables: { input: updateContestAnswerInput },
-      authMode: "AMAZON_COGNITO_USER_POOLS",
-    })) as { data: CreateContestAnswerMutation };
+    if (
+      Date.now() < props.currentContest.endTime ||
+      props.currentContest.practice == true
+    ) {
+      const updateNewContestAnswer = (await API.graphql({
+        query: updateContestAnswer,
+        variables: { input: updateContestAnswerInput },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      })) as { data: CreateContestAnswerMutation };
+      if (practice == true) {
+        for (let index = 0; index < currentContest.questionSet; index++) {
+          if (localAnswerSet[index] == currentContest.answerSet[index]) {
+            statusAns[index] = true;
+            console.log(localAnswerSet[index]);
+            console.log(currentContest.answerSet[index]);
+          } else {
+            statusAns[index] = false;
+            console.log(localAnswerSet[index]);
+            console.log(currentContest.answerSet[index]);
+          }
+        }
+      }
+    } else {
+      router.replace({
+        pathname: "/",
+      });
+    }
   };
-  if (activeState == true) {
-    console.log(timeUntilInactive);
-    setTimeout(function () {
-      setActive(false);
-    }, timeUntilInactive);
-  } else {
+  if (props.currentContest.practice != true) {
+    if (activeState == true) {
+      setTimeout(function () {
+        setActive(false);
+      }, timeUntilInactive);
+    } else {
+      router.push("/");
+    }
   }
   return (
     <div className={classes.container}>
@@ -167,13 +214,20 @@ function Contests(props) {
                   <Typography className={classes.submitAns}>
                     Your Submitted Answer: {currentAnswerSet[val]}
                   </Typography>
-                  {}
+                  {practice && (
+                    <Typography className={classes.resultText}>
+                      {statusAns[val] == true && "Correct"}
+                      {statusAns[val] == false && "Incorrect"}
+                      {statusAns[val] == null && ""}
+                    </Typography>
+                  )}
                 </div>
               </CardContent>
             </Card>
           </div>
         </form>
       ))}
+      {activeState && <Countdown date={Date.now() + timeUntilInactive} />}
     </div>
   );
 }
@@ -185,6 +239,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const SSR = withSSRContext({ req });
   const { Auth } = withSSRContext({ req });
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+  } catch (err) {
+    res.writeHead(302, {
+      Location: "/?error=You+are+not+logged+in.",
+    });
+    res.end();
+  }
   const contNum = query.contNumber;
   const contNumber = String(contNum);
   const currContest = (await SSR.API.graphql({
@@ -204,15 +266,12 @@ export const getServerSideProps: GetServerSideProps = async ({
       Location: "/?error=Contest+has+not+started.",
     });
     res.end();
-  } else {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-    } catch (err) {
-      res.writeHead(302, {
-        Location: "/?error=You+are+not+logged+in.",
-      });
-      res.end();
-    }
+  } else if (contest.endTime <= current && contest.practice != true) {
+    res.writeHead(302, {
+      Location:
+        "/?error=Contest+is+being+graded.+Come+back+later+to+view+the+contest.",
+    });
+    res.end();
   }
 
   const user = await Auth.currentAuthenticatedUser();
@@ -224,7 +283,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     authMode: "AMAZON_COGNITO_USER_POOLS",
   })) as { data: GetContestAnswerQuery };
   const answer = newAnswer.data.getContestAnswer;
-  const answerFinal = answer.userAnswerSet;
   if (answer == null) {
     const arr = new Array(contest.questionSet.length).fill(null);
     const newContestAnswerInput: CreateContestAnswerInput = {
@@ -250,7 +308,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
-
+  const answerFinal = answer.userAnswerSet;
   return {
     props: {
       currentContest: contest,

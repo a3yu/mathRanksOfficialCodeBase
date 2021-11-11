@@ -118,7 +118,9 @@ function Home(props) {
     if (
       router.query.error == "Contest does not exist." ||
       router.query.error == "Contest has not started." ||
-      router.query.error == "You are not logged in."
+      router.query.error == "You are not logged in." ||
+      router.query.error ==
+        "Contest is being graded. Come back later to view the contest."
     ) {
       alert.show(router.query.error);
       window.history.pushState("", "", "/");

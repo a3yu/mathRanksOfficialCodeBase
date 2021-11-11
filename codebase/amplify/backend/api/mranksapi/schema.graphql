@@ -17,6 +17,8 @@ type Contest
   answerSet: [String]
   scheduledTime: Float!
   endTime: Float!
+  length: String!
+  practice: Boolean
 }
 
 type ContestAnswer

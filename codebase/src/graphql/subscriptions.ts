@@ -15,6 +15,8 @@ export const onCreateContest = /* GraphQL */ `
       answerSet
       scheduledTime
       endTime
+      length
+      practice
       createdAt
       updatedAt
     }
@@ -33,6 +35,8 @@ export const onUpdateContest = /* GraphQL */ `
       answerSet
       scheduledTime
       endTime
+      length
+      practice
       createdAt
       updatedAt
     }
@@ -51,6 +55,8 @@ export const onDeleteContest = /* GraphQL */ `
       answerSet
       scheduledTime
       endTime
+      length
+      practice
       createdAt
       updatedAt
     }

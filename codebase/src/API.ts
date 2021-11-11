@@ -13,6 +13,8 @@ export type CreateContestInput = {
   answerSet?: Array< string | null > | null,
   scheduledTime: number,
   endTime: number,
+  length: string,
+  practice?: boolean | null,
 };
 
 export type ModelContestConditionInput = {
@@ -25,6 +27,8 @@ export type ModelContestConditionInput = {
   answerSet?: ModelStringInput | null,
   scheduledTime?: ModelFloatInput | null,
   endTime?: ModelFloatInput | null,
+  length?: ModelStringInput | null,
+  practice?: ModelBooleanInput | null,
   and?: Array< ModelContestConditionInput | null > | null,
   or?: Array< ModelContestConditionInput | null > | null,
   not?: ModelContestConditionInput | null,
@@ -110,6 +114,13 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Contest = {
   __typename: "Contest",
   id: string,
@@ -122,6 +133,8 @@ export type Contest = {
   answerSet?: Array< string | null > | null,
   scheduledTime: number,
   endTime: number,
+  length: string,
+  practice?: boolean | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -137,6 +150,8 @@ export type UpdateContestInput = {
   answerSet?: Array< string | null > | null,
   scheduledTime?: number | null,
   endTime?: number | null,
+  length?: string | null,
+  practice?: boolean | null,
 };
 
 export type DeleteContestInput = {
@@ -198,6 +213,8 @@ export type ModelContestFilterInput = {
   answerSet?: ModelStringInput | null,
   scheduledTime?: ModelFloatInput | null,
   endTime?: ModelFloatInput | null,
+  length?: ModelStringInput | null,
+  practice?: ModelBooleanInput | null,
   and?: Array< ModelContestFilterInput | null > | null,
   or?: Array< ModelContestFilterInput | null > | null,
   not?: ModelContestFilterInput | null,
@@ -245,6 +262,8 @@ export type CreateContestMutation = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -268,6 +287,8 @@ export type UpdateContestMutation = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -291,6 +312,8 @@ export type DeleteContestMutation = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -370,6 +393,8 @@ export type GetContestQuery = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -396,6 +421,8 @@ export type ListContestsQuery = {
       answerSet?: Array< string | null > | null,
       scheduledTime: number,
       endTime: number,
+      length: string,
+      practice?: boolean | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -458,6 +485,8 @@ export type OnCreateContestSubscription = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -476,6 +505,8 @@ export type OnUpdateContestSubscription = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -494,6 +525,8 @@ export type OnDeleteContestSubscription = {
     answerSet?: Array< string | null > | null,
     scheduledTime: number,
     endTime: number,
+    length: string,
+    practice?: boolean | null,
     createdAt: string,
     updatedAt: string,
   } | null,
