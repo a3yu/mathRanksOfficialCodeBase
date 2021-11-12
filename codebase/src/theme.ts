@@ -57,11 +57,11 @@ const theme = createTheme({
       fontWeight: 700,
       lineHeight: 1,
       color: "#000000",
-      fontFamily: "Segoe UI",
+      fontFamily: "Inter",
     },
     h2: {
       fontWeight: 700,
-      fontFamily: "Segoe UI",
+      fontFamily: "Inter",
       fontSize: "2.25rem",
       lineHeight: 1,
       color: "#000000",
@@ -76,7 +76,7 @@ const theme = createTheme({
       fontSize: "1.08em",
       lineHeight: 1.75,
       color: "#000000",
-      fontFamily: "Segoe UI",
+      fontFamily: "Inter",
     },
     body2: {
       fontSize: "1rem",
