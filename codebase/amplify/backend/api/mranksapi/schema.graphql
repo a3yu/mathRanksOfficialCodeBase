@@ -40,3 +40,29 @@ type ContestAnswer
   userAnswerSet: [String]
   contestID: ID!
 }
+
+type leaderboard
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  users: [String]
+  ratings: [String]
+}
+
+type contestRanking
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  users: [String]
+  ratings: [String]
+}

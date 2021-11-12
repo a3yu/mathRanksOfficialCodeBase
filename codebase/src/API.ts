@@ -158,6 +158,72 @@ export type DeleteContestInput = {
   id: string,
 };
 
+export type CreateLeaderboardInput = {
+  id?: string | null,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+};
+
+export type ModelleaderboardConditionInput = {
+  users?: ModelStringInput | null,
+  ratings?: ModelStringInput | null,
+  and?: Array< ModelleaderboardConditionInput | null > | null,
+  or?: Array< ModelleaderboardConditionInput | null > | null,
+  not?: ModelleaderboardConditionInput | null,
+};
+
+export type leaderboard = {
+  __typename: "leaderboard",
+  id: string,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateLeaderboardInput = {
+  id: string,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+};
+
+export type DeleteLeaderboardInput = {
+  id: string,
+};
+
+export type CreateContestRankingInput = {
+  id?: string | null,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+};
+
+export type ModelcontestRankingConditionInput = {
+  users?: ModelStringInput | null,
+  ratings?: ModelStringInput | null,
+  and?: Array< ModelcontestRankingConditionInput | null > | null,
+  or?: Array< ModelcontestRankingConditionInput | null > | null,
+  not?: ModelcontestRankingConditionInput | null,
+};
+
+export type contestRanking = {
+  __typename: "contestRanking",
+  id: string,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateContestRankingInput = {
+  id: string,
+  users?: Array< string | null > | null,
+  ratings?: Array< string | null > | null,
+};
+
+export type DeleteContestRankingInput = {
+  id: string,
+};
+
 export type CreateContestAnswerInput = {
   id?: string | null,
   contestAnswerID: string,
@@ -244,6 +310,36 @@ export type ModelContestAnswerConnection = {
   nextToken?: string | null,
 };
 
+export type ModelleaderboardFilterInput = {
+  id?: ModelIDInput | null,
+  users?: ModelStringInput | null,
+  ratings?: ModelStringInput | null,
+  and?: Array< ModelleaderboardFilterInput | null > | null,
+  or?: Array< ModelleaderboardFilterInput | null > | null,
+  not?: ModelleaderboardFilterInput | null,
+};
+
+export type ModelleaderboardConnection = {
+  __typename: "ModelleaderboardConnection",
+  items?:  Array<leaderboard | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelcontestRankingFilterInput = {
+  id?: ModelIDInput | null,
+  users?: ModelStringInput | null,
+  ratings?: ModelStringInput | null,
+  and?: Array< ModelcontestRankingFilterInput | null > | null,
+  or?: Array< ModelcontestRankingFilterInput | null > | null,
+  not?: ModelcontestRankingFilterInput | null,
+};
+
+export type ModelcontestRankingConnection = {
+  __typename: "ModelcontestRankingConnection",
+  items?:  Array<contestRanking | null > | null,
+  nextToken?: string | null,
+};
+
 export type CreateContestMutationVariables = {
   input: CreateContestInput,
   condition?: ModelContestConditionInput | null,
@@ -314,6 +410,102 @@ export type DeleteContestMutation = {
     endTime: number,
     length: string,
     practice?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLeaderboardMutationVariables = {
+  input: CreateLeaderboardInput,
+  condition?: ModelleaderboardConditionInput | null,
+};
+
+export type CreateLeaderboardMutation = {
+  createLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLeaderboardMutationVariables = {
+  input: UpdateLeaderboardInput,
+  condition?: ModelleaderboardConditionInput | null,
+};
+
+export type UpdateLeaderboardMutation = {
+  updateLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLeaderboardMutationVariables = {
+  input: DeleteLeaderboardInput,
+  condition?: ModelleaderboardConditionInput | null,
+};
+
+export type DeleteLeaderboardMutation = {
+  deleteLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateContestRankingMutationVariables = {
+  input: CreateContestRankingInput,
+  condition?: ModelcontestRankingConditionInput | null,
+};
+
+export type CreateContestRankingMutation = {
+  createContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateContestRankingMutationVariables = {
+  input: UpdateContestRankingInput,
+  condition?: ModelcontestRankingConditionInput | null,
+};
+
+export type UpdateContestRankingMutation = {
+  updateContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteContestRankingMutationVariables = {
+  input: DeleteContestRankingInput,
+  condition?: ModelcontestRankingConditionInput | null,
+};
+
+export type DeleteContestRankingMutation = {
+  deleteContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -472,6 +664,78 @@ export type ListContestAnswersQuery = {
   } | null,
 };
 
+export type GetLeaderboardQueryVariables = {
+  id: string,
+};
+
+export type GetLeaderboardQuery = {
+  getLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLeaderboardsQueryVariables = {
+  filter?: ModelleaderboardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLeaderboardsQuery = {
+  listLeaderboards?:  {
+    __typename: "ModelleaderboardConnection",
+    items?:  Array< {
+      __typename: "leaderboard",
+      id: string,
+      users?: Array< string | null > | null,
+      ratings?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetContestRankingQueryVariables = {
+  id: string,
+};
+
+export type GetContestRankingQuery = {
+  getContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListContestRankingsQueryVariables = {
+  filter?: ModelcontestRankingFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListContestRankingsQuery = {
+  listContestRankings?:  {
+    __typename: "ModelcontestRankingConnection",
+    items?:  Array< {
+      __typename: "contestRanking",
+      id: string,
+      users?: Array< string | null > | null,
+      ratings?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateContestSubscription = {
   onCreateContest?:  {
     __typename: "Contest",
@@ -581,6 +845,72 @@ export type OnDeleteContestAnswerSubscription = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLeaderboardSubscription = {
+  onCreateLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLeaderboardSubscription = {
+  onUpdateLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLeaderboardSubscription = {
+  onDeleteLeaderboard?:  {
+    __typename: "leaderboard",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateContestRankingSubscription = {
+  onCreateContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateContestRankingSubscription = {
+  onUpdateContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteContestRankingSubscription = {
+  onDeleteContestRanking?:  {
+    __typename: "contestRanking",
+    id: string,
+    users?: Array< string | null > | null,
+    ratings?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,

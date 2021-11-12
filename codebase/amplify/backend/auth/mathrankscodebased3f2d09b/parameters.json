@@ -1,6 +1,6 @@
 {
     "identityPoolName": "mathrankscodebased3f2d09b_identitypool_d3f2d09b",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "mathrad3f2d09b",
     "userPoolName": "mathrankscodebased3f2d09b_userpool_d3f2d09b",
     "autoVerifiedAttributes": [

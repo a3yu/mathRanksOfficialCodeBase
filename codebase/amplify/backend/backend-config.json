@@ -54,5 +54,11 @@
         }
       }
     }
+  },
+  "storage": {
+    "mathRanksStorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

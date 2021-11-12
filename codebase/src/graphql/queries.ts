@@ -84,3 +84,61 @@ export const listContestAnswers = /* GraphQL */ `
     }
   }
 `;
+export const getLeaderboard = /* GraphQL */ `
+  query GetLeaderboard($id: ID!) {
+    getLeaderboard(id: $id) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLeaderboards = /* GraphQL */ `
+  query ListLeaderboards(
+    $filter: ModelleaderboardFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLeaderboards(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        users
+        ratings
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getContestRanking = /* GraphQL */ `
+  query GetContestRanking($id: ID!) {
+    getContestRanking(id: $id) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listContestRankings = /* GraphQL */ `
+  query ListContestRankings(
+    $filter: ModelcontestRankingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listContestRankings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        users
+        ratings
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

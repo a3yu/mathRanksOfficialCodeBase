@@ -104,3 +104,69 @@ export const onDeleteContestAnswer = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLeaderboard = /* GraphQL */ `
+  subscription OnCreateLeaderboard {
+    onCreateLeaderboard {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLeaderboard = /* GraphQL */ `
+  subscription OnUpdateLeaderboard {
+    onUpdateLeaderboard {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLeaderboard = /* GraphQL */ `
+  subscription OnDeleteLeaderboard {
+    onDeleteLeaderboard {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateContestRanking = /* GraphQL */ `
+  subscription OnCreateContestRanking {
+    onCreateContestRanking {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateContestRanking = /* GraphQL */ `
+  subscription OnUpdateContestRanking {
+    onUpdateContestRanking {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteContestRanking = /* GraphQL */ `
+  subscription OnDeleteContestRanking {
+    onDeleteContestRanking {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;

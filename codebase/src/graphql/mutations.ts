@@ -71,6 +71,90 @@ export const deleteContest = /* GraphQL */ `
     }
   }
 `;
+export const createLeaderboard = /* GraphQL */ `
+  mutation CreateLeaderboard(
+    $input: CreateLeaderboardInput!
+    $condition: ModelleaderboardConditionInput
+  ) {
+    createLeaderboard(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLeaderboard = /* GraphQL */ `
+  mutation UpdateLeaderboard(
+    $input: UpdateLeaderboardInput!
+    $condition: ModelleaderboardConditionInput
+  ) {
+    updateLeaderboard(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLeaderboard = /* GraphQL */ `
+  mutation DeleteLeaderboard(
+    $input: DeleteLeaderboardInput!
+    $condition: ModelleaderboardConditionInput
+  ) {
+    deleteLeaderboard(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createContestRanking = /* GraphQL */ `
+  mutation CreateContestRanking(
+    $input: CreateContestRankingInput!
+    $condition: ModelcontestRankingConditionInput
+  ) {
+    createContestRanking(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateContestRanking = /* GraphQL */ `
+  mutation UpdateContestRanking(
+    $input: UpdateContestRankingInput!
+    $condition: ModelcontestRankingConditionInput
+  ) {
+    updateContestRanking(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteContestRanking = /* GraphQL */ `
+  mutation DeleteContestRanking(
+    $input: DeleteContestRankingInput!
+    $condition: ModelcontestRankingConditionInput
+  ) {
+    deleteContestRanking(input: $input, condition: $condition) {
+      id
+      users
+      ratings
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createContestAnswer = /* GraphQL */ `
   mutation CreateContestAnswer(
     $input: CreateContestAnswerInput!

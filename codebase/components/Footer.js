@@ -10,7 +10,7 @@ function Footer() {
       <hr className={styles.footerseperator} />
       <section className={styles.footersocialmedia}>
         <Link href="/" target="_blank" rel="noopener noreferrer">
-          MathRanks LLC
+          mathRanks LLC
         </Link>{" "}
         (c) Copyright 2021 - Aedin Yu <br />
         Server Time (last refresh): {a}
