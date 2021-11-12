@@ -202,14 +202,28 @@ export default function ContestHome(props) {
                     </Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <Typography className={classes.tableRowCell}>
-                      <a href={"/contests/" + key.id}>Ranking</a>
-                    </Typography>
+                    {key.practice ? (
+                      <Typography className={classes.tableRowCell}>
+                        <a href={"/contests/" + key.id + "/standings"}>
+                          Standings
+                        </a>
+                      </Typography>
+                    ) : (
+                      <Typography className={classes.tableRowCell}>
+                        Standings not released yet.
+                      </Typography>
+                    )}
                   </TableCell>
                   <TableCell align="center">
-                    <Typography className={classes.tableRowCell}>
-                      <a href={"/contests/" + key.id}>Practice</a>
-                    </Typography>
+                    {key.practice ? (
+                      <Typography className={classes.tableRowCell}>
+                        <a href={"/contests/" + key.id}>Practice</a>
+                      </Typography>
+                    ) : (
+                      <Typography className={classes.tableRowCell}>
+                        Practice not available yet.
+                      </Typography>
+                    )}
                   </TableCell>
                   <TableCell align="center"></TableCell>
                 </TableRow>

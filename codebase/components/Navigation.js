@@ -54,6 +54,12 @@ export default function Navbar() {
                 <a>Ranking</a>
               </Link>
             </li>
+            <li>
+              {" "}
+              <Link href="/about">
+                <a>About</a>
+              </Link>
+            </li>
             {!user && (
               <ul className={styles.account}>
                 <li>

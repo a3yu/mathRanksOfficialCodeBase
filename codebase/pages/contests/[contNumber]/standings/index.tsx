@@ -13,9 +13,23 @@ import {
 } from "@material-ui/core";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { maxWidth } from "@material-ui/system";
-import { API } from "aws-amplify";
-import { ListLeaderboardsQuery } from "../src/API";
-import { listContests, listLeaderboards } from "../src/graphql/queries";
+import { API, withSSRContext } from "aws-amplify";
+import {
+  GetContestQuery,
+  GetContestRankingQuery,
+  ListContestRankingsQuery,
+  ListContestRankingsQueryVariables,
+  ListLeaderboardsQuery,
+} from "../../../../src/API";
+import {
+  getContest,
+  getContestRanking,
+  listContestRankings,
+  listContests,
+  listLeaderboards,
+} from "../../../../src/graphql/queries";
+import { GetServerSideProps } from "next";
+import { red } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
@@ -40,12 +54,11 @@ const useStyles = makeStyles((theme: Theme) =>
     title: { textAlign: "center", marginBottom: 30 },
   })
 );
-export default function Ranking(props) {
+export default function Standings(props) {
   const classes = useStyles();
-  const { leaderBoard } = props;
-  console.log(leaderBoard.users);
-  const board = leaderBoard.users;
-  const ratings = leaderBoard.ratings;
+  const { standings } = props;
+  const users = standings.users;
+  const ratings = standings.ratings;
   const columns: GridColDef[] = [
     {
       field: "id",
@@ -65,20 +78,20 @@ export default function Ranking(props) {
     },
     {
       field: "rating",
-      headerName: "Rating",
+      headerName: "Score",
       flex: 3,
       minWidth: 160,
       editable: false,
     },
   ];
   const rows = [];
-  for (let index = 0; index < board.length; index++) {
-    rows.push({ id: index + 1, name: board[index], rating: ratings[index] });
+  for (let index = 0; index < users.length; index++) {
+    rows.push({ id: index + 1, name: users[index], rating: ratings[index] });
   }
   return (
     <div className={classes.body}>
       <Typography className={classes.title} variant="h1">
-        Leaderboard
+        {props.title}
       </Typography>
       <Paper>
         <DataGrid
@@ -96,18 +109,44 @@ export default function Ranking(props) {
   );
 }
 
-export async function getServerSideProps() {
-  const rankingList = (await API.graphql({
-    query: listLeaderboards,
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+  res,
+}) => {
+  const numberCont = query.contNumber;
+  console.log(numberCont);
+  const SSR = withSSRContext({ req });
+  const rankingList = (await SSR.API.graphql({
+    query: getContestRanking,
+    variables: {
+      id: numberCont,
+    },
   })) as {
-    data: ListLeaderboardsQuery;
+    data: GetContestRankingQuery;
     errors: any[];
   };
-  const leaderboard = rankingList.data.listLeaderboards.items;
-
+  const contest = (await SSR.API.graphql({
+    query: getContest,
+    variables: {
+      id: numberCont,
+    },
+  })) as {
+    data: GetContestQuery;
+    errors: any[];
+  };
+  const title = contest.data.getContest.title;
+  const cRanking = rankingList.data.getContestRanking;
+  if (contest.data.getContest.practice != true) {
+    res.writeHead(302, {
+      Location: "/",
+    });
+    res.end();
+  }
   return {
     props: {
-      leaderBoard: leaderboard[0],
+      standings: cRanking,
+      title: title,
     },
   };
-}
+};
