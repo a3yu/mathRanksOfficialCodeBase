@@ -291,6 +291,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       userName: user.username,
       score: -1,
       id: user.username + contNumber,
+      sort: contest.sort,
       userAnswerSet: arr,
     };
     const newContestAnswer = (await SSR.API.graphql({

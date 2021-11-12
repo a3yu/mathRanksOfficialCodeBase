@@ -153,6 +153,9 @@ export default function ContestHome(props) {
       ) : (
         <Typography className={classes.none}>No Upcoming Contests</Typography>
       )}
+      <Typography variant="h2" className={classes.title}>
+        Past Contests
+      </Typography>
       {contestList.length != 0 ? (
         <TableContainer component={Paper}>
           <Table
@@ -187,7 +190,6 @@ export default function ContestHome(props) {
                       {key.title}
                     </Typography>
                   </TableCell>
-
                   <TableCell align="center">
                     <Typography className={classes.tableRowCell}>
                       {changeToDate(key.scheduledTime)}
@@ -206,7 +208,7 @@ export default function ContestHome(props) {
                   </TableCell>
                   <TableCell align="center">
                     <Typography className={classes.tableRowCell}>
-                      <a href={"/contests/" + key.id}>Enter</a>
+                      <a href={"/contests/" + key.id}>Practice</a>
                     </Typography>
                   </TableCell>
                   <TableCell align="center"></TableCell>

@@ -44,12 +44,6 @@ export default function Navbar() {
             </li>
             <li>
               {" "}
-              <Link href="/about">
-                <a>About</a>
-              </Link>
-            </li>
-            <li>
-              {" "}
               <Link href="/contests">
                 <a>Contests</a>
               </Link>
@@ -80,7 +74,7 @@ export default function Navbar() {
                   <a onClick={signUserOut}>Logout</a>
                 </li>
                 <li>
-                  <Link href="/signup">
+                  <Link href={"/" + user.username}>
                     <a>{user.username}</a>
                   </Link>
                 </li>

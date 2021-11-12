@@ -58,6 +58,7 @@ export const getContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
@@ -77,6 +78,7 @@ export const listContestAnswers = /* GraphQL */ `
         score
         userAnswerSet
         contestID
+        sort
         createdAt
         updatedAt
       }

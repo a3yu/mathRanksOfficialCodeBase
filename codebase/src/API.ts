@@ -231,6 +231,7 @@ export type CreateContestAnswerInput = {
   score: number,
   userAnswerSet?: Array< string | null > | null,
   contestID: string,
+  sort: number,
 };
 
 export type ModelContestAnswerConditionInput = {
@@ -238,6 +239,7 @@ export type ModelContestAnswerConditionInput = {
   score?: ModelIntInput | null,
   userAnswerSet?: ModelStringInput | null,
   contestID?: ModelIDInput | null,
+  sort?: ModelIntInput | null,
   and?: Array< ModelContestAnswerConditionInput | null > | null,
   or?: Array< ModelContestAnswerConditionInput | null > | null,
   not?: ModelContestAnswerConditionInput | null,
@@ -251,6 +253,7 @@ export type ContestAnswer = {
   score: number,
   userAnswerSet?: Array< string | null > | null,
   contestID: string,
+  sort: number,
   createdAt: string,
   updatedAt: string,
 };
@@ -262,6 +265,7 @@ export type UpdateContestAnswerInput = {
   score?: number | null,
   userAnswerSet?: Array< string | null > | null,
   contestID?: string | null,
+  sort?: number | null,
 };
 
 export type DeleteContestAnswerInput = {
@@ -299,6 +303,7 @@ export type ModelContestAnswerFilterInput = {
   score?: ModelIntInput | null,
   userAnswerSet?: ModelStringInput | null,
   contestID?: ModelIDInput | null,
+  sort?: ModelIntInput | null,
   and?: Array< ModelContestAnswerFilterInput | null > | null,
   or?: Array< ModelContestAnswerFilterInput | null > | null,
   not?: ModelContestAnswerFilterInput | null,
@@ -525,6 +530,7 @@ export type CreateContestAnswerMutation = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -544,6 +550,7 @@ export type UpdateContestAnswerMutation = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -563,6 +570,7 @@ export type DeleteContestAnswerMutation = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -635,6 +643,7 @@ export type GetContestAnswerQuery = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -657,6 +666,7 @@ export type ListContestAnswersQuery = {
       score: number,
       userAnswerSet?: Array< string | null > | null,
       contestID: string,
+      sort: number,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -809,6 +819,7 @@ export type OnCreateContestAnswerSubscription = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -827,6 +838,7 @@ export type OnUpdateContestAnswerSubscription = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -845,6 +857,7 @@ export type OnDeleteContestAnswerSubscription = {
     score: number,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
+    sort: number,
     createdAt: string,
     updatedAt: string,
   } | null,

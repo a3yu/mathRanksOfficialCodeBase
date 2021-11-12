@@ -167,6 +167,7 @@ export const createContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
@@ -184,6 +185,7 @@ export const updateContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
@@ -201,6 +203,7 @@ export const deleteContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }

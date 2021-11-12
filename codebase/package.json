@@ -16,6 +16,8 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/system": "^4.12.1",
+    "@mui/material": "^5.1.0",
+    "@mui/x-data-grid": "^4.0.2",
     "aws-amplify": "^4.2.4",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",

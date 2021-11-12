@@ -110,6 +110,7 @@ function Signup() {
             >
               <Grid item>
                 <TextField
+                  required
                   variant="outlined"
                   id="username"
                   label="Username"
@@ -137,6 +138,7 @@ function Signup() {
               </Grid>
               <Grid item>
                 <TextField
+                  required
                   variant="outlined"
                   id="email"
                   label="Email"
@@ -154,6 +156,7 @@ function Signup() {
 
               <Grid item>
                 <TextField
+                  required
                   variant="outlined"
                   id="password"
                   label="Password"
@@ -175,6 +178,7 @@ function Signup() {
               {showCode && (
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     id="code"
                     label="Verification Code"

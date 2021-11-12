@@ -65,6 +65,7 @@ function Login() {
         >
           <Grid item>
             <TextField
+              required
               variant="outlined"
               id="username"
               label="Username"
@@ -77,6 +78,7 @@ function Login() {
 
           <Grid item>
             <TextField
+              required
               variant="outlined"
               id="password"
               label="Password"

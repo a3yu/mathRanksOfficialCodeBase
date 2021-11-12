@@ -171,8 +171,8 @@ function Home(props) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about#2">
-                      <a className={classes.ul}>Contest Format</a>
+                    <Link href="/contests">
+                      <a className={classes.ul}>Contests</a>
                     </Link>
                   </li>
                   <li>

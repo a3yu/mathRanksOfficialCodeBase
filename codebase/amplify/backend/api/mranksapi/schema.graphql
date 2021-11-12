@@ -39,6 +39,7 @@ type ContestAnswer
   score: Int!
   userAnswerSet: [String]
   contestID: ID!
+  sort: Int!
 }
 
 type leaderboard

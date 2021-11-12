@@ -81,7 +81,7 @@ const theme = createTheme({
     body2: {
       fontSize: "1rem",
       lineHeight: 1.75,
-      color: "#9CA3AF",
+      color: "#000",
     },
   },
   spacing: 8,

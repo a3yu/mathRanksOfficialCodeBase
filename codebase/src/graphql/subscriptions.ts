@@ -71,6 +71,7 @@ export const onCreateContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
@@ -85,6 +86,7 @@ export const onUpdateContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
@@ -99,6 +101,7 @@ export const onDeleteContestAnswer = /* GraphQL */ `
       score
       userAnswerSet
       contestID
+      sort
       createdAt
       updatedAt
     }
