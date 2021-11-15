@@ -164,7 +164,7 @@ function Home(props) {
             </Grid>
           ))}
           <Typography className={classes.seeAll}>
-            <a href="/allPosts">See all posts</a>
+            <Link href="/allPosts">See all posts</Link>
           </Typography>
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
@@ -225,7 +225,7 @@ function Home(props) {
                   {contestsCal.map((contests) => (
                     <TableBody key={contests.id}>
                       <TableCell className={classes.tableCellText}>
-                        <a href="/contests">{contests.title}</a>
+                        <Link href="/contests">{contests.title}</Link>
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
                         {changeToDate(contests.scheduledTime)}
@@ -282,7 +282,7 @@ function Home(props) {
                   ))}
                 </Table>
                 <Typography className={classes.seeAll}>
-                  <a href="/ranking">See all</a>
+                  <Link href="/ranking">See all</Link>
                 </Typography>
               </CardContent>
             </Card>

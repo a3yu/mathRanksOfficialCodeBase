@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export default function userProfile() {
+export default function UserProfile() {
   const classes = useStyles();
   return (
     <div className={classes.forNow}>
