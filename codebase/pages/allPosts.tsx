@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
 );
-function allPosts(props) {
+function AllPosts(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
@@ -146,4 +146,4 @@ export async function getServerSideProps() {
     },
   };
 }
-export default allPosts;
+export default AllPosts;

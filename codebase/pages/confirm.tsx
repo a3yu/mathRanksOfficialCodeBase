@@ -17,7 +17,7 @@ interface IFormInput {
   username: string;
   code: string;
 }
-function confirm() {
+function Confirm() {
   const { user, setUser } = useUser();
   const [open, setOpen] = useState(false);
   const [veriNotice, setVeriNotice] = useState(false);
@@ -176,4 +176,4 @@ function confirm() {
     </div>
   );
 }
-export default confirm;
+export default Confirm;

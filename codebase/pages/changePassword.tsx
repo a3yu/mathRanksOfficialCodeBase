@@ -18,7 +18,7 @@ interface IFormInput {
   code: string;
   newPass: string;
 }
-function changePassword() {
+function ChangePassword() {
   const { user, setUser } = useUser();
   const [open, setOpen] = useState(false);
   const [veriNotice, setVeriNotice] = useState(false);
@@ -199,4 +199,4 @@ function changePassword() {
     </div>
   );
 }
-export default changePassword;
+export default ChangePassword;
