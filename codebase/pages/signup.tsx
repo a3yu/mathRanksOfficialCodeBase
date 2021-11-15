@@ -36,7 +36,7 @@ function Signup() {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       if (showCode) {
-        confirmSignUp(data);
+        await confirmSignUp(data);
       } else {
         await signUpAWS(data);
         setVeriNotice(true);
@@ -79,14 +79,13 @@ function Signup() {
     try {
       await Auth.confirmSignUp(username, code);
       const amplifyUser = await Auth.signIn(username, password);
-      console.log("Successs, singed in a user", amplifyUser);
       if (amplifyUser) {
         router.push(`/`);
       } else {
         throw new Error("Something went wrong :'(");
       }
     } catch (error) {
-      console.log("error confirming sign up", error);
+      throw error;
     }
   }
   console.log("The value of the user from:", user);
@@ -133,7 +132,6 @@ function Signup() {
                         "Please enter a username between 3-16 characters.",
                     },
                   })}
-                  {...register("username", { required: true })}
                 />
               </Grid>
               <Grid item>
@@ -210,6 +208,9 @@ function Signup() {
               </Grid>
               <div className={styles.botText}>
                 <Link href="/login">Have an account? Sign in!</Link>
+              </div>
+              <div>
+                <Link href="/confirm">Confirm Account</Link>
               </div>
             </Grid>
             <Snackbar

@@ -1,9 +1,7 @@
 import React from "react";
-import moment from "moment";
 import Link from "next/link";
 
 import styles from "../styles/Footer.module.scss";
-var a = moment().format("M/D/Y, h:mm:ss a");
 function Footer() {
   return (
     <section className={styles.footer}>
@@ -13,7 +11,14 @@ function Footer() {
           mathRanks LLC
         </Link>{" "}
         (c) Copyright 2021 - Aedin Yu <br />
-        Server Time (last refresh): {a}
+        Inquiries:{" "}
+        <Link
+          href="mailto:admin@mathranks.com"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          admin@mathranks.com
+        </Link>
         <br />
         <Link href="/" target="_blank" rel="noopener noreferrer">
           Privacy Policy

@@ -1,5 +1,11 @@
 .container {
   margin-top: 85px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  ul {
+    list-style: none;
+    text-align: center;
+  }
 }
 
 .divider {

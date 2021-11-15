@@ -32,6 +32,10 @@ function DrawerComponent() {
   const { user } = useUser();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const signUserOut = async () => {
+    await Auth.signOut();
+    router.push(`/`);
+  };
   return (
     <div>
       <IconButton onClick={() => setOpen(!open)}>
@@ -80,7 +84,9 @@ function DrawerComponent() {
         {user && (
           <ul className={classes.list}>
             <li>
-              <a onClick={signUserOut}>Logout</a>
+              <a onClick={signUserOut} className={classes.link}>
+                Logout
+              </a>
             </li>
             <li>
               <Link href="/signup">

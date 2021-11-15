@@ -10,10 +10,18 @@ import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { listContests } from "../src/graphql/queries";
-import { TableBody, TableCell, TableRow } from "@material-ui/core";
+import {
+  listContests,
+  listLeaderboards,
+  listPosts,
+} from "../src/graphql/queries";
+import { TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
 import API from "@aws-amplify/api";
-import { ListContestsQuery } from "../src/API";
+import {
+  ListContestsQuery,
+  ListLeaderboardsQuery,
+  ListPostsQuery,
+} from "../src/API";
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import moment from "moment-timezone";
@@ -93,6 +101,10 @@ const useStyles = makeStyles((theme: Theme) =>
     cardClass: {
       borderRadius: 2.5,
     },
+    seeAll: {
+      marginLeft: 20,
+      fontSize: ".8em",
+    },
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
 );
@@ -100,7 +112,7 @@ function Home(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
-  const { contestsAnn, contestsCal } = props;
+  const { contestsAnn, contestsCal, leaderboard, leadRating } = props;
   const classes = useStyles();
   const router = useRouter();
   const alert = useAlert();
@@ -132,7 +144,7 @@ function Home(props) {
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
-          {contestsAnn.slice(0, 3).map((contest) => (
+          {contestsAnn.slice(0, 4).map((contest) => (
             <Grid item xs={12} key={contest.id}>
               <Card className={classes.cardClass}>
                 <CardHeader
@@ -151,6 +163,9 @@ function Home(props) {
               </Card>
             </Grid>
           ))}
+          <Typography className={classes.seeAll}>
+            <a href="/allPosts">See all posts</a>
+          </Typography>
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>
@@ -161,7 +176,7 @@ function Home(props) {
                 classes={{
                   title: classes.titleSide,
                 }}
-                title="Information"
+                title="Key Links"
               />
               <CardContent className={classes.cardContentList}>
                 <ul className={classes.list}>
@@ -210,7 +225,7 @@ function Home(props) {
                   {contestsCal.map((contests) => (
                     <TableBody key={contests.id}>
                       <TableCell className={classes.tableCellText}>
-                        {contests.title}
+                        <a href="/contests">{contests.title}</a>
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
                         {changeToDate(contests.scheduledTime)}
@@ -231,11 +246,46 @@ function Home(props) {
                 }}
                 title="Ranking"
               />
-              <CardContent className={classes.cardContentList}></CardContent>
+              <CardContent className={classes.cardContentList}>
+                <Table size="small">
+                  <TableHead className={classes.tableHead}>
+                    <TableRow>
+                      <TableCell
+                        className={classes.tableHeadText}
+                        align="center"
+                      >
+                        Rank
+                      </TableCell>
+                      <TableCell className={classes.tableHeadText}>
+                        Name
+                      </TableCell>
+                      <TableCell className={classes.tableHeadText}>
+                        Rating
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  {leaderboard.slice(0, 10).map((user, val) => (
+                    <TableBody key={user}>
+                      <TableCell
+                        className={classes.tableCellText}
+                        align="center"
+                      >
+                        {val + 1}
+                      </TableCell>
+                      <TableCell className={classes.tableCellText}>
+                        {user}
+                      </TableCell>
+                      <TableCell className={classes.tableCellText}>
+                        {leadRating[val]}
+                      </TableCell>
+                    </TableBody>
+                  ))}
+                </Table>
+                <Typography className={classes.seeAll}>
+                  <a href="/ranking">See all</a>
+                </Typography>
+              </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={12} className={classes.sectionX}>
-            <Card className={classes.cardClass}></Card>
           </Grid>
         </Grid>
       </Grid>
@@ -250,10 +300,17 @@ export async function getServerSideProps() {
     data: ListContestsQuery;
     errors: any[];
   };
-  const itemsAnn = allContests.data.listContests.items;
+  const allPosts = (await API.graphql({
+    query: listPosts,
+  })) as {
+    data: ListPostsQuery;
+    errors: any[];
+  };
+
+  const itemsPost = allPosts.data.listPosts.items;
   const itemsCal = allContests.data.listContests.items;
 
-  itemsAnn.sort(function (a, b) {
+  itemsPost.sort(function (a, b) {
     if (a.sort > b.sort) {
       return -1;
     }
@@ -266,11 +323,22 @@ export async function getServerSideProps() {
   const calendar = itemsCal.filter((contest) => {
     return contest.scheduledTime > current;
   });
+  const rankingList = (await API.graphql({
+    query: listLeaderboards,
+  })) as {
+    data: ListLeaderboardsQuery;
+    errors: any[];
+  };
+  const leaderboard = rankingList.data.listLeaderboards.items;
+  const users = leaderboard[0].users;
+  const ratings = leaderboard[0].ratings;
 
   return {
     props: {
-      contestsAnn: itemsAnn,
+      contestsAnn: itemsPost,
       contestsCal: calendar,
+      leaderboard: users,
+      leadRating: ratings,
     },
   };
 }

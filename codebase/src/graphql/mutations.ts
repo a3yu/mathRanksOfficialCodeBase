@@ -11,7 +11,6 @@ export const createContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -34,7 +33,6 @@ export const updateContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -57,7 +55,6 @@ export const deleteContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -66,6 +63,54 @@ export const deleteContest = /* GraphQL */ `
       endTime
       length
       practice
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPost = /* GraphQL */ `
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    createPost(input: $input, condition: $condition) {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePost = /* GraphQL */ `
+  mutation UpdatePost(
+    $input: UpdatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    updatePost(input: $input, condition: $condition) {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePost = /* GraphQL */ `
+  mutation DeletePost(
+    $input: DeletePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    deletePost(input: $input, condition: $condition) {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
       createdAt
       updatedAt
     }

@@ -51,7 +51,13 @@ const options = {
 };
 const MyApp = (props) => {
   const { Component, pageProps } = props;
-  const noNav = ["/login", "/signup", "/contests/[...contNumber]"];
+  const noNav = [
+    "/login",
+    "/signup",
+    "/contests/[...contNumber]",
+    "/confirm",
+    "/changePassword",
+  ];
   const router = useRouter();
   const { asPath } = router;
 

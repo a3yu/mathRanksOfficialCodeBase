@@ -8,7 +8,6 @@ export const onCreateContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -28,7 +27,6 @@ export const onUpdateContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -48,7 +46,6 @@ export const onDeleteContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -57,6 +54,45 @@ export const onDeleteContest = /* GraphQL */ `
       endTime
       length
       practice
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePost = /* GraphQL */ `
+  subscription OnCreatePost {
+    onCreatePost {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePost = /* GraphQL */ `
+  subscription OnUpdatePost {
+    onUpdatePost {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePost = /* GraphQL */ `
+  subscription OnDeletePost {
+    onDeletePost {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
       createdAt
       updatedAt
     }

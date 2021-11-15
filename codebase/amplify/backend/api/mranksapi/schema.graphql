@@ -10,7 +10,6 @@ type Contest
   id: ID!
   contestID: ID!
   sort: Int!
-  contestContentAnn: String!
   title: String!
   authorSet: [String]
   questionSet: [String]
@@ -20,7 +19,20 @@ type Contest
   length: String!
   practice: Boolean
 }
-
+type Post
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  contestID: ID
+  sort: Int!
+  contestContentAnn: String!
+  title: String!
+}
 type ContestAnswer
   @model
   @key(name: "answerContest", fields: ["contestAnswerID", "score"])
@@ -36,7 +48,7 @@ type ContestAnswer
   id: ID!
   contestAnswerID: ID!
   userName: String!
-  score: Int!
+  score: Int
   userAnswerSet: [String]
   contestID: ID!
   sort: Int!

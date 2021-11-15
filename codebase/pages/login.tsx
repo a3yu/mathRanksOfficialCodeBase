@@ -97,6 +97,12 @@ function Login() {
           <div className={styles.botText}>
             <Link href="/signup">No account? Sign up!</Link>
           </div>
+          <div>
+            <Link href="/changePassword">Forgot Password?</Link>
+          </div>
+          <div>
+            <Link href="/confirm">Confirm Account</Link>
+          </div>
         </Grid>
       </form>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

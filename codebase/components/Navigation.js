@@ -80,7 +80,7 @@ export default function Navbar() {
                   <a onClick={signUserOut}>Logout</a>
                 </li>
                 <li>
-                  <Link href={"/" + user.username}>
+                  <Link href={"/user/" + user.username}>
                     <a>{user.username}</a>
                   </Link>
                 </li>

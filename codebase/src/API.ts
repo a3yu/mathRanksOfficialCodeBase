@@ -6,7 +6,6 @@ export type CreateContestInput = {
   id?: string | null,
   contestID: string,
   sort: number,
-  contestContentAnn: string,
   title: string,
   authorSet?: Array< string | null > | null,
   questionSet?: Array< string | null > | null,
@@ -20,7 +19,6 @@ export type CreateContestInput = {
 export type ModelContestConditionInput = {
   contestID?: ModelIDInput | null,
   sort?: ModelIntInput | null,
-  contestContentAnn?: ModelStringInput | null,
   title?: ModelStringInput | null,
   authorSet?: ModelStringInput | null,
   questionSet?: ModelStringInput | null,
@@ -126,7 +124,6 @@ export type Contest = {
   id: string,
   contestID: string,
   sort: number,
-  contestContentAnn: string,
   title: string,
   authorSet?: Array< string | null > | null,
   questionSet?: Array< string | null > | null,
@@ -143,7 +140,6 @@ export type UpdateContestInput = {
   id: string,
   contestID?: string | null,
   sort?: number | null,
-  contestContentAnn?: string | null,
   title?: string | null,
   authorSet?: Array< string | null > | null,
   questionSet?: Array< string | null > | null,
@@ -155,6 +151,47 @@ export type UpdateContestInput = {
 };
 
 export type DeleteContestInput = {
+  id: string,
+};
+
+export type CreatePostInput = {
+  id?: string | null,
+  contestID?: string | null,
+  sort: number,
+  contestContentAnn: string,
+  title: string,
+};
+
+export type ModelPostConditionInput = {
+  contestID?: ModelIDInput | null,
+  sort?: ModelIntInput | null,
+  contestContentAnn?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  and?: Array< ModelPostConditionInput | null > | null,
+  or?: Array< ModelPostConditionInput | null > | null,
+  not?: ModelPostConditionInput | null,
+};
+
+export type Post = {
+  __typename: "Post",
+  id: string,
+  contestID?: string | null,
+  sort: number,
+  contestContentAnn: string,
+  title: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdatePostInput = {
+  id: string,
+  contestID?: string | null,
+  sort?: number | null,
+  contestContentAnn?: string | null,
+  title?: string | null,
+};
+
+export type DeletePostInput = {
   id: string,
 };
 
@@ -228,7 +265,7 @@ export type CreateContestAnswerInput = {
   id?: string | null,
   contestAnswerID: string,
   userName: string,
-  score: number,
+  score?: number | null,
   userAnswerSet?: Array< string | null > | null,
   contestID: string,
   sort: number,
@@ -250,7 +287,7 @@ export type ContestAnswer = {
   id: string,
   contestAnswerID: string,
   userName: string,
-  score: number,
+  score?: number | null,
   userAnswerSet?: Array< string | null > | null,
   contestID: string,
   sort: number,
@@ -276,7 +313,6 @@ export type ModelContestFilterInput = {
   id?: ModelIDInput | null,
   contestID?: ModelIDInput | null,
   sort?: ModelIntInput | null,
-  contestContentAnn?: ModelStringInput | null,
   title?: ModelStringInput | null,
   authorSet?: ModelStringInput | null,
   questionSet?: ModelStringInput | null,
@@ -293,6 +329,23 @@ export type ModelContestFilterInput = {
 export type ModelContestConnection = {
   __typename: "ModelContestConnection",
   items?:  Array<Contest | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelPostFilterInput = {
+  id?: ModelIDInput | null,
+  contestID?: ModelIDInput | null,
+  sort?: ModelIntInput | null,
+  contestContentAnn?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  and?: Array< ModelPostFilterInput | null > | null,
+  or?: Array< ModelPostFilterInput | null > | null,
+  not?: ModelPostFilterInput | null,
+};
+
+export type ModelPostConnection = {
+  __typename: "ModelPostConnection",
+  items?:  Array<Post | null > | null,
   nextToken?: string | null,
 };
 
@@ -356,7 +409,6 @@ export type CreateContestMutation = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -381,7 +433,6 @@ export type UpdateContestMutation = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -406,7 +457,6 @@ export type DeleteContestMutation = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -415,6 +465,60 @@ export type DeleteContestMutation = {
     endTime: number,
     length: string,
     practice?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreatePostMutationVariables = {
+  input: CreatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type CreatePostMutation = {
+  createPost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePostMutationVariables = {
+  input: UpdatePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type UpdatePostMutation = {
+  updatePost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePostMutationVariables = {
+  input: DeletePostInput,
+  condition?: ModelPostConditionInput | null,
+};
+
+export type DeletePostMutation = {
+  deletePost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -527,7 +631,7 @@ export type CreateContestAnswerMutation = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -547,7 +651,7 @@ export type UpdateContestAnswerMutation = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -567,7 +671,7 @@ export type DeleteContestAnswerMutation = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -586,7 +690,6 @@ export type GetContestQuery = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -614,7 +717,6 @@ export type ListContestsQuery = {
       id: string,
       contestID: string,
       sort: number,
-      contestContentAnn: string,
       title: string,
       authorSet?: Array< string | null > | null,
       questionSet?: Array< string | null > | null,
@@ -623,6 +725,46 @@ export type ListContestsQuery = {
       endTime: number,
       length: string,
       practice?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPostQueryVariables = {
+  id: string,
+};
+
+export type GetPostQuery = {
+  getPost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPostsQueryVariables = {
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostsQuery = {
+  listPosts?:  {
+    __typename: "ModelPostConnection",
+    items?:  Array< {
+      __typename: "Post",
+      id: string,
+      contestID?: string | null,
+      sort: number,
+      contestContentAnn: string,
+      title: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -640,7 +782,7 @@ export type GetContestAnswerQuery = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -663,7 +805,7 @@ export type ListContestAnswersQuery = {
       id: string,
       contestAnswerID: string,
       userName: string,
-      score: number,
+      score?: number | null,
       userAnswerSet?: Array< string | null > | null,
       contestID: string,
       sort: number,
@@ -752,7 +894,6 @@ export type OnCreateContestSubscription = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -772,7 +913,6 @@ export type OnUpdateContestSubscription = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -792,7 +932,6 @@ export type OnDeleteContestSubscription = {
     id: string,
     contestID: string,
     sort: number,
-    contestContentAnn: string,
     title: string,
     authorSet?: Array< string | null > | null,
     questionSet?: Array< string | null > | null,
@@ -801,6 +940,45 @@ export type OnDeleteContestSubscription = {
     endTime: number,
     length: string,
     practice?: boolean | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePostSubscription = {
+  onCreatePost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePostSubscription = {
+  onUpdatePost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePostSubscription = {
+  onDeletePost?:  {
+    __typename: "Post",
+    id: string,
+    contestID?: string | null,
+    sort: number,
+    contestContentAnn: string,
+    title: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -816,7 +994,7 @@ export type OnCreateContestAnswerSubscription = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -835,7 +1013,7 @@ export type OnUpdateContestAnswerSubscription = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,
@@ -854,7 +1032,7 @@ export type OnDeleteContestAnswerSubscription = {
     id: string,
     contestAnswerID: string,
     userName: string,
-    score: number,
+    score?: number | null,
     userAnswerSet?: Array< string | null > | null,
     contestID: string,
     sort: number,

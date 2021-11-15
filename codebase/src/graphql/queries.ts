@@ -8,7 +8,6 @@ export const getContest = /* GraphQL */ `
       id
       contestID
       sort
-      contestContentAnn
       title
       authorSet
       questionSet
@@ -33,7 +32,6 @@ export const listContests = /* GraphQL */ `
         id
         contestID
         sort
-        contestContentAnn
         title
         authorSet
         questionSet
@@ -42,6 +40,39 @@ export const listContests = /* GraphQL */ `
         endTime
         length
         practice
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPost = /* GraphQL */ `
+  query GetPost($id: ID!) {
+    getPost(id: $id) {
+      id
+      contestID
+      sort
+      contestContentAnn
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        contestID
+        sort
+        contestContentAnn
+        title
         createdAt
         updatedAt
       }

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 85,
       margin: 65,
     },
-    title: { textAlign: "center", marginBottom: 30 },
+    title: { textAlign: "center", marginBottom: 30, marginTop: 30 },
     none: {
       margin: 30,
     },
@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 650,
     },
     tableRowCell: {
-      fontWeight: 450,
+      fontWeight: 350,
+      fontSize: "1em",
     },
   })
 );
