@@ -39,10 +39,12 @@ const useStyles = makeStyles((theme: Theme) =>
     cardHeader: {
       backgroundColor: "#0048ba",
       height: 38,
+      "@media (max-width:500px)": { height: 42 },
     },
     cardHeaderCont: {
       backgroundColor: "#0048ba",
       height: 38,
+      "@media (max-width:500px)": { height: 42 },
     },
     cardContentList: {
       color: "#3f3f3f",
@@ -84,6 +86,7 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       color: "#FFFFFF",
       fontSize: "1em",
+      "@media (max-width:500px)": { fontSize: ".8em" },
     },
     pastContest: {
       marginBottom: -10,
@@ -104,6 +107,7 @@ const useStyles = makeStyles((theme: Theme) =>
     seeAll: {
       marginLeft: 20,
       fontSize: ".8em",
+      margin: 10,
     },
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
