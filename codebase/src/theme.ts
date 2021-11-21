@@ -3,18 +3,18 @@ import { responsiveFontSizes } from "@material-ui/core/styles";
 
 const theme = createTheme({
   palette: {
-    common: { black: "#000", white: "#fff" },
-    background: { paper: "#fff", default: "#FDFDFD" },
+    common: { black: "#18181B", white: "#0000" },
+    background: { paper: "#18181B", default: "#080808" },
     primary: {
-      light: "rgba(217, 237, 247, 1)",
-      main: "#345abf",
-      dark: "#14234B",
-      contrastText: "#fff",
+      light: "#18181B",
+      main: "#A9C5EA",
+      dark: "#18181B",
+      contrastText: "#18181B",
     },
     secondary: {
       light: "rgba(180, 180, 180, 1)",
-      main: "rgba(0, 0, 0, 1)",
-      dark: "rgba(104, 104, 104, 1)",
+      main: "#ffff",
+      dark: "#ffff",
       contrastText: "#fff",
     },
     error: {
@@ -24,7 +24,7 @@ const theme = createTheme({
       contrastText: "#fff",
     },
     text: {
-      primary: "rgba(0, 0, 0, 0.87)",
+      primary: "#ffff",
       secondary: "rgba(0, 0, 0, 0.54)",
       disabled: "rgba(0, 0, 0, 0.38)",
       hint: "rgba(0, 0, 0, 0.38)",
@@ -56,18 +56,18 @@ const theme = createTheme({
       fontSize: "2.7rem",
       fontWeight: 700,
       lineHeight: 1,
-      color: "#000000",
-      fontFamily: "Inter",
+      color: "#ffff",
+      fontFamily: "Noto Sans",
     },
     h2: {
       fontWeight: 700,
       fontFamily: "Inter",
       fontSize: "2.25rem",
       lineHeight: 1,
-      color: "#000000",
+      color: "#ffff",
     },
     h3: {
-      color: "#000000",
+      color: "#ffff",
       fontWeight: 500,
       fontSize: "1.1rem",
       lineHeight: 1.75,
@@ -75,16 +75,46 @@ const theme = createTheme({
     body1: {
       fontSize: "1.08em",
       lineHeight: 1.75,
-      color: "#000000",
+      color: "#ffff",
       fontFamily: "Inter",
     },
     body2: {
       fontSize: "1rem",
       lineHeight: 1.75,
-      color: "#000",
+      color: "#ffff",
     },
   },
   spacing: 8,
+  overrides: {
+    MuiGrid: {
+      "spacing-xs-3": {
+        margin: 0,
+      },
+    },
+    MuiDataGrid: {
+      root: {
+        border: "1px solid #969696",
+      },
+    },
+    MuiOutlinedInput: {
+      root: {
+        position: "relative",
+        "& $notchedOutline": {
+          borderColor: "#18181B",
+        },
+        "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
+          borderColor: "#FFFFFF",
+          "@media (hover: none)": {
+            borderColor: "#FFFFFF",
+          },
+        },
+        "&$focused $notchedOutline": {
+          borderColor: "#FFFFFF",
+          borderWidth: 1,
+        },
+      },
+    },
+  },
 });
 
 export default responsiveFontSizes(theme);

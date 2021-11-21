@@ -3,11 +3,17 @@
   flex-direction: column;
   font-weight: bold;
 }
+.link {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: rgb(169, 197, 234);
+  text-decoration: none;
+}
 
 .footersocialmedia {
   margin-bottom: 20px;
   font-weight: 300;
-  color: black;
+  color: #ffff;
   text-align: center;
 }
 
@@ -63,7 +69,7 @@
   flex-grow: 1;
   border: none;
   height: 1px;
-  background-color: rgb(221, 221, 221);
+  background: #ffff;
   width: 90%;
 }
 

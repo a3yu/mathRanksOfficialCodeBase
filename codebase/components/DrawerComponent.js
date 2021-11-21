@@ -3,6 +3,7 @@ import { IconButton, makeStyles } from "@material-ui/core";
 import Link from "next/link";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useUser } from "../context/AuthContext";
+import styles from "../styles/navigation.module.scss";
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -10,6 +11,7 @@ const useStyles = makeStyles(() => ({
     fontSize: "16px",
     fontWeight: 450,
     color: "#FFFFFF",
+    fontFamily: "Inter",
   },
   icon: {
     color: "white",
@@ -25,6 +27,11 @@ const useStyles = makeStyles(() => ({
   },
   hidden: {
     display: "none",
+  },
+  account: {
+    fontWeight: 600,
+    color: "#a9c5ea",
+    textDecoration: "none",
   },
 }));
 
@@ -71,12 +78,12 @@ function DrawerComponent() {
           <ul className={classes.list}>
             <li>
               <Link href="/login">
-                <a className={classes.link}>Login</a>
+                <a className={classes.account}>Login</a>
               </Link>
             </li>
             <li>
               <Link href="/signup">
-                <a className={classes.link}>Sign Up</a>
+                <a className={classes.account}>Sign Up</a>
               </Link>
             </li>
           </ul>
@@ -84,13 +91,13 @@ function DrawerComponent() {
         {user && (
           <ul className={classes.list}>
             <li>
-              <a onClick={signUserOut} className={classes.link}>
+              <a onClick={signUserOut} className={classes.account}>
                 Logout
               </a>
             </li>
             <li>
               <Link href="/signup">
-                <a className={classes.link}>{user.username}</a>
+                <a className={classes.account}>{user.username}</a>
               </Link>
             </li>
           </ul>

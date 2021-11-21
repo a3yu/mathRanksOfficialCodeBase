@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       flexGrow: 1,
-      marginTop: 85,
+      marginTop: 70,
       margin: 65,
     },
     paper: {
@@ -37,38 +37,38 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.text.secondary,
     },
     cardHeader: {
-      backgroundColor: "#0048ba",
+      backgroundColor: "#18181B",
       height: 38,
       "@media (max-width:500px)": { height: 42 },
     },
     cardHeaderCont: {
-      backgroundColor: "#0048ba",
+      backgroundColor: "#18181B",
       height: 38,
       "@media (max-width:500px)": { height: 42 },
     },
     cardContentList: {
       color: "#3f3f3f",
-      marginLeft: -30,
-      marginTop: -18,
-      marginBottom: -18,
     },
     cardContentContests: {
       color: "#3f3f3f",
-      marginTop: -11,
+      marginTop: 0,
     },
     list: {
       listStyle: "none",
     },
     ul: {
-      fontSize: 14,
-      fontWeight: 300,
-      color: "#263580",
-      "&:hover": {
-        color: "#23527c",
-      },
+      fontSize: ".9em",
+      fontWeight: 600,
+      textDecoration: "none",
+      color: "rgb(169, 197, 234)",
     },
-    tableHeadText: { fontSize: 14, fontStyle: "none" },
-    tableCellText: { fontSize: 12.5 },
+    tableHeadText: {
+      fontSize: 14,
+      fontStyle: "none",
+      color: "#ffff",
+      fontWeight: 600,
+    },
+    tableCellText: { fontSize: 12.5, color: "#ffff" },
     tableHead: {
       marginBottom: -10,
     },
@@ -82,11 +82,14 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 14,
       marginTop: -10,
       marginBottom: -10,
+      color: "rgba(255, 255, 255, 0.6)",
+      fontWeight: 500,
     },
     title: {
       color: "#FFFFFF",
-      fontSize: "1em",
-      "@media (max-width:500px)": { fontSize: ".8em" },
+      fontWeight: 700,
+      fontSize: "1.4em",
+      marginTop: 10,
     },
     pastContest: {
       marginBottom: -10,
@@ -99,15 +102,31 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     titleSide: {
       color: "#ffff",
-      fontSize: "1em",
+      fontSize: "1.4em",
+      fontWeight: 700,
     },
     cardClass: {
-      borderRadius: 2.5,
+      borderRadius: 7.5,
     },
     seeAll: {
-      marginLeft: 20,
-      fontSize: ".8em",
-      margin: 10,
+      fontSize: ".9em",
+      fontWeight: 600,
+      color: "rgb(169, 197, 234)",
+      textDecoration: "none",
+      margin: 5,
+    },
+    listDiv: {
+      marginLeft: -35,
+      marginBottom: -25,
+    },
+    table: {
+      marginTop: 10,
+    },
+    tableCellTextLink: {
+      fontSize: ".9em",
+      fontWeight: 600,
+      color: "rgb(169, 197, 234)",
+      textDecoration: "none",
     },
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
@@ -151,15 +170,10 @@ function Home(props) {
           {contestsAnn.slice(0, 4).map((contest) => (
             <Grid item xs={12} key={contest.id}>
               <Card className={classes.cardClass}>
-                <CardHeader
-                  className={classes.cardHeaderCont}
-                  titleTypographyProps={{ variant: "h3" }}
-                  classes={{
-                    title: classes.title,
-                  }}
-                  title={contest.title}
-                />
                 <CardContent className={classes.cardContentText}>
+                  <Typography variant="h1" className={classes.title}>
+                    {contest.title}
+                  </Typography>
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
                     {contest.contestContentAnn}
                   </ReactMarkdown>
@@ -168,54 +182,47 @@ function Home(props) {
             </Grid>
           ))}
           <Typography className={classes.seeAll}>
-            <Link href="/allPosts">See all posts</Link>
+            <Link href="/allPosts">
+              <a className={classes.seeAll}>See all posts</a>
+            </Link>
           </Typography>
         </Grid>
         <Grid container xs={12} md={4} spacing={2} className={classes.left}>
           <Grid item xs={12}>
             <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeader}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.titleSide,
-                }}
-                title="Key Links"
-              />
               <CardContent className={classes.cardContentList}>
-                <ul className={classes.list}>
-                  <li>
-                    <Link href="/about#1">
-                      <a className={classes.ul}>Participating in Contests</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/contests">
-                      <a className={classes.ul}>Contests</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="https://github.com/EbTech/Elo-MMR">
-                      <a className={classes.ul}>Elo System</a>
-                    </Link>
-                  </li>
-                </ul>
+                <Typography variant="h1" className={classes.titleSide}>
+                  Key Links
+                </Typography>
+                <div className={classes.listDiv}>
+                  <ul className={classes.list}>
+                    <li>
+                      <Link href="/about#1">
+                        <a className={classes.ul}>Participating in Contests</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/contests">
+                        <a className={classes.ul}>Contests</a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="https://github.com/EbTech/Elo-MMR">
+                        <a className={classes.ul}>Elo System</a>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12}>
             <Card className={classes.cardClass}>
-              {" "}
-              <CardHeader
-                className={classes.cardHeader}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.titleSide,
-                }}
-                title="Upcoming Contests"
-              />
               <CardContent className={classes.cardContentContests}>
-                <Table size="small">
+                <Typography variant="h1" className={classes.titleSide}>
+                  Upcoming Contests
+                </Typography>
+                <Table size="small" className={classes.table}>
                   <TableHead className={classes.tableHead}>
                     <TableRow>
                       <TableCell className={classes.tableHeadText}>
@@ -228,8 +235,12 @@ function Home(props) {
                   </TableHead>
                   {contestsCal.map((contests) => (
                     <TableBody key={contests.id}>
-                      <TableCell className={classes.tableCellText}>
-                        <Link href="/contests">{contests.title}</Link>
+                      <TableCell className={classes.tableCellTextLink}>
+                        <Link href="/contests">
+                          <a className={classes.tableCellTextLink}>
+                            {contests.title}
+                          </a>
+                        </Link>
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
                         {changeToDate(contests.scheduledTime)}
@@ -242,16 +253,11 @@ function Home(props) {
           </Grid>
           <Grid item xs={12}>
             <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeader}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.titleSide,
-                }}
-                title="Ranking"
-              />
               <CardContent className={classes.cardContentList}>
-                <Table size="small">
+                <Typography variant="h1" className={classes.titleSide}>
+                  Ranking
+                </Typography>
+                <Table size="small" className={classes.table}>
                   <TableHead className={classes.tableHead}>
                     <TableRow>
                       <TableCell
@@ -286,7 +292,11 @@ function Home(props) {
                   ))}
                 </Table>
                 <Typography className={classes.seeAll}>
-                  <Link href="/ranking">See all</Link>
+                  <Typography className={classes.seeAll}>
+                    <Link href="/allPosts">
+                      <a className={classes.seeAll}>See all</a>
+                    </Link>
+                  </Typography>
                 </Typography>
               </CardContent>
             </Card>

@@ -91,13 +91,14 @@ function ChangePassword() {
               direction="column"
               alignItems="center"
               justify="center"
-              spacing={2}
+              spacing={3}
             >
               <Grid item>
                 <TextField
                   required
-                  variant="outlined"
+                  variant="filled"
                   id="username"
+                  className={styles.textF}
                   label="Username"
                   type="text"
                   error={errors.username ? true : false}
@@ -195,7 +196,6 @@ function ChangePassword() {
           </div>
         </form>
       </div>
-      )
     </div>
   );
 }

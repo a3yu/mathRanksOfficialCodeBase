@@ -1,17 +1,52 @@
 .container {
-  margin-top: 85px;
+  margin-top: 70px;
   width: 100%;
 }
 .divider {
-  background-color: rgb(230, 230, 230);
-  border: 0.001px solid rgb(230, 230, 230);
+  background-color: #000000;
+  border: 0.0001px solid #000000;
   margin: 1.2em;
 }
-
+.gridContainer {
+  margin: 15;
+}
+.textF {
+  background-color: #151518;
+  border-radius: 5px;
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #18181b inset !important;
+  }
+  input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+  }
+}
 .alert {
   color: black;
   margin: 1em;
 }
 .botText {
   margin-top: 20px;
+  a {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: rgb(169, 197, 234);
+    text-decoration: none;
+  }
+}
+.botText2 {
+  a {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: rgb(169, 197, 234);
+    text-decoration: none;
+  }
+}
+.butText {
+  background-color: #a9c5ea;
+  a {
+    color: black;
+  }
 }

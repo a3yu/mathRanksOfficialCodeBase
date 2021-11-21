@@ -1,4 +1,4 @@
-$black-main: #131a3e;
+$black-main: #000000;
 $font-color: #ffffff;
 $font-color-hover: #7e7e7e;
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
@@ -38,7 +38,8 @@ $font-color-hover: #7e7e7e;
     text-align: center;
     padding: 14px 18px;
     text-decoration: none;
-    font-family: "Merriweather Sans", sans-serif;
+    font: "Inter";
+    font-weight: 400;
     font-size: 0.9em;
   }
   a:hover {
@@ -47,18 +48,28 @@ $font-color-hover: #7e7e7e;
   }
   .account {
     display: block;
-    color: $font-color;
     text-align: center;
     text-decoration: none;
     list-style-type: none;
-    font-family: "Merriweather Sans", sans-serif;
+    font: "Inter";
+    .accountLogin {
+      margin: 9px;
+    }
     li {
       float: right;
     }
+    a {
+      font-weight: 625;
+      color: #a9c5ea;
+    }
+    a:hover {
+      cursor: pointer;
+    }
   }
 }
+
 .allDiv {
-  background-color: #131a3e;
+  background-color: #000000;
   @media screen and (max-width: 700px) {
     margin-bottom: -70px;
   }

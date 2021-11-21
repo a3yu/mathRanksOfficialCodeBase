@@ -10,6 +10,7 @@ import { listPosts } from "../src/graphql/queries";
 import API from "@aws-amplify/api";
 import { ListPostsQuery } from "../src/API";
 import { useRouter } from "next/router";
+import { Typography } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -59,10 +60,14 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 14,
       marginTop: -10,
       marginBottom: -10,
+      color: "rgba(255, 255, 255, 0.6)",
+      fontWeight: 500,
     },
     title: {
       color: "#FFFFFF",
-      fontSize: "1em",
+      fontWeight: 700,
+      fontSize: "1.4em",
+      marginTop: 10,
     },
     pastContest: {
       marginBottom: -10,
@@ -99,15 +104,10 @@ function AllPosts(props) {
         {contestsAnn.map((contest) => (
           <Grid item xs={12} key={contest.id}>
             <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeaderCont}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.title,
-                }}
-                title={contest.title}
-              />
               <CardContent className={classes.cardContentText}>
+                <Typography variant="h1" className={classes.title}>
+                  {contest.title}
+                </Typography>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {contest.contestContentAnn}
                 </ReactMarkdown>

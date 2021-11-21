@@ -1,6 +1,7 @@
 import API from "@aws-amplify/api";
 import {
   createStyles,
+  Link,
   makeStyles,
   Paper,
   Table,
@@ -12,6 +13,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
+import { GridColDef } from "@mui/x-data-grid";
 import { withSSRContext } from "aws-amplify";
 import moment from "moment";
 import { GetServerSideProps } from "next";
@@ -43,16 +45,20 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 350,
       fontSize: "1em",
     },
+    hideRightSeparator: {
+      "& > .MuiDataGrid-columnSeparator": {
+        visibility: "hidden",
+      },
+    },
   })
 );
 export default function ContestHome(props) {
   const contList = props.contestList;
   var upcomingList = contList.filter((contest) => contest.endTime > Date.now());
   const contestList = contList.filter(
-    (contest) => contest.endTime < Date.now()
+    (contest) => contest.endTime < Date.now() && contest.practice == true
   );
   var statusList = new Array(upcomingList.length).fill(false);
-  const [listStatus, setListStatus] = useState(statusList);
   const classes = useStyles();
   const changeToDate = (epoch) => {
     var offset = new Date().getTimezoneOffset();
@@ -60,27 +66,46 @@ export default function ContestHome(props) {
     var s = m.utcOffset(-offset).format("M/D/YY, h:mm A UTC(Z)");
     return s;
   };
-  function getCurrentList() {
-    console.log(1);
-    upcomingList = contestList.filter(
-      (contest) => contest.endTime > Date.now()
-    );
-    console.log(1);
-    var array = new Array(upcomingList.length);
-    for (let index = 0; index < upcomingList.length; index++) {
-      if (
-        upcomingList[index].endTime > Date.now() &&
-        upcomingList[index].scheduledTime < Date.now()
-      ) {
-        array[index] = true;
-      } else {
-        array[index] = false;
-        console.log(1);
-      }
-    }
-    setListStatus(array);
+  const columns: GridColDef[] = [
+    {
+      field: "name",
+      headerName: "Name",
+      width: 70,
+    },
+    { field: "startTime", headerName: "Start Time", width: 130 },
+    {
+      field: "length",
+      headerName: "Length",
+      width: 90,
+    },
+    {
+      field: "standings",
+      headerName: "Standings",
+      width: 300,
+      renderCell: (params) => (
+        <Link href={`mailto:${params.value}`}>Standings</Link>
+      ),
+    },
+    {
+      field: "practice",
+      headerName: "Practice",
+      width: 300,
+      renderCell: (params) => (
+        <Link href={`mailto:${params.value}`}>Practice</Link>
+      ),
+    },
+  ];
+  const rows = [];
+  for (let index = 0; index < contestList.length; index++) {
+    rows.push({
+      name: contList[index].title,
+      startTime: changeToDate(contList[index].scheduledTime),
+      length: contList[index].length,
+      standings: contList[index].contID,
+      practice: contList[index].contID,
+    });
   }
-  console.log(listStatus);
+  console.log(rows);
   return (
     <div className={classes.body}>
       <Typography variant="h2" className={classes.title}>
@@ -180,7 +205,8 @@ export default function ContestHome(props) {
                   </Typography>
                 </TableCell>
                 <TableCell align="center"></TableCell>
-                <TableCell align="center"></TableCell>
+                <TableCell align="right"></TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

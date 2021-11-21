@@ -89,12 +89,13 @@ function Confirm() {
               direction="column"
               alignItems="center"
               justify="center"
-              spacing={2}
+              spacing={3}
             >
               <Grid item>
                 <TextField
                   required
-                  variant="outlined"
+                  variant="filled"
+                  className={styles.textF}
                   id="username"
                   label="Username"
                   type="text"
@@ -146,7 +147,12 @@ function Confirm() {
               )}
 
               <Grid style={{ marginTop: 16 }}>
-                <Button variant="contained" type="submit" color="primary">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className={styles.butText}
+                  color="primary"
+                >
                   {showCode ? "Confirm Code" : "Confirm Account"}
                 </Button>
               </Grid>
@@ -172,7 +178,6 @@ function Confirm() {
           </div>
         </form>
       </div>
-      )
     </div>
   );
 }

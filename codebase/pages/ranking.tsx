@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
     dataGrid: {
       color: "#00000",
     },
+    hideRightSeparator: {
+      "& > .MuiDataGrid-columnSeparator": {
+        visibility: "hidden",
+      },
+    },
     title: { textAlign: "center", marginBottom: 30 },
   })
 );
@@ -49,16 +54,18 @@ export default function Ranking(props) {
   const columns: GridColDef[] = [
     {
       field: "id",
-      headerName: " ",
+      headerName: "#",
       flex: 1,
       hideSortIcons: true,
-      disableColumnMenu: true,
+      disableColumnMenu: false,
+      headerClassName: classes.hideRightSeparator,
       minWidth: 145,
       editable: false,
     },
     {
       field: "name",
       headerName: "Username",
+      headerClassName: classes.hideRightSeparator,
       flex: 3,
       minWidth: 160,
       editable: false,
@@ -66,6 +73,7 @@ export default function Ranking(props) {
     {
       field: "rating",
       headerName: "Rating",
+      headerClassName: classes.hideRightSeparator,
       flex: 3,
       minWidth: 160,
       editable: false,

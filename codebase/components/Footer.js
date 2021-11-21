@@ -8,24 +8,24 @@ function Footer() {
       <hr className={styles.footerseperator} />
       <section className={styles.footersocialmedia}>
         <Link href="/" target="_blank" rel="noopener noreferrer">
-          mathRanks LLC
+          <a className={styles.link}>mathRanks LLC</a>
         </Link>{" "}
-        (c) Copyright 2021 - Aedin Yu <br />
+        (c) Copyright 2021 - A. Yu <br />
         Inquiries:{" "}
         <Link
           href="mailto:admin@mathranks.com"
           rel="noopener noreferrer"
           target="_blank"
         >
-          admin@mathranks.com
+          <a className={styles.link}>admin@mathranks.com</a>
         </Link>
         <br />
         <Link href="/" target="_blank" rel="noopener noreferrer">
-          Privacy Policy
+          <a className={styles.link}>Privacy Policy</a>
         </Link>{" "}
         &{" "}
         <Link href="/" target="_blank" rel="noopener noreferrer">
-          Terms and Conditions
+          <a className={styles.link}>Terms and Conditions</a>
         </Link>
       </section>
     </section>

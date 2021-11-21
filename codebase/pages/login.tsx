@@ -61,14 +61,15 @@ function Login() {
           direction="column"
           alignItems="center"
           justify="center"
-          spacing={1}
+          spacing={3}
         >
           <Grid item>
             <TextField
               required
-              variant="outlined"
+              variant="filled"
               id="username"
               label="Username"
+              className={styles.textF}
               type="text"
               error={errors.username ? true : false}
               helperText={errors.username ? errors.username.message : null}
@@ -79,7 +80,8 @@ function Login() {
           <Grid item>
             <TextField
               required
-              variant="outlined"
+              variant="filled"
+              className={styles.textF}
               id="password"
               label="Password"
               type="password"
@@ -90,17 +92,24 @@ function Login() {
           </Grid>
 
           <Grid style={{ marginTop: 16 }}>
-            <Button variant="contained" type="submit" color="primary">
+            <Button
+              variant="contained"
+              type="submit"
+              style={{
+                backgroundColor: "#a9c5ea",
+              }}
+              className={styles.butText}
+            >
               Login
             </Button>
           </Grid>
           <div className={styles.botText}>
             <Link href="/signup">No account? Sign up!</Link>
           </div>
-          <div>
+          <div className={styles.botText2}>
             <Link href="/changePassword">Forgot Password?</Link>
           </div>
-          <div>
+          <div className={styles.botText2}>
             <Link href="/confirm">Confirm Account</Link>
           </div>
         </Grid>
