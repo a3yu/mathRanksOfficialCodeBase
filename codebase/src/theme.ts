@@ -94,18 +94,27 @@ const theme = createTheme({
     MuiDataGrid: {
       root: {
         border: "1px solid #969696",
+        ".MuiDataGrid-row, .MuiDataGrid-root .MuiDataGrid-cell, .rendering-zone":
+          { "max-height": "none !important" },
+        ".MuiDataGrid-root .MuiDataGrid-window": {
+          position: "relative !important",
+        },
+        ".MuiDataGrid-root .MuiDataGrid-viewport": {
+          "max-height": "none !important",
+        },
+        ".MuiDataGrid-root": { height: "auto !important" },
       },
     },
     MuiOutlinedInput: {
       root: {
         position: "relative",
         "& $notchedOutline": {
-          borderColor: "#18181B",
+          borderColor: "#b3b3b3",
         },
         "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-          borderColor: "#FFFFFF",
+          borderColor: "#b3b3b3",
           "@media (hover: none)": {
-            borderColor: "#FFFFFF",
+            borderColor: "#b3b3b3",
           },
         },
         "&$focused $notchedOutline": {

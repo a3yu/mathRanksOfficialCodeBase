@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     dataGrid: {
       color: "#00000",
+      borderRadius: 3,
     },
     hideRightSeparator: {
       "& > .MuiDataGrid-columnSeparator": {

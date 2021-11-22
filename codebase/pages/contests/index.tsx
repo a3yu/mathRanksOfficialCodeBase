@@ -1,26 +1,35 @@
-import API from "@aws-amplify/api";
 import {
-  createStyles,
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  LastPage,
+  FirstPage,
+} from "@material-ui/icons";
+import { makeStyles, createStyles } from "@material-ui/core";
+import {
+  Box,
+  IconButton,
   Link,
-  makeStyles,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
+  TablePagination,
   TableRow,
   Theme,
   Typography,
+  useTheme,
 } from "@material-ui/core";
-import { GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { withSSRContext } from "aws-amplify";
 import moment from "moment";
 import { GetServerSideProps } from "next";
-import { useState } from "react";
 import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
+import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 85,
       margin: 65,
     },
+    hideRightSeparator: {
+      "& > .MuiDataGrid-columnSeparator": {
+        visibility: "hidden",
+      },
+    },
     title: { textAlign: "center", marginBottom: 30, marginTop: 30 },
     none: {
       margin: 30,
@@ -45,13 +59,95 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 350,
       fontSize: "1em",
     },
-    hideRightSeparator: {
-      "& > .MuiDataGrid-columnSeparator": {
-        visibility: "hidden",
-      },
-    },
   })
 );
+interface TablePaginationActionsProps {
+  count: number;
+  page: number;
+  rowsPerPage: number;
+  onPageChange: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    newPage: number
+  ) => void;
+}
+function TablePaginationActions(props: TablePaginationActionsProps) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === "rtl" ? (
+          <LastPage style={{ fill: "white" }} />
+        ) : (
+          <FirstPage style={{ fill: "white" }} />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight style={{ fill: "white" }} />
+        ) : (
+          <KeyboardArrowLeft style={{ fill: "white" }} />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft style={{ fill: "white" }} />
+        ) : (
+          <KeyboardArrowRight style={{ fill: "white" }} />
+        )}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === "rtl" ? (
+          <FirstPage style={{ fill: "white" }} />
+        ) : (
+          <LastPage style={{ fill: "white" }} />
+        )}
+      </IconButton>
+    </Box>
+  );
+}
+
 export default function ContestHome(props) {
   const contList = props.contestList;
   var upcomingList = contList.filter((contest) => contest.endTime > Date.now());
@@ -66,46 +162,26 @@ export default function ContestHome(props) {
     var s = m.utcOffset(-offset).format("M/D/YY, h:mm A UTC(Z)");
     return s;
   };
-  const columns: GridColDef[] = [
-    {
-      field: "name",
-      headerName: "Name",
-      width: 70,
-    },
-    { field: "startTime", headerName: "Start Time", width: 130 },
-    {
-      field: "length",
-      headerName: "Length",
-      width: 90,
-    },
-    {
-      field: "standings",
-      headerName: "Standings",
-      width: 300,
-      renderCell: (params) => (
-        <Link href={`mailto:${params.value}`}>Standings</Link>
-      ),
-    },
-    {
-      field: "practice",
-      headerName: "Practice",
-      width: 300,
-      renderCell: (params) => (
-        <Link href={`mailto:${params.value}`}>Practice</Link>
-      ),
-    },
-  ];
-  const rows = [];
-  for (let index = 0; index < contestList.length; index++) {
-    rows.push({
-      name: contList[index].title,
-      startTime: changeToDate(contList[index].scheduledTime),
-      length: contList[index].length,
-      standings: contList[index].contID,
-      practice: contList[index].contID,
-    });
-  }
-  console.log(rows);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(15);
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  /*   const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0; */
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   return (
     <div className={classes.body}>
       <Typography variant="h2" className={classes.title}>
@@ -187,7 +263,7 @@ export default function ContestHome(props) {
           <Table
             className={classes.table}
             size="small"
-            aria-label="a dense table"
+            aria-label="custom pagination table"
           >
             <TableHead>
               <TableRow>
@@ -210,7 +286,13 @@ export default function ContestHome(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {contestList.map((key, val) => (
+              {(rowsPerPage > 0
+                ? contestList.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : contestList
+              ).map((key) => (
                 <TableRow key={key} className={classes.tableRow}>
                   <TableCell component="th" scope="row" align="center">
                     <Typography className={classes.tableRowCell}>
@@ -255,7 +337,33 @@ export default function ContestHome(props) {
                   <TableCell align="center"></TableCell>
                 </TableRow>
               ))}
+              {/* {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )} */}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[1]}
+                  colSpan={5}
+                  count={contestList.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  style={{ border: "none" }}
+                  SelectProps={{
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       ) : (
@@ -277,7 +385,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     data: ListContestsQuery;
     errors: any[];
   };
-  const contests = allContests.data.listContests.items;
+  var contests = allContests.data.listContests.items;
+  contests.sort(function (a, b) {
+    if (a.sort > b.sort) {
+      return -1;
+    }
+    if (a.sort < b.sort) {
+      return 1;
+    }
+    return 0;
+  });
 
   return {
     props: {

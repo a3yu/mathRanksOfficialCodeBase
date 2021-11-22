@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 700,
     },
     cardClass: {
-      borderRadius: 7.5,
+      borderRadius: 5,
     },
     seeAll: {
       fontSize: ".9em",
@@ -334,8 +334,17 @@ export async function getServerSideProps() {
     return 0;
   });
   const current = Math.round(Date.now());
-  const calendar = itemsCal.filter((contest) => {
+  var calendar = itemsCal.filter((contest) => {
     return contest.scheduledTime > current;
+  });
+  calendar.sort(function (a, b) {
+    if (a.sort > b.sort) {
+      return -1;
+    }
+    if (a.sort < b.sort) {
+      return 1;
+    }
+    return 0;
   });
   const rankingList = (await API.graphql({
     query: listLeaderboards,

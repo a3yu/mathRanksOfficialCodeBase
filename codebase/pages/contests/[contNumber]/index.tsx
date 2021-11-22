@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 38,
     },
     input: {
+      borderColor: "white",
       "& input[type=number]": {
         "-moz-appearance": "textfield",
       },
@@ -89,6 +90,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: ".9em",
       fontWeight: 500,
       marginBottom: "-.8em",
+    },
+    titleSide: {
+      color: "#ffff",
+      fontSize: "1.4em",
+      fontWeight: 650,
     },
   })
 );
@@ -174,15 +180,10 @@ function Contests(props) {
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" key={key}>
           <div key={key}>
             <Card className={classes.cardClass}>
-              <CardHeader
-                className={classes.cardHeader}
-                titleTypographyProps={{ variant: "h3" }}
-                classes={{
-                  title: classes.title,
-                }}
-                title={"Question " + (val + 1)}
-              />
               <CardContent className={classes.cardContentText}>
+                <Typography variant="h1" className={classes.titleSide}>
+                  Question {val + 1}
+                </Typography>
                 <div className={classes.question}>
                   <h2 className={classes.questionText}>
                     <Latex>{key}</Latex>
