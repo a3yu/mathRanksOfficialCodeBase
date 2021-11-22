@@ -11,7 +11,14 @@ import AuthContext from "../context/AuthContext";
 import Footer from "../components/Footer";
 import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
+import NProgress from "../nprogress";
+import "../nprogress/nprogress.css";
+
+//Binding events.
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 Amplify.configure({ ...awsconfig, ssr: true, cookieStore: false });
 const alertStyle = {
