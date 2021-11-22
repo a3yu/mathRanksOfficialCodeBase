@@ -8,7 +8,6 @@ import { makeStyles, createStyles } from "@material-ui/core";
 import {
   Box,
   IconButton,
-  Link,
   Paper,
   Table,
   TableBody,
@@ -22,7 +21,6 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { withSSRContext } from "aws-amplify";
 import moment from "moment";
 import { GetServerSideProps } from "next";
@@ -154,7 +152,7 @@ export default function ContestHome(props) {
   const contestList = contList.filter(
     (contest) => contest.endTime < Date.now() && contest.practice == true
   );
-  var statusList = new Array(upcomingList.length).fill(false);
+
   const classes = useStyles();
   const changeToDate = (epoch) => {
     var offset = new Date().getTimezoneOffset();
@@ -164,10 +162,6 @@ export default function ContestHome(props) {
   };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(15);
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  /*   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0; */
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -337,11 +331,6 @@ export default function ContestHome(props) {
                   <TableCell align="center"></TableCell>
                 </TableRow>
               ))}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )} */}
             </TableBody>
             <TableFooter>
               <TableRow>
@@ -373,11 +362,7 @@ export default function ContestHome(props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-  req,
-  res,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const SSR = withSSRContext({ req });
   const allContests = (await SSR.API.graphql({
     query: listContests,
