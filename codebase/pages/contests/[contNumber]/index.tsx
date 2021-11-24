@@ -125,7 +125,6 @@ function Contests(props) {
       }
     }
   }
-  console.log(statusAns);
   const onSubmit = async (data) => {
     for (var q in data) {
       const ind = parseInt(q) - 1;

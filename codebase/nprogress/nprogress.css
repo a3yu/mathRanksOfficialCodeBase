@@ -48,6 +48,7 @@
   border-top-color: #a9c5ea;
   border-left-color: #a9c5ea;
   border-radius: 50%;
+  display: none;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
   animation: nprogress-spinner 400ms linear infinite;
