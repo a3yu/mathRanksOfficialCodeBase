@@ -2,34 +2,14 @@ import {
   createStyles,
   makeStyles,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Theme,
   Typography,
 } from "@material-ui/core";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { maxWidth } from "@material-ui/system";
-import { API, withSSRContext } from "aws-amplify";
-import {
-  GetContestQuery,
-  GetContestRankingQuery,
-  ListContestRankingsQuery,
-  ListContestRankingsQueryVariables,
-  ListLeaderboardsQuery,
-} from "../../../../src/API";
-import {
-  getContest,
-  getContestRanking,
-  listContestRankings,
-  listContests,
-  listLeaderboards,
-} from "../../../../src/graphql/queries";
+import { withSSRContext } from "aws-amplify";
+import { GetContestQuery, GetContestRankingQuery } from "../../../../src/API";
+import { getContest, getContestRanking } from "../../../../src/graphql/queries";
 import { GetServerSideProps } from "next";
-import { red } from "@material-ui/core/colors";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {

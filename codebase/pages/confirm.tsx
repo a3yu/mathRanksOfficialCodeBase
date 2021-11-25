@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Button,
@@ -9,7 +9,7 @@ import {
   Container,
 } from "@material-ui/core";
 import styles from "../styles/Signup.module.scss";
-import { Auth, withSSRContext } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";

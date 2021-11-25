@@ -8,7 +8,6 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-import { createTheme } from "@material-ui/core/styles";
 import styles from "../styles/Signup.module.scss";
 import { Auth, withSSRContext } from "aws-amplify";
 import { Alert } from "@material-ui/lab";

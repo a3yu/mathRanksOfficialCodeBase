@@ -5,15 +5,13 @@ import {
   GetContestAnswerQuery,
   GetContestQuery,
   UpdateContestAnswerInput,
-  UpdateContestAnswerMutation,
 } from "../../../src/API";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { getContest, getContestAnswer } from "../../../src/graphql/queries";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
 import { Button, Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import TextField from "@material-ui/core/TextField";
 import { GetServerSideProps } from "next";
@@ -24,7 +22,7 @@ import {
   updateContestAnswer,
 } from "../../../src/graphql/mutations";
 import { useState } from "react";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Countdown from "react-countdown";
 
 const useStyles = makeStyles((theme: Theme) =>
