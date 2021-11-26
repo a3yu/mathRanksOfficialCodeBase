@@ -192,7 +192,7 @@ function Contests(props) {
                     variant="outlined"
                     size="small"
                     id={"q" + (val + 1)}
-                    type="number"
+                    type="text"
                     className={classes.input}
                     inputProps={{
                       style: { fontSize: 12 },
