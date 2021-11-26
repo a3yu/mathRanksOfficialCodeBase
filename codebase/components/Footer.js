@@ -20,11 +20,11 @@ function Footer() {
           <a className={styles.link}>admin@mathranks.com</a>
         </Link>
         <br />
-        <Link href="/" target="_blank" rel="noopener noreferrer">
+        <Link href="/privacyPolicy" target="_blank" rel="noopener noreferrer">
           <a className={styles.link}>Privacy Policy</a>
         </Link>{" "}
         &{" "}
-        <Link href="/" target="_blank" rel="noopener noreferrer">
+        <Link href="/tOfC" target="_blank" rel="noopener noreferrer">
           <a className={styles.link}>Terms and Conditions</a>
         </Link>
       </section>
