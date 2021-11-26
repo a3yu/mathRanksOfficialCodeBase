@@ -13,7 +13,7 @@ import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
-import * as ga from "./lib/ga";
+import * as ga from "../lib/ga";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
