@@ -2,20 +2,13 @@ import {
   createStyles,
   makeStyles,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Theme,
   Typography,
 } from "@material-ui/core";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { maxWidth } from "@material-ui/system";
 import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
-import { listContests, listLeaderboards } from "../src/graphql/queries";
+import { listLeaderboards } from "../src/graphql/queries";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
