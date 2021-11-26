@@ -105,7 +105,7 @@ export default function Ranking(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const rankingList = (await API.graphql({
     query: listLeaderboards,
   })) as {
@@ -118,5 +118,6 @@ export async function getServerSideProps() {
     props: {
       leaderBoard: leaderboard[0],
     },
+    revalidate: 60 * 60,
   };
 }

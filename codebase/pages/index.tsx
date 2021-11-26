@@ -323,7 +323,7 @@ function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const allContests = (await API.graphql({
     query: listContests,
   })) as {
@@ -379,6 +379,7 @@ export async function getServerSideProps() {
       leaderboard: users,
       leadRating: ratings,
     },
+    revalidate: 60 * 60,
   };
 }
 export default Home;
