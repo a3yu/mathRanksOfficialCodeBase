@@ -5,3 +5,9 @@ body {
   width: 100%;
   overflow-x: hidden;
 }
+
+:any-link {
+  font-weight: 600;
+  color: rgb(169, 197, 234);
+  text-decoration: none;
+}

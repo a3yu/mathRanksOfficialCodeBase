@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     questionText: {
       fontWeight: 400,
-      fontSize: "1.2em",
+      fontSize: "1.3em",
+      width: "100%",
     },
     cardContentText: {
       fontSize: 14,
@@ -91,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     titleSide: {
       color: "#ffff",
-      fontSize: "1.4em",
+      fontSize: "1.35em",
       fontWeight: 650,
     },
   })
@@ -191,7 +192,7 @@ function Contests(props) {
                     variant="outlined"
                     size="small"
                     id={"q" + (val + 1)}
-                    type="number"
+                    type="text"
                     className={classes.input}
                     inputProps={{
                       style: { fontSize: 12 },
