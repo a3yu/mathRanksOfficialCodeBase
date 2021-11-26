@@ -84,6 +84,9 @@ export default function About() {
             do not punish users for entering the competition and not making any
             answer submissions. However, if you make any answer submission in
             the contest, that contest will be evaluated and effect your rating.
+            Each question will be allotted points and those will determine the
+            standing at the end of the contest. Ratings will be adjusted after
+            standings are determined.
           </Typography>
         </CardContent>
       </Card>
