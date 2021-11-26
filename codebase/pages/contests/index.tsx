@@ -21,9 +21,9 @@ import {
   Typography,
   useTheme,
 } from "@material-ui/core";
-import { withSSRContext } from "aws-amplify";
+import { API, withSSRContext } from "aws-amplify";
 import moment from "moment";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
@@ -362,9 +362,8 @@ export default function ContestHome(props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const SSR = withSSRContext({ req });
-  const allContests = (await SSR.API.graphql({
+export const getStaticProps: GetStaticProps = async () => {
+  const allContests = (await API.graphql({
     query: listContests,
   })) as {
     data: ListContestsQuery;
@@ -385,5 +384,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     props: {
       contestList: contests,
     },
+    revalidate: 15 * 60,
   };
 };
