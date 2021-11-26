@@ -12,19 +12,13 @@ const Table = dynamic(() => import("@material-ui/core/Table"), {
   ssr: true,
 });
 const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
-const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
-  ssr: true,
-});
+import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
   ssr: true,
 });
-const TableCell = dynamic(() => import("@material-ui/core/TableCell"), {
-  ssr: true,
-});
-const TableRow = dynamic(() => import("@material-ui/core/TableRow"), {
-  ssr: true,
-});
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
 import {
   listContests,
   listLeaderboards,
@@ -39,6 +33,7 @@ import {
 import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import moment from "moment-timezone";
+import { useUser } from "../context/AuthContext";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -82,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ffff",
       fontWeight: 600,
     },
-    tableCellText: { fontSize: ".82em", color: "#ffff" },
+    tableCellText: { fontSize: ".9em", color: "#ffff" },
     tableHead: {
       marginBottom: -10,
     },
@@ -122,6 +117,9 @@ const useStyles = makeStyles((theme: Theme) =>
     cardClass: {
       borderRadius: 5,
     },
+    cardClassTop: {
+      margin: 20,
+    },
     seeAll: {
       fontSize: ".9em",
       fontWeight: 600,
@@ -137,10 +135,16 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 10,
     },
     tableCellTextLink: {
-      fontSize: ".8em",
+      fontSize: ".9em",
       fontWeight: 600,
       color: "rgb(169, 197, 234)",
       textDecoration: "none",
+    },
+    userText: {
+      fontSize: 14,
+      margin: 10,
+      color: "rgba(255, 255, 255, 0.6)",
+      fontWeight: 500,
     },
     sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
   })
@@ -149,10 +153,15 @@ function Home(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
+  const { user } = useUser();
   const { contestsAnn, contestsCal, leaderboard, leadRating } = props;
   const classes = useStyles();
   const router = useRouter();
   const alert = useAlert();
+  var index = 0;
+  if (user) {
+    index = leaderboard.indexOf(user.getUsername());
+  }
   const changeToDate = (epoch) => {
     var offset = new Date().getTimezoneOffset();
     var m = moment(epoch);
@@ -182,6 +191,22 @@ function Home(props) {
     <div className={classes.container}>
       <Grid container>
         <Grid container xs={12} md={8} spacing={2} className={classes.right}>
+          {user && (
+            <Grid item xs={12}>
+              <Card className={classes.cardClass}>
+                <CardContent className={classes.cardContentText}>
+                  <Typography variant="h1" className={classes.title}>
+                    User Data
+                  </Typography>
+                  <Typography className={classes.userText}>
+                    Username : {user.getUsername()} <br />
+                    Current Rating :{" "}
+                    {leadRating[index] == null ? "none" : leadRating[index]}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          )}
           {contestsAnn.slice(0, 4).map((contest) => (
             <Grid item xs={12} key={contest.id}>
               <Card className={classes.cardClass}>
