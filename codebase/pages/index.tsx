@@ -1,19 +1,37 @@
 import React, { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Link from "next/link";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+const TableHead = dynamic(() => import("@material-ui/core/TableHead"), {
+  ssr: true,
+});
+const Table = dynamic(() => import("@material-ui/core/Table"), {
+  ssr: true,
+});
+const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
+const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
+  ssr: true,
+});
+const Typography = dynamic(() => import("@material-ui/core/Typography"), {
+  ssr: true,
+});
+const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
+  ssr: true,
+});
+const TableCell = dynamic(() => import("@material-ui/core/TableCell"), {
+  ssr: true,
+});
+const TableRow = dynamic(() => import("@material-ui/core/TableRow"), {
+  ssr: true,
+});
 import {
   listContests,
   listLeaderboards,
   listPosts,
 } from "../src/graphql/queries";
-import { TableBody, TableCell, TableRow, Typography } from "@material-ui/core";
 import API from "@aws-amplify/api";
 import {
   ListContestsQuery,

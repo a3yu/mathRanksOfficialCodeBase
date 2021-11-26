@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
-import Navbar from "../components/Navigation";
-import Amplify, { Auth } from "aws-amplify";
+import Amplify from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
-import Footer from "../components/Footer";
 import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
+const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
 
-//Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());

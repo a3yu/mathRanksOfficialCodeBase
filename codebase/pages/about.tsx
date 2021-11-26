@@ -1,5 +1,12 @@
-import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import dynamic from "next/dynamic";
+const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
+const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
+  ssr: true,
+});
+const Typography = dynamic(() => import("@material-ui/core/Typography"), {
+  ssr: true,
+});
 
 const useStyles = makeStyles(() => ({
   h2: {
