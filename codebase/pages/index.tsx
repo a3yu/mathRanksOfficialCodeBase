@@ -298,10 +298,14 @@ function Home(props) {
                         {val + 1}
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
-                        {user}
+                        <Typography className={classes.tableCellText}>
+                          {user}
+                        </Typography>
                       </TableCell>
-                      <TableCell className={classes.tableCellText}>
-                        {leadRating[val]}
+                      <TableCell>
+                        <Typography className={classes.tableCellText}>
+                          {leadRating[val]}
+                        </Typography>
                       </TableCell>
                     </TableBody>
                   ))}
