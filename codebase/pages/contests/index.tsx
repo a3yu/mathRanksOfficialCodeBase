@@ -57,6 +57,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 350,
       fontSize: "1em",
     },
+    linkText: {
+      fontWeight: 600,
+      color: "rgb(169, 197, 234)",
+      textDecoration: "none",
+    },
   })
 );
 interface TablePaginationActionsProps {
@@ -235,7 +240,12 @@ export default function ContestHome(props) {
                     <Typography className={classes.tableRowCell}>
                       <Countdown date={key.scheduledTime}>
                         <Typography className={classes.tableRowCell}>
-                          <a href={"/contests/" + key.id}>Enter</a>
+                          <a
+                            href={"/contests/" + key.id}
+                            className={classes.linkText}
+                          >
+                            Enter
+                          </a>
                         </Typography>
                       </Countdown>
                     </Typography>
@@ -307,7 +317,10 @@ export default function ContestHome(props) {
                   <TableCell align="center">
                     {key.practice ? (
                       <Typography className={classes.tableRowCell}>
-                        <a href={"/contests/" + key.id + "/standings"}>
+                        <a
+                          href={"/contests/" + key.id + "/standings"}
+                          className={classes.linkText}
+                        >
                           Standings
                         </a>
                       </Typography>
@@ -320,7 +333,12 @@ export default function ContestHome(props) {
                   <TableCell align="center">
                     {key.practice ? (
                       <Typography className={classes.tableRowCell}>
-                        <a href={"/contests/" + key.id}>Practice</a>
+                        <a
+                          href={"/contests/" + key.id}
+                          className={classes.linkText}
+                        >
+                          Practice
+                        </a>
                       </Typography>
                     ) : (
                       <Typography className={classes.tableRowCell}>

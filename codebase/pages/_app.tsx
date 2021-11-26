@@ -7,11 +7,13 @@ import theme from "../src/theme";
 import Amplify from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
+import { useEffect } from "react";
 import "../styles/globals.scss";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
+import * as ga from "./lib/ga";
 import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
 const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
@@ -57,6 +59,21 @@ const options = {
   transition: transitions.SCALE,
 };
 const MyApp = (props) => {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url);
+    };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   const { Component, pageProps } = props;
   const noNav = [
     "/login",
@@ -65,7 +82,6 @@ const MyApp = (props) => {
     "/confirm",
     "/changePassword",
   ];
-  const router = useRouter();
   const { asPath } = router;
 
   React.useEffect(() => {

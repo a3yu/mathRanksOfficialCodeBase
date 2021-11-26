@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     questionText: {
       fontWeight: 400,
-      fontSize: "1.2em",
+      fontSize: "1.1em",
     },
     cardContentText: {
       fontSize: 14,

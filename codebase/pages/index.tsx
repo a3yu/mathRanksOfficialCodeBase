@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ffff",
       fontWeight: 600,
     },
-    tableCellText: { fontSize: 12.5, color: "#ffff" },
+    tableCellText: { fontSize: ".8em", color: "#ffff" },
     tableHead: {
       marginBottom: -10,
     },
@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: 10,
     },
     tableCellTextLink: {
-      fontSize: ".9em",
+      fontSize: ".8em",
       fontWeight: 600,
       color: "rgb(169, 197, 234)",
       textDecoration: "none",
