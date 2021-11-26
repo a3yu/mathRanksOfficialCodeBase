@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#ffff",
       fontWeight: 600,
     },
-    tableCellText: { fontSize: ".8em", color: "#ffff" },
+    tableCellText: { fontSize: ".82em", color: "#ffff" },
     tableHead: {
       marginBottom: -10,
     },
@@ -258,7 +258,9 @@ function Home(props) {
                         </Link>
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
-                        {changeToDate(contests.scheduledTime)}
+                        <Typography className={classes.tableCellText}>
+                          {changeToDate(contests.scheduledTime)}
+                        </Typography>
                       </TableCell>
                     </TableBody>
                   ))}
