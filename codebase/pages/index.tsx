@@ -15,9 +15,7 @@ const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
 const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
   ssr: true,
 });
-const Typography = dynamic(() => import("@material-ui/core/Typography"), {
-  ssr: true,
-});
+import Typography from "@material-ui/core/Typography";
 const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
   ssr: true,
 });
