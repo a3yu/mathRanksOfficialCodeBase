@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  Button,
-  Grid,
-  Snackbar,
-  TextField,
-  Typography,
-  Container,
-} from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import styles from "../styles/Signup.module.scss";
 import { Auth, withSSRContext } from "aws-amplify";
 import { Alert } from "@material-ui/lab";

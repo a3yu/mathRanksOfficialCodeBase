@@ -153,7 +153,6 @@ function Home(props) {
   const classes = useStyles();
   const router = useRouter();
   const alert = useAlert();
-  console.log(router.query.error);
   const changeToDate = (epoch) => {
     var offset = new Date().getTimezoneOffset();
     var m = moment(epoch);
@@ -163,7 +162,9 @@ function Home(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  console.log(router.query.error);
   useEffect(() => {
+    if (!router.isReady) return;
     if (
       router.query.error == "Contest does not exist." ||
       router.query.error == "Contest has not started." ||
@@ -176,7 +177,7 @@ function Home(props) {
     } else {
       window.history.pushState("", "", "/");
     }
-  }, []);
+  }, [router.isReady]);
   return (
     <div className={classes.container}>
       <Grid container>

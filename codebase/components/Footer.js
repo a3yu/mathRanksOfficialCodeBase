@@ -20,11 +20,19 @@ function Footer() {
           <a className={styles.link}>admin@mathranks.com</a>
         </Link>
         <br />
-        <Link href="/privacyPolicy" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://docs.google.com/document/d/1DOol22V4kYUt-l5ovT6Cre44kAM4y2uxp2UsWcYfUpI/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <a className={styles.link}>Privacy Policy</a>
         </Link>{" "}
         &{" "}
-        <Link href="/tOfC" target="_blank" rel="noopener noreferrer">
+        <Link
+          href="https://docs.google.com/document/d/1DOol22V4kYUt-l5ovT6Cre44kAM4y2uxp2UsWcYfUpI/edit?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <a className={styles.link}>Terms and Conditions</a>
         </Link>
       </section>
