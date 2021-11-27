@@ -13,11 +13,11 @@ function Footer() {
         (c) Copyright 2021 - A. Yu <br />
         Inquiries:{" "}
         <Link
-          href="mailto:admin@mathranks.com"
+          href="mailto:contact@mathranks.net"
           rel="noopener noreferrer"
           target="_blank"
         >
-          <a className={styles.link}>admin@mathranks.com</a>
+          <a className={styles.link}>contact@mathranks.net</a>
         </Link>
         <br />
         <Link
