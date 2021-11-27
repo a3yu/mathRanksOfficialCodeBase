@@ -10,7 +10,7 @@ function Footer() {
         <Link href="/" target="_blank" rel="noopener noreferrer">
           <a className={styles.link}>mathRanks LLC</a>
         </Link>{" "}
-        (c) Copyright 2021 - A. Yu <br />
+        (c) Copyright 2021 - A.Y <br />
         Inquiries:{" "}
         <Link
           href="mailto:contact@mathranks.net"
