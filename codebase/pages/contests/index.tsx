@@ -321,7 +321,7 @@ export default function ContestHome(props) {
                           href={"/contests/" + key.id + "/standings"}
                           className={classes.linkText}
                         >
-                          Standings
+                          Standings & Answers
                         </a>
                       </Typography>
                     ) : (
