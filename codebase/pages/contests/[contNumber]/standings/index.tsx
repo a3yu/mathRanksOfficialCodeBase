@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import Link from "next/link";
 import { withSSRContext } from "aws-amplify";
 import { GetContestQuery, GetContestRankingQuery } from "../../../../src/API";
 import { getContest, getContestRanking } from "../../../../src/graphql/queries";
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     dataGrid: {
       color: "#00000",
+    },
+    ansTitle: {
+      textAlign: "center",
+      marginTop: -15,
+      marginBottom: 25,
     },
     hideRightSeparator: {
       "& > .MuiDataGrid-columnSeparator": {
@@ -80,6 +86,9 @@ export default function Standings(props) {
     <div className={classes.body}>
       <Typography className={classes.title} variant="h1">
         {props.title}
+      </Typography>
+      <Typography className={classes.ansTitle}>
+        <Link href={standings.linkAnswer}>Contest Answers</Link>
       </Typography>
       <Paper>
         <DataGrid

@@ -152,6 +152,7 @@ export const getContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      linkAnswer
       createdAt
       updatedAt
     }
@@ -168,6 +169,7 @@ export const listContestRankings = /* GraphQL */ `
         id
         users
         ratings
+        linkAnswer
         createdAt
         updatedAt
       }

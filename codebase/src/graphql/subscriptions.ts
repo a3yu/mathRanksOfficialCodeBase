@@ -182,6 +182,7 @@ export const onCreateContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      linkAnswer
       createdAt
       updatedAt
     }
@@ -193,6 +194,7 @@ export const onUpdateContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      linkAnswer
       createdAt
       updatedAt
     }
@@ -204,6 +206,7 @@ export const onDeleteContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      linkAnswer
       createdAt
       updatedAt
     }
