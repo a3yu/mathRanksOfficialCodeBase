@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
     dataGrid: {
       color: "#00000",
     },
+    hideRightSeparator: {
+      "& > .MuiDataGrid-columnSeparator": {
+        visibility: "hidden",
+      },
+    },
     title: { textAlign: "center", marginBottom: 30 },
   })
 );
@@ -48,6 +53,7 @@ export default function Standings(props) {
       disableColumnMenu: true,
       minWidth: 145,
       editable: false,
+      headerClassName: classes.hideRightSeparator,
     },
     {
       field: "name",
@@ -55,6 +61,7 @@ export default function Standings(props) {
       flex: 3,
       minWidth: 160,
       editable: false,
+      headerClassName: classes.hideRightSeparator,
     },
     {
       field: "rating",
@@ -62,6 +69,7 @@ export default function Standings(props) {
       flex: 3,
       minWidth: 160,
       editable: false,
+      headerClassName: classes.hideRightSeparator,
     },
   ];
   const rows = [];

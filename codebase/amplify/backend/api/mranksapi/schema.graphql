@@ -78,4 +78,5 @@ type contestRanking
   id: ID!
   users: [String]
   ratings: [String]
+  answerLink: String
 }
