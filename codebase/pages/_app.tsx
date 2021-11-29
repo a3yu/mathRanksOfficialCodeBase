@@ -99,6 +99,10 @@ const MyApp = (props) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <meta
+          name="description"
+          content="mathRanks. A math competition platform for everyone."
+        />
       </Head>
       <AuthContext>
         <AlertProvider template={AlertTemplate} {...options}>
