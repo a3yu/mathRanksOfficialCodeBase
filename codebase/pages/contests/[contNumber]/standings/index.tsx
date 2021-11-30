@@ -5,7 +5,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import Link from "next/link";
 import { withSSRContext } from "aws-amplify";
 import { GetContestQuery, GetContestRankingQuery } from "../../../../src/API";
@@ -96,6 +96,9 @@ export default function Standings(props) {
           columns={columns}
           pageSize={100}
           autoHeight={true}
+          components={{
+            Toolbar: GridToolbar,
+          }}
           className={classes.dataGrid}
           rowsPerPageOptions={[100]}
           disableSelectionOnClick

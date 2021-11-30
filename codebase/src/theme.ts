@@ -85,7 +85,13 @@ const theme = createTheme({
     },
   },
   spacing: 8,
+
   overrides: {
+    MuiIconButton: {
+      root: {
+        color: "#ffff",
+      },
+    },
     MuiGrid: {
       "spacing-xs-3": {
         margin: 0,
@@ -94,10 +100,17 @@ const theme = createTheme({
     MuiDataGrid: {
       root: {
         border: "1px solid #969696",
+        color: "#ffff",
         ".MuiDataGrid-row, .MuiDataGrid-root .MuiDataGrid-cell, .rendering-zone":
           { "max-height": "none !important" },
         ".MuiDataGrid-root .MuiDataGrid-window": {
           position: "relative !important",
+        },
+        ".MuiIconButton-root": {
+          color: "#ffff",
+        },
+        ".MuiDataGrid-sortIcon": {
+          fill: "#ffff",
         },
         ".MuiDataGrid-root .MuiDataGrid-viewport": {
           "max-height": "none !important",

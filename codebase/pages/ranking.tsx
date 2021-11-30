@@ -5,7 +5,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
 import { listLeaderboards } from "../src/graphql/queries";
@@ -60,7 +60,9 @@ export default function Ranking(props) {
       field: "name",
       headerName: "Username",
       headerClassName: classes.hideRightSeparator,
+
       flex: 3,
+
       minWidth: 160,
       editable: false,
     },
@@ -85,6 +87,9 @@ export default function Ranking(props) {
       <Paper>
         <DataGrid
           rows={rows}
+          components={{
+            Toolbar: GridToolbar,
+          }}
           columns={columns}
           pageSize={100}
           autoHeight={true}
