@@ -94,7 +94,6 @@ function Signup() {
         <Typography variant="h1" color="textPrimary" align="center">
           Sign Up
         </Typography>
-        <hr className={styles.divider} />
       </Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.gridContainer}>
