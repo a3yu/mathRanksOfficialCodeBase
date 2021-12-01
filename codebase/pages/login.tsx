@@ -53,6 +53,7 @@ function Login() {
         <Typography variant="h1" color="textPrimary" align="center">
           Login
         </Typography>
+        <hr className={styles.divider} />
       </Container>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <Grid
