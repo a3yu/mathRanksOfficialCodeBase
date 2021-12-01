@@ -96,6 +96,12 @@ export default function Navbar() {
                 <a>About</a>
               </Link>
             </li>
+            <li>
+              {" "}
+              <Link href="/sponsors">
+                <a>Sponsors</a>
+              </Link>
+            </li>
             {!user && (
               <ul className={styles.account}>
                 <li>

@@ -73,6 +73,12 @@ function DrawerComponent() {
               <a className={classes.link}>Ranking</a>
             </Link>
           </li>
+          <li>
+            {" "}
+            <Link href="/sponsors">
+              <a className={classes.link}>Sponsors</a>
+            </Link>
+          </li>
         </ul>
         {!user && (
           <ul className={classes.list}>
