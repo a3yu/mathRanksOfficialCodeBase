@@ -53,7 +53,7 @@ export default function Standings(props) {
   const place = standings.place;
   const columns: GridColDef[] = [
     {
-      field: "id",
+      field: "place",
       headerName: " ",
       flex: 1,
       hideSortIcons: true,
@@ -63,7 +63,7 @@ export default function Standings(props) {
       headerClassName: classes.hideRightSeparator,
     },
     {
-      field: "name",
+      field: "id",
       headerName: "Username",
       flex: 3,
       minWidth: 160,
@@ -81,7 +81,11 @@ export default function Standings(props) {
   ];
   const rows = [];
   for (let index = 0; index < users.length; index++) {
-    rows.push({ id: place[index], name: users[index], rating: ratings[index] });
+    rows.push({
+      place: place[index],
+      id: users[index],
+      rating: ratings[index],
+    });
   }
   return (
     <div className={classes.body}>
