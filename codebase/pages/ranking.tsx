@@ -48,7 +48,7 @@ export default function Ranking(props) {
   const ratings = leaderBoard.ratings;
   const columns: GridColDef[] = [
     {
-      field: "id",
+      field: "place",
       headerName: "#",
       flex: 1,
       hideSortIcons: true,
@@ -58,7 +58,7 @@ export default function Ranking(props) {
       editable: false,
     },
     {
-      field: "name",
+      field: "id",
       headerName: "Username",
       headerClassName: classes.hideRightSeparator,
 
@@ -78,7 +78,11 @@ export default function Ranking(props) {
   ];
   const rows = [];
   for (let index = 0; index < board.length; index++) {
-    rows.push({ id: place[index], name: board[index], rating: ratings[index] });
+    rows.push({
+      place: place[index],
+      id: board[index],
+      rating: ratings[index],
+    });
   }
   return (
     <div className={classes.body}>

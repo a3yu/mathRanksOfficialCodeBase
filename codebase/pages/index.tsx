@@ -340,7 +340,7 @@ function Home(props) {
                 </Table>
                 <Typography className={classes.seeAll}>
                   <Typography className={classes.seeAll}>
-                    <Link href="/allPosts">
+                    <Link href="/ranking">
                       <a className={classes.seeAll}>See all</a>
                     </Link>
                   </Typography>
