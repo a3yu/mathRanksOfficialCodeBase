@@ -123,6 +123,7 @@ export const getLeaderboard = /* GraphQL */ `
       id
       users
       ratings
+      place
       createdAt
       updatedAt
     }
@@ -139,6 +140,7 @@ export const listLeaderboards = /* GraphQL */ `
         id
         users
         ratings
+        place
         createdAt
         updatedAt
       }
@@ -152,6 +154,7 @@ export const getContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      place
       linkAnswer
       createdAt
       updatedAt
@@ -169,6 +172,7 @@ export const listContestRankings = /* GraphQL */ `
         id
         users
         ratings
+        place
         linkAnswer
         createdAt
         updatedAt

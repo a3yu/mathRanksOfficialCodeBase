@@ -50,6 +50,7 @@ export default function Standings(props) {
   const { standings } = props;
   const users = standings.users;
   const ratings = standings.ratings;
+  const place = standings.place;
   const columns: GridColDef[] = [
     {
       field: "id",
@@ -80,7 +81,7 @@ export default function Standings(props) {
   ];
   const rows = [];
   for (let index = 0; index < users.length; index++) {
-    rows.push({ id: index + 1, name: users[index], rating: ratings[index] });
+    rows.push({ id: place[index], name: users[index], rating: ratings[index] });
   }
   return (
     <div className={classes.body}>

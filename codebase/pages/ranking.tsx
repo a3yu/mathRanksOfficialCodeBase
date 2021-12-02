@@ -44,6 +44,7 @@ export default function Ranking(props) {
   const { leaderBoard } = props;
   console.log(leaderBoard.users);
   const board = leaderBoard.users;
+  const place = leaderBoard.place;
   const ratings = leaderBoard.ratings;
   const columns: GridColDef[] = [
     {
@@ -77,7 +78,7 @@ export default function Ranking(props) {
   ];
   const rows = [];
   for (let index = 0; index < board.length; index++) {
-    rows.push({ id: index + 1, name: board[index], rating: ratings[index] });
+    rows.push({ id: place[index], name: board[index], rating: ratings[index] });
   }
   return (
     <div className={classes.body}>

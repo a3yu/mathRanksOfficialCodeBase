@@ -149,6 +149,7 @@ export const onCreateLeaderboard = /* GraphQL */ `
       id
       users
       ratings
+      place
       createdAt
       updatedAt
     }
@@ -160,6 +161,7 @@ export const onUpdateLeaderboard = /* GraphQL */ `
       id
       users
       ratings
+      place
       createdAt
       updatedAt
     }
@@ -171,6 +173,7 @@ export const onDeleteLeaderboard = /* GraphQL */ `
       id
       users
       ratings
+      place
       createdAt
       updatedAt
     }
@@ -182,6 +185,7 @@ export const onCreateContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      place
       linkAnswer
       createdAt
       updatedAt
@@ -194,6 +198,7 @@ export const onUpdateContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      place
       linkAnswer
       createdAt
       updatedAt
@@ -206,6 +211,7 @@ export const onDeleteContestRanking = /* GraphQL */ `
       id
       users
       ratings
+      place
       linkAnswer
       createdAt
       updatedAt

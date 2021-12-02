@@ -154,7 +154,8 @@ function Home(props) {
     window.scrollTo(0, 0);
   }
   const { user } = useUser();
-  const { contestsAnn, contestsCal, leaderboard, leadRating } = props;
+  const { contestsAnn, contestsCal, leaderboard, leadRating, leadPlace } =
+    props;
   const classes = useStyles();
   const router = useRouter();
   const alert = useAlert();
@@ -322,7 +323,7 @@ function Home(props) {
                         className={classes.tableCellText}
                         align="center"
                       >
-                        {val + 1}
+                        {leadPlace[val]}
                       </TableCell>
                       <TableCell className={classes.tableCellText}>
                         <Typography className={classes.tableCellText}>
@@ -401,13 +402,14 @@ export async function getStaticProps() {
   const leaderboard = rankingList.data.listLeaderboards.items;
   const users = leaderboard[0].users;
   const ratings = leaderboard[0].ratings;
-
+  const place = leaderboard[0].place;
   return {
     props: {
       contestsAnn: itemsPost,
       contestsCal: calendar,
       leaderboard: users,
       leadRating: ratings,
+      leadPlace: place,
     },
     revalidate: 60 * 60,
   };

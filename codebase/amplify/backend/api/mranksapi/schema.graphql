@@ -65,6 +65,7 @@ type leaderboard
   id: ID!
   users: [String]
   ratings: [String]
+  place: [String]
 }
 
 type contestRanking
@@ -78,5 +79,6 @@ type contestRanking
   id: ID!
   users: [String]
   ratings: [String]
+  place: [String]
   linkAnswer: String
 }
