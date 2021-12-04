@@ -120,7 +120,7 @@ function Signup() {
               {errors.username && errors.username.message}
             </p>
           </div>
-          <div className="mb-4">
+          <div className="mb-6">
             <input
               required
               id="email"
@@ -138,7 +138,7 @@ function Signup() {
               {errors.email && errors.email.message}
             </p>
           </div>
-          <div className="mb-4">
+          <div className="mb-6">
             <input
               required
               id="password"
@@ -198,11 +198,13 @@ function Signup() {
               {showCode ? "Confirm Code" : "Sign Up"}
             </button>
           </div>
-          <div>
-            <Link href="/login">Have an account? Sign in!</Link>
-          </div>
-          <div>
-            <Link href="/confirm">Confirm Account</Link>
+          <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <div>
+              <Link href="/login">Have an account? Sign in!</Link>
+            </div>
+            <div>
+              <Link href="/confirm">Confirm Account</Link>
+            </div>
           </div>
           <Snackbar open={open} autoHideDuration={60000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
