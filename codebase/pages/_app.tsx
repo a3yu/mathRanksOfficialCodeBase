@@ -12,7 +12,8 @@ import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
-/* const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true }); */
+import dynamic from "next/dynamic";
+const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
 /* const Footer = dynamic(() => import("../components/Footer"), { ssr: true }); */
 
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -96,7 +97,7 @@ const MyApp = (props) => {
       </Head>
       <AuthContext>
         <AlertProvider template={AlertTemplate} {...options}>
-          {/*  <Navbar /> */}
+          <Navbar />
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Component {...pageProps} />

@@ -1,21 +1,15 @@
 import React, { useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { listPosts } from "../src/graphql/queries";
 import API from "@aws-amplify/api";
 import { ListPostsQuery } from "../src/API";
-import { useRouter } from "next/router";
-import { Typography } from "@material-ui/core";
 
 function AllPosts(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
   const { contestsAnn } = props;
-  const router = useRouter();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -1,7 +1,7 @@
 import React from "react";
 // Modules
-import Document, { Html, Head, Main, NextScript } from "next/document";
-// MUI Core
+import { Html, Head, Main, NextScript } from "next/document";
+import Document from "next/dist/pages/_document";
 
 class MyDocument extends Document {
   render() {
@@ -28,22 +28,6 @@ class MyDocument extends Document {
             });
           `,
             }}
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:wght@700&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Source+Code+Pro:wght@300&display=swap"
-            rel="stylesheet"
           />
         </Head>
         <body className="dark:bg-black min-h-screen">

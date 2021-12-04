@@ -2,6 +2,36 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
+    scale: {
+      0: "0",
+      25: ".25",
+      50: ".5",
+      75: ".75",
+      90: ".9",
+      95: ".95",
+      100: "1",
+      105: "1.05",
+      110: "1.1",
+      125: "1.25",
+      150: "1.5",
+      200: "2",
+    },
+    screens: {
+      sm: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      md: "900px",
+      // => @media (min-width: 768px) { ... }
+
+      lg: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      xl: "1280px",
+      // => @media (min-width: 1280px) { ... }
+
+      "2xl": "1536px",
+      // => @media (min-width: 1536px) { ... }
+    },
     extend: {
       typography: {
         DEFAULT: {
@@ -34,6 +64,7 @@ module.exports = {
         cardColorDark: "#18181B",
         cardPTextDark: "rgba(255, 255, 255, 0.6)",
         linkColorDark: "rgb(169, 197, 234)",
+        linkColorDarkHover: "#97acc7",
       },
     },
   },

@@ -3,13 +3,20 @@
 @import "tailwindcss/base";
 
 @layer base {
-  any-link {
+  :any-link {
     font-weight: 700;
     color: rgb(169, 197, 234);
     text-decoration: none;
   }
   li {
     display: list-item;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #000000 inset !important;
+    -webkit-text-fill-color: #ffff !important;
   }
   ul {
     display: block;

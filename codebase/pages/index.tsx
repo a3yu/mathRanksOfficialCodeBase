@@ -56,11 +56,11 @@ function Home(props) {
     }
   }, [router.isReady]);
   return (
-    <div>
-      <div className="grid grid-cols-11 ">
-        <div className="col-span-7 grid-flow-row ml-12">
+    <div className="md:mt-10">
+      <div className="grid md:grid-cols-11 grid-cols-1">
+        <div className="col-span-7 grid-flow-row md:ml-12">
           {user && (
-            <div className="col-span-6">
+            <div>
               <figure className="dark:bg-cardColorDark rounded p-5 m-4">
                 <div className="space-y-1 ">
                   <h1 className="text-2xl font-bold text-white m-0">
@@ -95,14 +95,14 @@ function Home(props) {
             </div>
           ))}
           <Link href="/allPosts">
-            <a className="dark:text-linkColorDark font-bold text-base font-sans">
+            <a className="dark:text-linkColorDark font-bold text-base font-sans ml-8">
               See all posts
             </a>
           </Link>
         </div>
-        <div className="col-span-4 mr-12">
+        <div className="col-span-4 md:mr-12">
           <div>
-            <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+            <figure className="dark:bg-cardColorDark rounded p-0 m-4 pt-4 pl-4 pb-1">
               <div className="space-y-1">
                 <h1 className="text-2xl font-bold text-white m-0">Key Links</h1>
                 <div className="-ml-5">
@@ -139,7 +139,7 @@ function Home(props) {
                 <h1 className="text-2xl font-bold text-white m-0">
                   Upcoming Contests
                 </h1>
-                <table className="table-auto border-collapse ">
+                <table className="table-auto border-collapse w-full ">
                   <thead>
                     <tr className="text-white">
                       <th>Name</th>
@@ -149,14 +149,14 @@ function Home(props) {
                   <tbody className="text-center">
                     {contestsCal.map((contests) => (
                       <tr key={contests} className="text-white">
-                        <td className="border-t border-b border-white">
+                        <td className="border-t border-b border-white p-1">
                           <Link href="/contests">
-                            <a className="dark:text-linkColorDark font-bold text-sm font-sans">
+                            <a className="dark:text-linkColorDark font-bold text-sm font-sans ">
                               {contests.title}
                             </a>
                           </Link>
                         </td>
-                        <td className="border-t border-b border-white">
+                        <td className="border-t border-b border-white p-1">
                           <p>{changeToDate(contests.scheduledTime)}</p>
                         </td>
                       </tr>
@@ -181,11 +181,13 @@ function Home(props) {
                   <tbody className="text-center">
                     {leaderboard.slice(0, 10).map((user, val) => (
                       <tr key={user} className="text-white">
-                        <td className="border-t border-white">
+                        <td className="border-t border-white p-1 text-sm ">
                           {leadPlace[val]}
                         </td>
-                        <td className="border-t border-white">{user}</td>
-                        <td className="border-t border-white">
+                        <td className="border-t border-white p-1 text-sm font-semibold">
+                          {user}
+                        </td>
+                        <td className="border-t border-white p-1 text-sm ">
                           {leadRating[val]}
                         </td>
                       </tr>
