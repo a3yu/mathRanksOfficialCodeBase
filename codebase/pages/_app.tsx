@@ -1,22 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/theme";
 import Amplify from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
 import { useEffect } from "react";
-import "../styles/globals.scss";
+import "../styles/main.css";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
-import dynamic from "next/dynamic";
-const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
-const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
+/* const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true }); */
+/* const Footer = dynamic(() => import("../components/Footer"), { ssr: true }); */
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -84,13 +81,6 @@ const MyApp = (props) => {
   ];
   const { asPath } = router;
 
-  React.useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }, []);
-
   return (
     <React.Fragment>
       <Head>
@@ -106,13 +96,11 @@ const MyApp = (props) => {
       </Head>
       <AuthContext>
         <AlertProvider template={AlertTemplate} {...options}>
-          <ThemeProvider theme={theme}>
-            <Navbar />
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Component {...pageProps} />
-            {noNav.includes(asPath) ? null : <Footer />}
-          </ThemeProvider>
+          {/*  <Navbar /> */}
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+          {/*    {noNav.includes(asPath) ? null : <Footer />} */}
         </AlertProvider>
       </AuthContext>
     </React.Fragment>
