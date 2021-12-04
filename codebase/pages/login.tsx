@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import { Alert } from "@material-ui/lab";
 import { Auth, withSSRContext } from "aws-amplify";
 import { useRouter } from "next/router";
-import styles from "../styles/Login.module.scss";
 import { useUser } from "../context/AuthContext";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 
 interface IFormInput {
   username: string;
@@ -48,72 +41,77 @@ function Login() {
   };
   console.log(user);
   return (
-    <div className={styles.container}>
-      <Container>
-        <Typography variant="h1" color="textPrimary" align="center">
-          Login
-        </Typography>
-        <hr className={styles.divider} />
-      </Container>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justify="center"
-          spacing={3}
+    <div className="bg-grey-lighter min-h-screen flex flex-col">
+      <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-cardColorDark  rounded px-8 pt-6 pb-8 mb-4 w-full"
         >
-          <Grid item>
-            <TextField
+          <div className="mb-4">
+            <h1 className="text-white text-center text-4xl font-semibold">
+              Login
+            </h1>
+          </div>
+          <div className="mb-6">
+            <input
               required
-              variant="filled"
+              autoComplete="false"
               id="username"
-              label="Username"
-              className={styles.textF}
+              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Username"
               type="text"
-              error={errors.username ? true : false}
-              helperText={errors.username ? errors.username.message : null}
-              {...register("username")}
+              {...register("username", {
+                required: true,
+                minLength: {
+                  value: 3,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+                maxLength: {
+                  value: 20,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+              })}
             />
-          </Grid>
-
-          <Grid item>
-            <TextField
-              required
-              variant="filled"
-              className={styles.textF}
-              id="password"
-              label="Password"
-              type="password"
-              error={errors.password ? true : false}
-              helperText={errors.password ? errors.password.message : null}
-              {...register("password")}
-            />
-          </Grid>
-
-          <Grid style={{ marginTop: 16 }}>
-            <Button
-              variant="contained"
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.username && errors.username.message}
+            </p>
+          </div>
+          <div>
+            <div className="mb-4">
+              <input
+                required
+                id="password"
+                className=" mb-2 shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Password"
+                type="password"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Please enter a password.",
+                  },
+                  minLength: {
+                    value: 8,
+                    message: "Please enter a stronger password.",
+                  },
+                })}
+              />
+              <p className="text-red-900 text-xs italic m-1">
+                {errors.password && errors.password.message}
+              </p>
+            </div>
+          </div>
+          <div className="mb-2 w-full flex flex-col">
+            <button
+              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 "
               type="submit"
-              style={{
-                backgroundColor: "#a9c5ea",
-              }}
-              className={styles.butText}
             >
               Login
-            </Button>
-          </Grid>
-          <div className={styles.botText}>
-            <Link href="/signup">No account? Sign up!</Link>
+            </button>
           </div>
-          <div className={styles.botText2}>
-            <Link href="/changePassword">Forgot Password?</Link>
-          </div>
-          <div className={styles.botText2}>
-            <Link href="/confirm">Confirm Account</Link>
-          </div>
-        </Grid>
-      </form>
+        </form>
+      </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
           {signInError}

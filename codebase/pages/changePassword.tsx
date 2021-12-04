@@ -153,7 +153,7 @@ function ChangePassword() {
                   })}
                 />
                 <p className="text-red-900 text-xs italic m-1">
-                  {errors.newPass && errors.newPass.message}
+                  {errors.code && errors.code.message}
                 </p>
               </div>
             </div>
