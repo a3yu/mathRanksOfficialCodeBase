@@ -119,7 +119,7 @@ function AllPosts(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const allPosts = (await API.graphql({
     query: listPosts,
   })) as {
