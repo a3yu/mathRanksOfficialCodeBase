@@ -6,14 +6,24 @@ import {
   GetContestQuery,
   UpdateContestAnswerInput,
 } from "../../../src/API";
+import dynamic from "next/dynamic";
+const Card = dynamic(() => import("@material-ui/core/Card"), {
+  ssr: true,
+});
+const Button = dynamic(() => import("@material-ui/core/Button"), {
+  ssr: true,
+});
+const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
+  ssr: true,
+});
+const TextField = dynamic(() => import("@material-ui/core/TextField"), {
+  ssr: true,
+});
 import { useForm } from "react-hook-form";
 import { getContest, getContestAnswer } from "../../../src/graphql/queries";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
-import { Button, Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import TextField from "@material-ui/core/TextField";
+import { Typography } from "@material-ui/core";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { API, withSSRContext } from "aws-amplify";

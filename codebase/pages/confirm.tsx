@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  Button,
-  Grid,
-  Snackbar,
-  TextField,
-  Typography,
-  Container,
-} from "@material-ui/core";
+import dynamic from "next/dynamic";
+import Typography from "@material-ui/core/Typography";
 import styles from "../styles/Signup.module.scss";
+const Grid = dynamic(() => import("@material-ui/core/Grid"), {
+  ssr: true,
+});
+const Button = dynamic(() => import("@material-ui/core/Button"), {
+  ssr: true,
+});
+const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
+  ssr: true,
+});
+const TextField = dynamic(() => import("@material-ui/core/TextField"), {
+  ssr: true,
+});
+const Container = dynamic(() => import("@material-ui/core/Container"), {
+  ssr: true,
+});
 import { Auth } from "aws-amplify";
 import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";

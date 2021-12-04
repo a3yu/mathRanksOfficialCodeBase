@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+const Grid = dynamic(() => import("@material-ui/core/Grid"), {
+  ssr: true,
+});
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -12,13 +14,19 @@ const Table = dynamic(() => import("@material-ui/core/Table"), {
   ssr: true,
 });
 const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
-import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
   ssr: true,
 });
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+const TableCell = dynamic(() => import("@material-ui/core/TableCell"), {
+  ssr: true,
+});
+const TableRow = dynamic(() => import("@material-ui/core/TableRow"), {
+  ssr: true,
+});
+const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
+  ssr: true,
+});
 import {
   listContests,
   listLeaderboards,
