@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import dynamic from "next/dynamic";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { listPosts } from "../src/graphql/queries";
@@ -10,6 +8,13 @@ import API from "@aws-amplify/api";
 import { ListPostsQuery } from "../src/API";
 import { useRouter } from "next/router";
 import { Typography } from "@material-ui/core";
+const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
+const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
+  ssr: true,
+});
+const Grid = dynamic(() => import("@material-ui/core/Grid"), {
+  ssr: true,
+});
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {

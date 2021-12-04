@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import dynamic from "next/dynamic";
 import Typography from "@material-ui/core/Typography";
 import styles from "../styles/Signup.module.scss";
 import { Auth, withSSRContext } from "aws-amplify";
@@ -13,6 +9,21 @@ import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
+const Grid = dynamic(() => import("@material-ui/core/Grid"), {
+  ssr: true,
+});
+const Button = dynamic(() => import("@material-ui/core/Button"), {
+  ssr: true,
+});
+const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
+  ssr: true,
+});
+const TextField = dynamic(() => import("@material-ui/core/TextField"), {
+  ssr: true,
+});
+const Container = dynamic(() => import("@material-ui/core/Container"), {
+  ssr: true,
+});
 interface IFormInput {
   username: string;
   email: string;

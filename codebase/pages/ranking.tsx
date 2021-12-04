@@ -1,10 +1,8 @@
-import {
-  createStyles,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from "@material-ui/core";
+import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
+import dynamic from "next/dynamic";
+const Paper = dynamic(() => import("@material-ui/core/Paper"), {
+  ssr: true,
+});
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
