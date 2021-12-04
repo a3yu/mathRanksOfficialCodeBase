@@ -91,7 +91,7 @@ function Signup() {
         >
           <div className="mb-4">
             <h1 className="text-white text-center text-4xl font-semibold">
-              Login
+              Sign Up
             </h1>
           </div>
           <div className="mb-6">
@@ -124,8 +124,8 @@ function Signup() {
             <input
               required
               id="email"
-              value="Email"
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              placeholder="Email"
+              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               {...register("email", {
                 required: {
