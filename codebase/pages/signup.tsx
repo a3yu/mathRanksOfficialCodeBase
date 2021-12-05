@@ -84,7 +84,7 @@ function Signup() {
   console.log("The value of the user from:", user);
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
-      <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-cardColorDark  rounded px-8 pt-6 pb-8 mb-4 w-full"
@@ -225,13 +225,5 @@ function Signup() {
     </div>
   );
 }
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const { Auth } = withSSRContext({ req });
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    res.writeHead(302, { Location: "/" });
-    res.end();
-  } catch (err) {}
-  return { props: {} };
-};
+
 export default Signup;
