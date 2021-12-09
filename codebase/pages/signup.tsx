@@ -6,21 +6,6 @@ import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const Grid = dynamic(() => import("@material-ui/core/Grid"), {
-  ssr: true,
-});
-const Button = dynamic(() => import("@material-ui/core/Button"), {
-  ssr: true,
-});
-const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
-  ssr: true,
-});
-const TextField = dynamic(() => import("@material-ui/core/TextField"), {
-  ssr: true,
-});
-const Container = dynamic(() => import("@material-ui/core/Container"), {
-  ssr: true,
-});
 interface IFormInput {
   username: string;
   email: string;

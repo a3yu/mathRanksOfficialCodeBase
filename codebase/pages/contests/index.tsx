@@ -4,48 +4,26 @@ import {
   LastPage,
   FirstPage,
 } from "@material-ui/icons";
-import dynamic from "next/dynamic";
 import { makeStyles, createStyles } from "@material-ui/core";
-const Box = dynamic(() => import("@material-ui/core/Box"), {
-  ssr: true,
-});
-const IconButton = dynamic(() => import("@material-ui/core/IconButton"), {
-  ssr: true,
-});
-const Table = dynamic(() => import("@material-ui/core/Table"), {
-  ssr: true,
-});
-const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
-  ssr: true,
-});
-const TableCell = dynamic(() => import("@material-ui/core/TableCell"), {
-  ssr: true,
-});
-const TableFooter = dynamic(() => import("@material-ui/core/TableFooter"), {
-  ssr: true,
-});
-const TableHead = dynamic(() => import("@material-ui/core/TableHead"), {
-  ssr: true,
-});
-const TablePagination = dynamic(
-  () => import("@material-ui/core/TablePagination"),
-  {
-    ssr: true,
-  }
-);
-const TableRow = dynamic(() => import("@material-ui/core/TableRow"), {
-  ssr: true,
-});
 import {
+  Box,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableHead,
+  TablePagination,
+  TableRow,
   Theme,
   Typography,
   useTheme,
-  Paper,
-  TableContainer,
 } from "@material-ui/core";
-import { API } from "aws-amplify";
+import { API, withSSRContext } from "aws-amplify";
 import moment from "moment";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
