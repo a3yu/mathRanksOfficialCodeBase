@@ -113,7 +113,7 @@ function Login() {
           </div>
           <div className="container max-w-md mx-auto flex-1 space-y-2 mt-4 flex flex-col items-center justify-center px-2">
             <div>
-              <Link href="/signup">Don't have an account? Sign up!</Link>
+              <Link href="/signup">Don&apos;t have an account? Sign up!</Link>
             </div>
             <div>
               <Link href="/confirm">Confirm Account</Link>
