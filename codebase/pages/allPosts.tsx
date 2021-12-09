@@ -4,7 +4,6 @@ import remarkGfm from "remark-gfm";
 import { listPosts } from "../src/graphql/queries";
 import API from "@aws-amplify/api";
 import { ListPostsQuery } from "../src/API";
-
 function AllPosts(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
