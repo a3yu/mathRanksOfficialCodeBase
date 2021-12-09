@@ -237,10 +237,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   try {
     const user = await Auth.currentAuthenticatedUser();
   } catch (err) {
-    res.writeHead(302, {
-      Location: "/?error=You+are+not+logged+in.",
-    });
-    res.end();
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/?error=You+are+not+logged+in.",
+      },
+      props: {},
+    };
   }
   const contNum = query.contNumber;
   const contNumber = String(contNum);
@@ -254,19 +257,30 @@ export const getServerSideProps: GetServerSideProps = async ({
   const contest = currContest.data.getContest;
   const current = Math.round(Date.now());
   if (contest == null || contest.questionSet[0] == null) {
-    res.writeHead(302, { Location: "/?error=Contest+does+not+exist." });
-    res.end();
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/?error=Contest+does+not+exist.",
+      },
+      props: {},
+    };
   } else if (contest.scheduledTime >= current) {
-    res.writeHead(302, {
-      Location: "/?error=Contest+has+not+started.",
-    });
-    res.end();
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/?error=Contest+has+not+started.",
+      },
+      props: {},
+    };
   } else if (contest.endTime <= current && contest.practice != true) {
-    res.writeHead(302, {
-      Location:
-        "/?error=Contest+is+being+graded.+Come+back+later+to+view+the+contest.",
-    });
-    res.end();
+    return {
+      redirect: {
+        permanent: false,
+        destination:
+          "/?error=Contest+is+being+graded.+Come+back+later+to+view+the+contest.",
+      },
+      props: {},
+    };
   }
 
   const user = await Auth.currentAuthenticatedUser();
