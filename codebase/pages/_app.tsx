@@ -13,6 +13,7 @@ import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
 import dynamic from "next/dynamic";
+import Footer from "../components/Footer";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../src/theme";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
@@ -111,7 +112,7 @@ const MyApp = (props) => {
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Component {...pageProps} />
-            {/*    {noNav.includes(asPath) ? null : <Footer />} */}
+            {noNav.includes(asPath) ? null : <Footer />}
           </ThemeProvider>
         </AlertProvider>
       </AuthContext>
