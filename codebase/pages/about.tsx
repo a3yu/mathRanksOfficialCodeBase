@@ -6,7 +6,7 @@ export default function About() {
   }
   return (
     <div className="p-5">
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 mt-10 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">About mathRanks</h1>
           <p className="text-base font-semibold font-sans dark:text-cardPTextDark">
@@ -18,7 +18,7 @@ export default function About() {
           </p>
         </div>
       </figure>
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">
             Participating in Contests
@@ -34,7 +34,7 @@ export default function About() {
           </p>
         </div>
       </figure>
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">Future</h1>
           <p className="text-base font-semibold font-sans dark:text-cardPTextDark">

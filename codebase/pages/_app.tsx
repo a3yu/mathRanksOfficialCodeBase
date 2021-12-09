@@ -14,7 +14,6 @@ import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
 import dynamic from "next/dynamic";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "../src/theme";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
 /* const Footer = dynamic(() => import("../components/Footer"), { ssr: true }); */
 
@@ -106,13 +105,11 @@ const MyApp = (props) => {
       </Head>
       <AuthContext>
         <AlertProvider template={AlertTemplate} {...options}>
-          <ThemeProvider theme={theme}>
-            <Navbar />
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <Component {...pageProps} />
-            {/*    {noNav.includes(asPath) ? null : <Footer />} */}
-          </ThemeProvider>
+          <Navbar />
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+          {/*    {noNav.includes(asPath) ? null : <Footer />} */}
         </AlertProvider>
       </AuthContext>
     </React.Fragment>

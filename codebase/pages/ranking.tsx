@@ -1,80 +1,138 @@
-import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
-import dynamic from "next/dynamic";
-const Paper = dynamic(() => import("@material-ui/core/Paper"), {
-  ssr: true,
-});
+import { Paper } from "@material-ui/core";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
 import { listLeaderboards } from "../src/graphql/queries";
-import theme from "../src/theme";
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    table: {
-      minWidth: 700,
+import { useTable, usePagination } from "react-table";
+function Table({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page, // Instead of using 'rows', we'll use page,
+    // which has only the rows for the active page
+
+    // The rest of these things are super handy, too ;)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 2 },
     },
-    tableRow: {
-      "&:last-child td, &:last-child th": { border: 0 },
-    },
-    body: {
-      marginTop: 85,
-      margin: 100,
-    },
-    tableHeader: {
-      fontWeight: 650,
-    },
-    tableRowCell: {
-      fontWeight: 450,
-    },
-    dataGrid: {
-      color: "#00000",
-      borderRadius: 3,
-    },
-    hideRightSeparator: {
-      "& > .MuiDataGrid-columnSeparator": {
-        visibility: "hidden",
-      },
-    },
-    title: { textAlign: "center", marginBottom: 30 },
-  })
-);
+    usePagination
+  );
+
+  // Render the UI for your table
+  return (
+    <>
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              pageIndex,
+              pageSize,
+              pageCount,
+              canNextPage,
+              canPreviousPage,
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {/* 
+        Pagination can be built however you'd like. 
+        This is just a very basic UI implementation:
+      */}
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>{" "}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {"<"}
+        </button>{" "}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {">"}
+        </button>{" "}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>{" "}
+        <span>
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <span>
+          | Go to page:{" "}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              gotoPage(page);
+            }}
+            style={{ width: "100px" }}
+          />
+        </span>{" "}
+        <select
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
+  );
+}
 export default function Ranking(props) {
-  const classes = useStyles();
   const { leaderBoard } = props;
   console.log(leaderBoard.users);
   const board = leaderBoard.users;
   const place = leaderBoard.place;
   const ratings = leaderBoard.ratings;
-  const columns: GridColDef[] = [
-    {
-      field: "place",
-      headerName: "#",
-      flex: 1,
-      hideSortIcons: true,
-      disableColumnMenu: false,
-      headerClassName: classes.hideRightSeparator,
-      minWidth: 145,
-      editable: false,
-    },
-    {
-      field: "id",
-      headerName: "Username",
-      headerClassName: classes.hideRightSeparator,
-
-      flex: 3,
-
-      minWidth: 160,
-      editable: false,
-    },
-    {
-      field: "rating",
-      headerName: "Rating",
-      headerClassName: classes.hideRightSeparator,
-      flex: 3,
-      minWidth: 160,
-      editable: false,
-    },
-  ];
   const rows = [];
   for (let index = 0; index < board.length; index++) {
     rows.push({
@@ -84,25 +142,8 @@ export default function Ranking(props) {
     });
   }
   return (
-    <div className={classes.body}>
-      <Typography className={classes.title} variant="h1">
-        Leaderboard
-      </Typography>
-      <Paper>
-        <DataGrid
-          rows={rows}
-          components={{
-            Toolbar: GridToolbar,
-          }}
-          columns={columns}
-          pageSize={100}
-          autoHeight={true}
-          className={classes.dataGrid}
-          rowsPerPageOptions={[100]}
-          disableSelectionOnClick
-          showCellRightBorder={false}
-        />
-      </Paper>
+    <div>
+      <h1 className="text-center text-2xl t">Leaderboard</h1>
     </div>
   );
 }

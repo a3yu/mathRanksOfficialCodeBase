@@ -13,6 +13,7 @@ import Latex from "react-latex-next";
 import { Button, Typography } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import TextField from "@material-ui/core/TextField";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { API, withSSRContext } from "aws-amplify";
@@ -87,7 +88,6 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: "Segoe UI",
       fontSize: ".9em",
       fontWeight: 500,
-      marginTop: ".1em",
       marginBottom: "-.8em",
     },
     titleSide: {
@@ -188,12 +188,16 @@ function Contests(props) {
                   </h2>
                 </div>
                 <div>
-                  <input
-                    required
-                    autoComplete="false"
-                    id="username"
-                    className="shadow appearance-none  rounded border-solid border py-2 px-3 text-white bg-black my-2 leading-tight focus:outline-none focus:shadow-outline"
+                  <TextField
+                    variant="outlined"
+                    size="small"
+                    id={"q" + (val + 1)}
                     type="text"
+                    className={classes.input}
+                    inputProps={{
+                      style: { fontSize: 12 },
+                    }}
+                    InputLabelProps={{ style: { fontSize: 12 } }}
                     {...register("" + (val + 1))}
                   />
                   <Button
