@@ -7,7 +7,8 @@ import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
 import { listLeaderboards } from "../src/graphql/queries";
-const useStyles = makeStyles((theme: Theme) =>
+import theme from "../src/theme";
+const useStyles = makeStyles((theme) =>
   createStyles({
     table: {
       minWidth: 700,

@@ -3,46 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Auth } from "@aws-amplify/auth";
 import { useUser } from "../context/AuthContext";
+import { useMediaQuery } from "react-responsive";
 import DrawerComponent from "./DrawerComponent";
-import { useTheme, useMediaQuery, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
-const useStyles = makeStyles(() => ({
-  link: {
-    textDecoration: "none",
-    fontSize: "16px",
-    fontWeight: 450,
-    color: "#FFFFFF",
-  },
-  icon: {
-    color: "white",
-  },
-  show: {
-    paddingBottom: 0.5,
-  },
-  list: {
-    textAlign: "center",
-    marginTop: -5,
-    listStyle: "none",
-    padding: 0,
-  },
-  hidden: {
-    display: "none",
-  },
-  account: {
-    background: "#38bdf8",
-    background: "-webkit-linear-gradient(to right, #38bdf8 0%, #c286ff 80%)",
-    background: "-moz-linear-gradient(to right, #38bdf8 0%, #c286ff 80%)",
-    background: "linear-gradient(to right, #38bdf8 0%, #c286ff 80%)",
-    "-webkit-background-clip": "text",
-    "-webkit-text-fill-color": "transparent",
-  },
-}));
 export default function Navbar() {
   const { user } = useUser();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("700"));
+  const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
   const router = useRouter();
-  const classes = useStyles();
   const loginButton = (e) => {
     e.preventDefault();
     router.push("/login");
@@ -105,16 +71,12 @@ export default function Navbar() {
             {!user && (
               <ul className={styles.account}>
                 <li>
-                  <Button
-                    variant="contained"
+                  <button
+                    className="bg-linkColorDark hover:bg-linkColorDarkHover text-black font-bold py-2 px-4 rounded m-0"
                     onClick={loginButton}
-                    className={styles.accountLogin}
-                    style={{
-                      backgroundColor: "#a9c5ea",
-                    }}
                   >
                     Login
-                  </Button>
+                  </button>
                 </li>
                 <li>
                   <Link href="/signup">

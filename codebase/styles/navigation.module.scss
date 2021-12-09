@@ -9,10 +9,10 @@ $font-color-hover: #7e7e7e;
   margin: 0;
   padding: 0;
   left: 0;
-  margin-left: -10.5em;
+  margin-left: -12em;
   margin-top: -0.75em;
   height: 50px;
-  margin-right: -11em;
+  margin-right: -12.1em;
 }
 .logo:hover {
   cursor: pointer;
@@ -38,9 +38,9 @@ $font-color-hover: #7e7e7e;
     text-align: center;
     padding: 14px 18px;
     text-decoration: none;
-    font: "Inter";
-    font-weight: 400;
-    font-size: 0.9em;
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+    font-weight: 500;
+    font-size: 1.1em;
   }
   a:hover {
     color: $font-color-hover;
@@ -51,26 +51,19 @@ $font-color-hover: #7e7e7e;
     text-align: center;
     text-decoration: none;
     list-style-type: none;
-    font: "Inter";
-    .accountLogin {
-      margin: 9px;
-    }
     li {
+      margin-top: -10px;
+      margin-right: 5px;
       float: right;
     }
     a {
       font-weight: 625;
+      margin-top: -5px;
+      font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
       color: #a9c5ea;
     }
     a:hover {
       cursor: pointer;
     }
-  }
-}
-
-.allDiv {
-  background-color: #000000;
-  @media screen and (max-width: 700px) {
-    margin-bottom: -70px;
   }
 }

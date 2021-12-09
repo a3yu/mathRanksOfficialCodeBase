@@ -3,7 +3,6 @@ import { IconButton, makeStyles } from "@material-ui/core";
 import Link from "next/link";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useUser } from "../context/AuthContext";
-import styles from "../styles/navigation.module.scss";
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -11,13 +10,13 @@ const useStyles = makeStyles(() => ({
     fontSize: "16px",
     fontWeight: 450,
     color: "#FFFFFF",
-    fontFamily: "Inter",
   },
   icon: {
     color: "white",
+    marginBottom: -15,
   },
   show: {
-    paddingBottom: 0.5,
+    marginBottom: -5,
   },
   list: {
     textAlign: "center",

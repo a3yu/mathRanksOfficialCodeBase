@@ -1,23 +1,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import dynamic from "next/dynamic";
-import Typography from "@material-ui/core/Typography";
-import styles from "../styles/Signup.module.scss";
-const Grid = dynamic(() => import("@material-ui/core/Grid"), {
-  ssr: true,
-});
-const Button = dynamic(() => import("@material-ui/core/Button"), {
-  ssr: true,
-});
-const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
-  ssr: true,
-});
-const TextField = dynamic(() => import("@material-ui/core/TextField"), {
-  ssr: true,
-});
-const Container = dynamic(() => import("@material-ui/core/Container"), {
-  ssr: true,
-});
+import { Snackbar } from "@material-ui/core";
 import { Auth } from "aws-amplify";
 import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
@@ -83,108 +66,96 @@ function Confirm() {
   }
   console.log(user);
   return (
-    <div className={styles.container}>
-      <div>
-        <Container>
-          <Typography variant="h1" color="textPrimary" align="center">
-            Confirm Account
-          </Typography>
-          <hr className={styles.divider} />
-        </Container>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.gridContainer}>
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              justify="center"
-              spacing={3}
-            >
-              <Grid item>
-                <TextField
+    <div className="bg-grey-lighter min-h-screen flex flex-col">
+      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-cardColorDark  rounded px-8 pt-6 pb-8 mb-4 w-full"
+        >
+          <div className="mb-4">
+            <h1 className="text-white text-center text-4xl font-semibold">
+              Confirm Account
+            </h1>
+          </div>
+          <div className="mb-6">
+            <input
+              required
+              autoComplete="false"
+              id="username"
+              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Username"
+              type="text"
+              {...register("username", {
+                required: true,
+                minLength: {
+                  value: 3,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+                maxLength: {
+                  value: 20,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+              })}
+            />
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.username && errors.username.message}
+            </p>
+          </div>
+
+          {showCode && (
+            <div>
+              <div className="mb-4">
+                <input
                   required
-                  variant="filled"
-                  className={styles.textF}
-                  id="username"
-                  label="Username"
+                  id="code"
+                  className=" mb-2 shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Verification Code"
                   type="text"
-                  error={errors.username ? true : false}
-                  helperText={errors.username ? errors.username.message : null}
-                  {...register("username", {
-                    required: true,
+                  {...register("code", {
+                    required: {
+                      value: true,
+                      message: "Please enter a code.",
+                    },
                     minLength: {
-                      value: 3,
-                      message:
-                        "Your username must be between 3 and 20 letters (inclusive).",
+                      value: 6,
+                      message: "Your verification is 6 characters long.",
                     },
                     maxLength: {
-                      value: 20,
-                      message:
-                        "Your username must be between 3 and 20 letters (inclusive).",
+                      value: 6,
+                      message: "Your verification is 6 characters long.",
                     },
                   })}
                 />
-              </Grid>
-              {showCode && (
-                <div>
-                  <Grid item>
-                    <TextField
-                      required
-                      variant="outlined"
-                      id="code"
-                      label="Verification Code"
-                      type="text"
-                      error={errors.code ? true : false}
-                      helperText={errors.code ? errors.code.message : null}
-                      {...register("code", {
-                        required: {
-                          value: true,
-                          message: "Please enter a code.",
-                        },
-                        minLength: {
-                          value: 6,
-                          message: "Your verification is 6 characters long.",
-                        },
-                        maxLength: {
-                          value: 6,
-                          message: "Your verification is 6 characters long.",
-                        },
-                      })}
-                    />
-                  </Grid>
-                </div>
-              )}
-
-              <Grid style={{ marginTop: 16 }}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  className={styles.butText}
-                  color="primary"
-                >
-                  {showCode ? "Confirm Code" : "Confirm Account"}
-                </Button>
-              </Grid>
-            </Grid>
-            <Snackbar
-              open={open}
-              autoHideDuration={60000}
-              onClose={handleClose}
+                <p className="text-red-900 text-xs italic m-1">
+                  {errors.code && errors.code.message}
+                </p>
+              </div>
+            </div>
+          )}
+          <div className="mb-2 w-full flex flex-col">
+            <button
+              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 "
+              type="submit"
             >
-              <Alert onClose={handleClose} severity="error">
-                {signUpError}
-              </Alert>
-            </Snackbar>
-            <Snackbar
-              open={veriNotice}
-              autoHideDuration={60000}
-              onClose={handleCloseVeri}
-            >
-              <Alert onClose={handleCloseVeri} severity="info">
-                A verification was sent to your email.
-              </Alert>
-            </Snackbar>
+              {showCode ? "Confirm Code" : "Confirm Account"}
+            </button>
           </div>
+          <Snackbar open={open} autoHideDuration={60000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error">
+              {signUpError}
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={veriNotice}
+            autoHideDuration={60000}
+            onClose={handleCloseVeri}
+          >
+            <Alert onClose={handleCloseVeri} severity="info">
+              A verification was sent to your email.
+            </Alert>
+          </Snackbar>
         </form>
       </div>
     </div>

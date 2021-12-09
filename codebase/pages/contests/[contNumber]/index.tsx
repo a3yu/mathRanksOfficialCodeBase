@@ -6,24 +6,13 @@ import {
   GetContestQuery,
   UpdateContestAnswerInput,
 } from "../../../src/API";
-import dynamic from "next/dynamic";
-const Card = dynamic(() => import("@material-ui/core/Card"), {
-  ssr: true,
-});
-const Button = dynamic(() => import("@material-ui/core/Button"), {
-  ssr: true,
-});
-const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
-  ssr: true,
-});
-const TextField = dynamic(() => import("@material-ui/core/TextField"), {
-  ssr: true,
-});
 import { useForm } from "react-hook-form";
 import { getContest, getContestAnswer } from "../../../src/graphql/queries";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { API, withSSRContext } from "aws-amplify";
@@ -98,6 +87,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontFamily: "Segoe UI",
       fontSize: ".9em",
       fontWeight: 500,
+      marginTop: ".1em",
       marginBottom: "-.8em",
     },
     titleSide: {
@@ -198,16 +188,12 @@ function Contests(props) {
                   </h2>
                 </div>
                 <div>
-                  <TextField
-                    variant="outlined"
-                    size="small"
-                    id={"q" + (val + 1)}
+                  <input
+                    required
+                    autoComplete="false"
+                    id="username"
+                    className="shadow appearance-none  rounded border-solid border py-2 px-3 text-white bg-black my-2 leading-tight focus:outline-none focus:shadow-outline"
                     type="text"
-                    className={classes.input}
-                    inputProps={{
-                      style: { fontSize: 12 },
-                    }}
-                    InputLabelProps={{ style: { fontSize: 12 } }}
                     {...register("" + (val + 1))}
                   />
                   <Button

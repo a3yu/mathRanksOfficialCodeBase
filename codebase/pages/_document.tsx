@@ -1,18 +1,23 @@
 import React from "react";
 // Modules
-import Document, { Html, Head, Main, NextScript } from "next/document";
-// MUI Core
+import { Html, Head, Main, NextScript } from "next/document";
+import Document from "next/dist/pages/_document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className="dark">
         <Head>
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
+          <link
+            rel="stylesheet"
+            href="https://unpkg.com/@tailwindcss/typography@0.4.x/dist/typography.min.css"
+          />
+
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -25,24 +30,8 @@ class MyDocument extends Document {
           `,
             }}
           />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans:wght@700&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Source+Code+Pro:wght@300&display=swap"
-            rel="stylesheet"
-          />
         </Head>
-        <body>
+        <body className="dark:bg-black min-h-screen">
           <Main />
           <NextScript />
         </body>
@@ -50,32 +39,7 @@ class MyDocument extends Document {
     );
   }
 }
-
-// `getInitialProps` belongs to `_document` (instead of `_app`),
-// it's compatible with server-side rendering (SSR).
 MyDocument.getInitialProps = async (ctx) => {
-  // Resolution order
-  //
-  // On the server:
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. document.getInitialProps
-  // 4. app.render
-  // 5. page.render
-  // 6. document.render
-  //
-  // On the server with error:
-  // 1. document.getInitialProps
-  // 2. app.render
-  // 3. page.render
-  // 4. document.render
-  //
-  // On the client
-  // 1. app.getInitialProps
-  // 2. page.getInitialProps
-  // 3. app.render
-  // 4. page.render
-
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;

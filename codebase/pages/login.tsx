@@ -1,29 +1,11 @@
 import React, { useState } from "react";
-import dynamic from "next/dynamic";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Typography from "@material-ui/core/Typography";
+import Snackbar from "@material-ui/core/Snackbar";
 import { Alert } from "@material-ui/lab";
-import { Auth, withSSRContext } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-import styles from "../styles/Login.module.scss";
-import { useUser } from "../context/AuthContext";
-import { GetServerSideProps } from "next";
 import Link from "next/link";
-const Grid = dynamic(() => import("@material-ui/core/Grid"), {
-  ssr: true,
-});
-const Button = dynamic(() => import("@material-ui/core/Button"), {
-  ssr: true,
-});
-const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
-  ssr: true,
-});
-const TextField = dynamic(() => import("@material-ui/core/TextField"), {
-  ssr: true,
-});
-const Container = dynamic(() => import("@material-ui/core/Container"), {
-  ssr: true,
-});
+import { useUser } from "../context/AuthContext";
 
 interface IFormInput {
   username: string;
@@ -59,72 +41,85 @@ function Login() {
   };
   console.log(user);
   return (
-    <div className={styles.container}>
-      <Container>
-        <Typography variant="h1" color="textPrimary" align="center">
-          Login
-        </Typography>
-        <hr className={styles.divider} />
-      </Container>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justify="center"
-          spacing={3}
+    <div className="bg-grey-lighter min-h-screen flex flex-col">
+      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-cardColorDark  rounded px-12 pt-6 pb-8 mb-4 w-full"
         >
-          <Grid item>
-            <TextField
+          <div className="mb-4">
+            <h1 className="text-white text-center text-4xl font-semibold">
+              Login
+            </h1>
+          </div>
+          <div className="mb-6">
+            <input
               required
-              variant="filled"
+              autoComplete="false"
               id="username"
-              label="Username"
-              className={styles.textF}
+              className="shadow appearance-none  rounded w-full py-3 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Username"
               type="text"
-              error={errors.username ? true : false}
-              helperText={errors.username ? errors.username.message : null}
-              {...register("username")}
+              {...register("username", {
+                required: true,
+                minLength: {
+                  value: 3,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+                maxLength: {
+                  value: 20,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+              })}
             />
-          </Grid>
-
-          <Grid item>
-            <TextField
-              required
-              variant="filled"
-              className={styles.textF}
-              id="password"
-              label="Password"
-              type="password"
-              error={errors.password ? true : false}
-              helperText={errors.password ? errors.password.message : null}
-              {...register("password")}
-            />
-          </Grid>
-
-          <Grid style={{ marginTop: 16 }}>
-            <Button
-              variant="contained"
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.username && errors.username.message}
+            </p>
+          </div>
+          <div>
+            <div className="mb-4">
+              <input
+                required
+                id="password"
+                className=" mb-2 shadow appearance-none  rounded w-full py-3 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Password"
+                type="password"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Please enter a password.",
+                  },
+                  minLength: {
+                    value: 8,
+                    message: "Please enter a stronger password.",
+                  },
+                })}
+              />
+              <p className="text-red-900 text-xs italic m-1">
+                {errors.password && errors.password.message}
+              </p>
+            </div>
+          </div>
+          <div className="mb-2 w-full flex flex-col">
+            <button
+              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded"
               type="submit"
-              style={{
-                backgroundColor: "#a9c5ea",
-              }}
-              className={styles.butText}
             >
               Login
-            </Button>
-          </Grid>
-          <div className={styles.botText}>
-            <Link href="/signup">No account? Sign up!</Link>
+            </button>
           </div>
-          <div className={styles.botText2}>
-            <Link href="/changePassword">Forgot Password?</Link>
+          <div className="container max-w-md mx-auto flex-1 space-y-2 mt-4 flex flex-col items-center justify-center px-2">
+            <div>
+              <Link href="/signup">Don&apos;t have an account? Sign up!</Link>
+            </div>
+            <div>
+              <Link href="/confirm">Confirm Account</Link>
+            </div>
           </div>
-          <div className={styles.botText2}>
-            <Link href="/confirm">Confirm Account</Link>
-          </div>
-        </Grid>
-      </form>
+        </form>
+      </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
           {signInError}
@@ -133,13 +128,4 @@ function Login() {
     </div>
   );
 }
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const { Auth } = withSSRContext({ req });
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    res.writeHead(302, { Location: "/" });
-    res.end();
-  } catch (err) {}
-  return { props: {} };
-};
 export default Login;

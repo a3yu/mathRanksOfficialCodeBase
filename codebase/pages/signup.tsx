@@ -1,29 +1,11 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import dynamic from "next/dynamic";
-import Typography from "@material-ui/core/Typography";
-import styles from "../styles/Signup.module.scss";
-import { Auth, withSSRContext } from "aws-amplify";
+import Snackbar from "@material-ui/core/Snackbar";
+import { Auth } from "aws-amplify";
 import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
 import Link from "next/link";
-const Grid = dynamic(() => import("@material-ui/core/Grid"), {
-  ssr: true,
-});
-const Button = dynamic(() => import("@material-ui/core/Button"), {
-  ssr: true,
-});
-const Snackbar = dynamic(() => import("@material-ui/core/Snackbar"), {
-  ssr: true,
-});
-const TextField = dynamic(() => import("@material-ui/core/TextField"), {
-  ssr: true,
-});
-const Container = dynamic(() => import("@material-ui/core/Container"), {
-  ssr: true,
-});
 interface IFormInput {
   username: string;
   email: string;
@@ -100,102 +82,92 @@ function Signup() {
   }
   console.log("The value of the user from:", user);
   return (
-    <div className={styles.container}>
-      <Container>
-        <Typography variant="h1" color="textPrimary" align="center">
-          Sign Up
-        </Typography>
-        <hr className={styles.divider} />
-      </Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.gridContainer}>
-          <Grid
-            container
-            direction="column"
-            alignItems="center"
-            justify="center"
-            spacing={3}
-          >
-            <Grid item>
-              <TextField
-                required
-                variant="filled"
-                className={styles.textF}
-                id="username"
-                label="Username"
-                type="text"
-                color="primary"
-                autoComplete="off"
-                error={errors.username ? true : false}
-                helperText={errors.username ? errors.username.message : null}
-                {...register("username", {
-                  required: {
-                    value: true,
-                    message: "Please enter a username.",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "Please enter a username between 3-16 characters.",
-                  },
-                  maxLength: {
-                    value: 16,
-                    message: "Please enter a username between 3-16 characters.",
-                  },
-                })}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                required
-                variant="filled"
-                id="email"
-                label="Email"
-                type="email"
-                className={styles.textF}
-                error={errors.email ? true : false}
-                helperText={errors.email ? errors.email.message : null}
-                {...register("email", {
-                  required: {
-                    value: true,
-                    message: "Please enter a valid email.",
-                  },
-                })}
-              />
-            </Grid>
-
-            <Grid item>
-              <TextField
-                required
-                variant="filled"
-                id="password"
-                label="Password"
-                type="password"
-                className={styles.textF}
-                error={errors.password ? true : false}
-                helperText={errors.password ? errors.password.message : null}
-                {...register("password", {
-                  required: {
-                    value: true,
-                    message: "Please enter a password.",
-                  },
-                  minLength: {
-                    value: 8,
-                    message: "Please enter a stronger password.",
-                  },
-                })}
-              />
-            </Grid>
-            {showCode && (
-              <Grid item>
-                <TextField
+    <div className="bg-grey-lighter min-h-screen flex flex-col">
+      <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-cardColorDark  rounded px-8 pt-6 pb-8 mb-4 w-full"
+        >
+          <div className="mb-4">
+            <h1 className="text-white text-center text-4xl font-semibold">
+              Sign Up
+            </h1>
+          </div>
+          <div className="mb-6">
+            <input
+              required
+              autoComplete="false"
+              id="username"
+              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Username"
+              type="text"
+              {...register("username", {
+                required: true,
+                minLength: {
+                  value: 3,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+                maxLength: {
+                  value: 20,
+                  message:
+                    "Your username must be between 3 and 20 letters (inclusive).",
+                },
+              })}
+            />
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.username && errors.username.message}
+            </p>
+          </div>
+          <div className="mb-6">
+            <input
+              required
+              id="email"
+              placeholder="Email"
+              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Please enter a valid email.",
+                },
+              })}
+            />
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.email && errors.email.message}
+            </p>
+          </div>
+          <div className="mb-6">
+            <input
+              required
+              id="password"
+              className=" mb-2 shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Password"
+              type="password"
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "Please enter a password.",
+                },
+                minLength: {
+                  value: 8,
+                  message: "Please enter a stronger password.",
+                },
+              })}
+            />
+            <p className="text-red-900 text-xs italic m-1">
+              {errors.password && errors.password.message}
+            </p>
+          </div>
+          {showCode && (
+            <div>
+              <div className="mb-4">
+                <input
                   required
-                  variant="filled"
                   id="code"
-                  label="Verification Code"
+                  className=" mb-2 shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+                  placeholder="Verification Code"
                   type="text"
-                  className={styles.textF}
-                  error={errors.code ? true : false}
-                  helperText={errors.code ? errors.code.message : null}
                   {...register("code", {
                     required: {
                       value: true,
@@ -211,28 +183,28 @@ function Signup() {
                     },
                   })}
                 />
-              </Grid>
-            )}
-
-            <Grid style={{ marginTop: 16 }}>
-              <Button
-                variant="contained"
-                type="submit"
-                className={styles.butText}
-                style={{
-                  backgroundColor: "#a9c5ea",
-                }}
-              >
-                <a>{showCode ? "Confirm Code" : "Sign Up"}</a>
-              </Button>
-            </Grid>
-            <div className={styles.botText}>
+                <p className="text-red-900 text-xs italic m-1">
+                  {errors.code && errors.code.message}
+                </p>
+              </div>
+            </div>
+          )}
+          <div className="mb-2 w-full flex flex-col">
+            <button
+              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 "
+              type="submit"
+            >
+              {showCode ? "Confirm Code" : "Sign Up"}
+            </button>
+          </div>
+          <div className="container max-w-md mx-auto flex-1 mt-4 space-y-2 flex flex-col items-center justify-center px-2">
+            <div>
               <Link href="/login">Have an account? Sign in!</Link>
             </div>
-            <div className={styles.botText2}>
+            <div>
               <Link href="/confirm">Confirm Account</Link>
             </div>
-          </Grid>
+          </div>
           <Snackbar open={open} autoHideDuration={60000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
               {signUpError}
@@ -247,18 +219,10 @@ function Signup() {
               A verification was sent to your email.
             </Alert>
           </Snackbar>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const { Auth } = withSSRContext({ req });
-  try {
-    const user = await Auth.currentAuthenticatedUser();
-    res.writeHead(302, { Location: "/" });
-    res.end();
-  } catch (err) {}
-  return { props: {} };
-};
+
 export default Signup;

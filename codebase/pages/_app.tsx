@@ -1,22 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/theme";
 import Amplify from "aws-amplify";
 import awsconfig from "../src/aws-exports";
 import AuthContext from "../context/AuthContext";
 import { useEffect } from "react";
-import "../styles/globals.scss";
+import "../styles/main.css";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Router, useRouter } from "next/router";
 import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
 import dynamic from "next/dynamic";
+import Footer from "../components/Footer";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "../src/theme";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
-const Footer = dynamic(() => import("../components/Footer"), { ssr: true });
+/* const Footer = dynamic(() => import("../components/Footer"), { ssr: true }); */
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -59,6 +60,13 @@ const options = {
   transition: transitions.SCALE,
 };
 const MyApp = (props) => {
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -83,13 +91,6 @@ const MyApp = (props) => {
     "/changePassword",
   ];
   const { asPath } = router;
-
-  React.useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
-    }
-  }, []);
 
   return (
     <React.Fragment>

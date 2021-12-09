@@ -1,32 +1,7 @@
 import React, { useEffect } from "react";
-import dynamic from "next/dynamic";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-const Grid = dynamic(() => import("@material-ui/core/Grid"), {
-  ssr: true,
-});
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-const TableHead = dynamic(() => import("@material-ui/core/TableHead"), {
-  ssr: true,
-});
-const Table = dynamic(() => import("@material-ui/core/Table"), {
-  ssr: true,
-});
-const Card = dynamic(() => import("@material-ui/core/Card"), { ssr: true });
-import Typography from "@material-ui/core/Typography";
-const TableBody = dynamic(() => import("@material-ui/core/TableBody"), {
-  ssr: true,
-});
-const TableCell = dynamic(() => import("@material-ui/core/TableCell"), {
-  ssr: true,
-});
-const TableRow = dynamic(() => import("@material-ui/core/TableRow"), {
-  ssr: true,
-});
-const CardContent = dynamic(() => import("@material-ui/core/CardContent"), {
-  ssr: true,
-});
 import {
   listContests,
   listLeaderboards,
@@ -42,121 +17,6 @@ import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import moment from "moment-timezone";
 import { useUser } from "../context/AuthContext";
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      flexGrow: 1,
-      marginTop: 70,
-      margin: 65,
-    },
-    paper: {
-      textAlign: "left",
-      color: theme.palette.text.secondary,
-    },
-    cardHeader: {
-      backgroundColor: "#18181B",
-      height: 38,
-      "@media (max-width:500px)": { height: 42 },
-    },
-    cardHeaderCont: {
-      backgroundColor: "#18181B",
-      height: 38,
-      "@media (max-width:500px)": { height: 42 },
-    },
-    cardContentList: {
-      color: "#3f3f3f",
-    },
-    cardContentContests: {
-      color: "#3f3f3f",
-      marginTop: 0,
-    },
-    list: {
-      listStyle: "none",
-    },
-    ul: {
-      fontSize: ".9em",
-      fontWeight: 600,
-      textDecoration: "none",
-      color: "rgb(169, 197, 234)",
-    },
-    tableHeadText: {
-      fontSize: 14,
-      fontStyle: "none",
-      color: "#ffff",
-      fontWeight: 600,
-    },
-    tableCellText: { fontSize: ".9em", color: "#ffff" },
-    tableHead: {
-      marginBottom: -10,
-    },
-    left: {
-      [theme.breakpoints.up("md")]: { marginLeft: 2 },
-    },
-    right: {
-      [theme.breakpoints.up("md")]: { marginRight: 2 },
-    },
-    cardContentText: {
-      fontSize: 14,
-      marginTop: -10,
-      marginBottom: -10,
-      color: "rgba(255, 255, 255, 0.6)",
-      fontWeight: 500,
-    },
-    title: {
-      color: "#FFFFFF",
-      fontWeight: 700,
-      fontSize: "1.4em",
-      marginTop: 10,
-    },
-    pastContest: {
-      marginBottom: -10,
-      marginTop: 15,
-      fontSize: 13.5,
-      color: "#337AB7",
-      "&:hover": {
-        color: "#23527c",
-      },
-    },
-    titleSide: {
-      color: "#ffff",
-      fontSize: "1.4em",
-      fontWeight: 700,
-    },
-    cardClass: {
-      borderRadius: 5,
-    },
-    cardClassTop: {
-      margin: 20,
-    },
-    seeAll: {
-      fontSize: ".9em",
-      fontWeight: 600,
-      color: "rgb(169, 197, 234)",
-      textDecoration: "none",
-      margin: 5,
-    },
-    listDiv: {
-      marginLeft: -35,
-      marginBottom: -25,
-    },
-    table: {
-      marginTop: 10,
-    },
-    tableCellTextLink: {
-      fontSize: ".9em",
-      fontWeight: 600,
-      color: "rgb(169, 197, 234)",
-      textDecoration: "none",
-    },
-    userText: {
-      fontSize: 14,
-      margin: 10,
-      color: "rgba(255, 255, 255, 0.6)",
-      fontWeight: 500,
-    },
-    sectionX: { height: 0, [theme.breakpoints.up("md")]: { height: 350 } },
-  })
-);
 function Home(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
@@ -164,7 +24,6 @@ function Home(props) {
   const { user } = useUser();
   const { contestsAnn, contestsCal, leaderboard, leadRating, leadPlace } =
     props;
-  const classes = useStyles();
   const router = useRouter();
   const alert = useAlert();
   var index = 0;
@@ -197,167 +56,154 @@ function Home(props) {
     }
   }, [router.isReady]);
   return (
-    <div className={classes.container}>
-      <Grid container>
-        <Grid container xs={12} md={8} spacing={2} className={classes.right}>
+    <div className="md:mt-10">
+      <div className="grid md:grid-cols-11 grid-cols-1">
+        <div className="col-span-7 grid-flow-row md:ml-12">
           {user && (
-            <Grid item xs={12}>
-              <Card className={classes.cardClass}>
-                <CardContent className={classes.cardContentText}>
-                  <Typography variant="h1" className={classes.title}>
+            <div>
+              <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+                <div className="space-y-1 ">
+                  <h1 className="text-2xl font-bold text-white m-0">
                     User Data
-                  </Typography>
-                  <Typography className={classes.userText}>
+                  </h1>
+                  <p className="text-base font-semibold font-sans dark:text-cardPTextDark">
                     Username : {user.getUsername()} <br />
                     Current Rating :{" "}
                     {leadRating[index] == null ? "none" : leadRating[index]}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+                  </p>
+                </div>
+              </figure>
+            </div>
           )}
           {contestsAnn.slice(0, 4).map((contest) => (
-            <Grid item xs={12} key={contest.id}>
-              <Card className={classes.cardClass}>
-                <CardContent className={classes.cardContentText}>
-                  <Typography variant="h1" className={classes.title}>
+            <div key={contest.id}>
+              <figure className="dark:bg-cardColorDark rounded p-5 m-4 ">
+                <div className="space-y-1">
+                  <h1 className="text-xl font-bold text-white m-0">
                     {contest.title}
-                  </Typography>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {contest.contestContentAnn}
-                  </ReactMarkdown>
-                </CardContent>
-              </Card>
-            </Grid>
+                  </h1>
+                  <div>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      className="text-sm font-normal font-sans dark:text-cardPTextDark"
+                    >
+                      {contest.contestContentAnn}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </figure>
+            </div>
           ))}
-          <Typography className={classes.seeAll}>
-            <Link href="/allPosts">
-              <a className={classes.seeAll}>See all posts</a>
-            </Link>
-          </Typography>
-        </Grid>
-        <Grid container xs={12} md={4} spacing={2} className={classes.left}>
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardContent className={classes.cardContentList}>
-                <Typography variant="h1" className={classes.titleSide}>
-                  Key Links
-                </Typography>
-                <div className={classes.listDiv}>
-                  <ul className={classes.list}>
+          <Link href="/allPosts">
+            <a className="dark:text-linkColorDark font-bold text-base font-sans ml-8">
+              See all posts
+            </a>
+          </Link>
+        </div>
+        <div className="col-span-4 md:mr-12">
+          <div>
+            <figure className="dark:bg-cardColorDark rounded p-0 m-4 pt-4 pl-4 pb-1">
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold text-white m-0">Key Links</h1>
+                <div className="-ml-5">
+                  <ul className="list-none -ml-5">
                     <li>
-                      <Link href="/about#1">
-                        <a className={classes.ul}>Participating in Contests</a>
+                      <Link href="/about">
+                        <a className="dark:text-linkColorDark font-bold text-base font-sans text-sm ">
+                          Participating in Contests
+                        </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/contests">
-                        <a className={classes.ul}>Contests</a>
+                        <a className="dark:text-linkColorDark font-bold text-base font-sans text-sm ">
+                          Contests
+                        </a>
                       </Link>
                     </li>
                     <li>
                       <Link href="https://github.com/EbTech/Elo-MMR">
-                        <a className={classes.ul}>Elo System</a>
+                        <a className="dark:text-linkColorDark font-bold text-base font-sans text-sm ">
+                          Elo System
+                        </a>
                       </Link>
                     </li>
                   </ul>
                 </div>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardContent className={classes.cardContentContests}>
-                <Typography variant="h1" className={classes.titleSide}>
+              </div>
+            </figure>
+          </div>
+          <div>
+            <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold text-white m-0">
                   Upcoming Contests
-                </Typography>
-                <Table size="small" className={classes.table}>
-                  <TableHead className={classes.tableHead}>
-                    <TableRow>
-                      <TableCell className={classes.tableHeadText}>
-                        Name
-                      </TableCell>
-                      <TableCell className={classes.tableHeadText}>
-                        Time
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {contestsCal.map((contests) => (
-                    <TableBody key={contests.id}>
-                      <TableCell className={classes.tableCellTextLink}>
-                        <Link href="/contests">
-                          <a className={classes.tableCellTextLink}>
-                            {contests.title}
-                          </a>
-                        </Link>
-                      </TableCell>
-                      <TableCell className={classes.tableCellText}>
-                        <Typography className={classes.tableCellText}>
-                          {changeToDate(contests.scheduledTime)}
-                        </Typography>
-                      </TableCell>
-                    </TableBody>
-                  ))}
-                </Table>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card className={classes.cardClass}>
-              <CardContent className={classes.cardContentList}>
-                <Typography variant="h1" className={classes.titleSide}>
-                  Ranking
-                </Typography>
-                <Table size="small" className={classes.table}>
-                  <TableHead className={classes.tableHead}>
-                    <TableRow>
-                      <TableCell
-                        className={classes.tableHeadText}
-                        align="center"
-                      >
-                        Rank
-                      </TableCell>
-                      <TableCell className={classes.tableHeadText}>
-                        Name
-                      </TableCell>
-                      <TableCell className={classes.tableHeadText}>
-                        Rating
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  {leaderboard.slice(0, 10).map((user, val) => (
-                    <TableBody key={user}>
-                      <TableCell
-                        className={classes.tableCellText}
-                        align="center"
-                      >
-                        {leadPlace[val]}
-                      </TableCell>
-                      <TableCell className={classes.tableCellText}>
-                        <Typography className={classes.tableCellText}>
+                </h1>
+                <table className="table-auto border-collapse w-full ">
+                  <thead>
+                    <tr className="text-white">
+                      <th>Name</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-center">
+                    {contestsCal.map((contests) => (
+                      <tr key={contests} className="text-white">
+                        <td className="border-t border-b border-white p-1">
+                          <Link href="/contests">
+                            <a className="dark:text-linkColorDark font-bold text-sm font-sans ">
+                              {contests.title}
+                            </a>
+                          </Link>
+                        </td>
+                        <td className="border-t border-b border-white p-1">
+                          <p>{changeToDate(contests.scheduledTime)}</p>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+          </div>
+          <div>
+            <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold text-white m-0">Ranking</h1>
+                <table className="table-auto w-full">
+                  <thead>
+                    <tr className="text-white">
+                      <th>Rank</th>
+                      <th>Name</th>
+                      <th>Rating</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-center">
+                    {leaderboard.slice(0, 10).map((user, val) => (
+                      <tr key={user} className="text-white">
+                        <td className="border-t border-white p-1 text-sm ">
+                          {leadPlace[val]}
+                        </td>
+                        <td className="border-t border-white p-1 text-sm font-semibold">
                           {user}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography className={classes.tableCellText}>
+                        </td>
+                        <td className="border-t border-white p-1 text-sm ">
                           {leadRating[val]}
-                        </Typography>
-                      </TableCell>
-                    </TableBody>
-                  ))}
-                </Table>
-                <Typography className={classes.seeAll}>
-                  <Typography className={classes.seeAll}>
-                    <Link href="/ranking">
-                      <a className={classes.seeAll}>See all</a>
-                    </Link>
-                  </Typography>
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Grid>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <Link href="/ranking">
+                  <a className="dark:text-linkColorDark font-bold text-base font-sans">
+                    See all
+                  </a>
+                </Link>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
