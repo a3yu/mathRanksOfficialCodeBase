@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Alert } from "@material-ui/lab";
-import { Auth, withSSRContext } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 import { useUser } from "../context/AuthContext";
-import { GetServerSideProps } from "next";
 
 interface IFormInput {
   username: string;
@@ -46,7 +45,7 @@ function Login() {
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-cardColorDark  rounded px-8 pt-6 pb-8 mb-4 w-full"
+          className="bg-cardColorDark  rounded px-12 pt-6 pb-8 mb-4 w-full"
         >
           <div className="mb-4">
             <h1 className="text-white text-center text-4xl font-semibold">
@@ -58,7 +57,7 @@ function Login() {
               required
               autoComplete="false"
               id="username"
-              className="shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none  rounded w-full py-3 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Username"
               type="text"
               {...register("username", {
@@ -84,7 +83,7 @@ function Login() {
               <input
                 required
                 id="password"
-                className=" mb-2 shadow appearance-none  rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
+                className=" mb-2 shadow appearance-none  rounded w-full py-3 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Password"
                 type="password"
                 {...register("password", {
@@ -105,11 +104,19 @@ function Login() {
           </div>
           <div className="mb-2 w-full flex flex-col">
             <button
-              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 "
+              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded"
               type="submit"
             >
               Login
             </button>
+          </div>
+          <div className="container max-w-md mx-auto flex-1 space-y-2 mt-4 flex flex-col items-center justify-center px-2">
+            <div>
+              <Link href="/signup">Don't have an account? Sign up!</Link>
+            </div>
+            <div>
+              <Link href="/confirm">Confirm Account</Link>
+            </div>
           </div>
         </form>
       </div>

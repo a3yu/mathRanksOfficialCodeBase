@@ -108,8 +108,8 @@ function Home(props) {
                 <div className="-ml-5">
                   <ul className="list-none -ml-5">
                     <li>
-                      <Link href="/about#1">
-                        <a className="dark:text-linkColorDark font-bold text-sm font-sans">
+                      <Link href="/about">
+                        <a className="dark:text-linkColorDark font-bold text-base font-sans text-sm ">
                           Participating in Contests
                         </a>
                       </Link>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Snackbar from "@material-ui/core/Snackbar";
-import { Auth, withSSRContext } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { Alert } from "@material-ui/lab";
 import { useUser } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
 import Link from "next/link";
 interface IFormInput {
   username: string;
@@ -198,7 +197,7 @@ function Signup() {
               {showCode ? "Confirm Code" : "Sign Up"}
             </button>
           </div>
-          <div className="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center px-2">
+          <div className="container max-w-md mx-auto flex-1 mt-4 space-y-2 flex flex-col items-center justify-center px-2">
             <div>
               <Link href="/login">Have an account? Sign in!</Link>
             </div>

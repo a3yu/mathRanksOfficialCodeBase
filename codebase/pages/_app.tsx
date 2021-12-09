@@ -13,6 +13,7 @@ import NProgress from "../nprogress";
 import "../nprogress/nprogress.css";
 import * as ga from "../lib/ga";
 import dynamic from "next/dynamic";
+import { ThemeProvider } from "@material-ui/core/styles";
 const Navbar = dynamic(() => import("../components/Navigation"), { ssr: true });
 /* const Footer = dynamic(() => import("../components/Footer"), { ssr: true }); */
 
@@ -57,6 +58,13 @@ const options = {
   transition: transitions.SCALE,
 };
 const MyApp = (props) => {
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
