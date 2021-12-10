@@ -208,7 +208,7 @@ function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const allContests = (await API.graphql({
     query: listContests,
   })) as {
