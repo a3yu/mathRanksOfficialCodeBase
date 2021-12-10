@@ -265,7 +265,7 @@ export async function getStaticProps() {
       leadRating: ratings,
       leadPlace: place,
     },
-    revalidate: 60 * 60,
+    revalidate: 60,
   };
 }
 export default Home;
