@@ -2,6 +2,9 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      deFont: ['"Inter"', "sans-serif"],
+    },
     scale: {
       0: "0",
       25: ".25",

@@ -1,381 +1,327 @@
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  LastPage,
-  FirstPage,
-} from "@material-ui/icons";
-import { makeStyles, createStyles } from "@material-ui/core";
-import {
-  Box,
-  IconButton,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Theme,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
-import { API, withSSRContext } from "aws-amplify";
+import { usePagination, useTable } from "react-table";
+import { API } from "aws-amplify";
 import moment from "moment";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetStaticProps } from "next";
 import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
 import React from "react";
+import Link from "next/link";
+function TableBottom({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page, // Instead of using 'rows', we'll use page,
+    // which has only the rows for the active page
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    table: {
-      minWidth: 650,
+    // The rest of these things are super handy, too ;)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 100 },
     },
-    tableRow: {
-      "&:last-child td, &:last-child th": { border: 0 },
-    },
-    body: {
-      marginTop: 85,
-      margin: 65,
-    },
-    hideRightSeparator: {
-      "& > .MuiDataGrid-columnSeparator": {
-        visibility: "hidden",
-      },
-    },
-    title: { textAlign: "center", marginBottom: 30, marginTop: 30 },
-    none: {
-      margin: 30,
-    },
-    tableHeader: {
-      fontWeight: 650,
-    },
-    tableRowCell: {
-      fontWeight: 350,
-      fontSize: "1em",
-    },
-    linkText: {
-      fontWeight: 600,
-      color: "rgb(169, 197, 234)",
-      textDecoration: "none",
-    },
-  })
-);
-interface TablePaginationActionsProps {
-  count: number;
-  page: number;
-  rowsPerPage: number;
-  onPageChange: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
-  ) => void;
-}
-function TablePaginationActions(props: TablePaginationActionsProps) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
+    usePagination
+  );
+  const link = data.practice;
   return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? (
-          <LastPage style={{ fill: "white" }} />
-        ) : (
-          <FirstPage style={{ fill: "white" }} />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight style={{ fill: "white" }} />
-        ) : (
-          <KeyboardArrowLeft style={{ fill: "white" }} />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft style={{ fill: "white" }} />
-        ) : (
-          <KeyboardArrowRight style={{ fill: "white" }} />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? (
-          <FirstPage style={{ fill: "white" }} />
-        ) : (
-          <LastPage style={{ fill: "white" }} />
-        )}
-      </IconButton>
-    </Box>
+    <>
+      <div className="flex flex-col">
+        <div className="-my-2 overflow-x-auto sm:mx-6 lg:mx-2">
+          <div className="py-2 align-middle inline-block min-w-full ">
+            <div className="shadow overflow-hidden border-b border-gray-500 sm:rounded-lg">
+              <table
+                {...getTableProps()}
+                className="min-w-full divide-y divide-gray-500"
+              >
+                <thead className="dark:bg-cardColorDark">
+                  {headerGroups.map((headerGroup) => (
+                    <tr
+                      key={headerGroup}
+                      {...headerGroup.getHeaderGroupProps()}
+                    >
+                      {headerGroup.headers.map((column) => (
+                        <th
+                          key={column}
+                          {...column.getHeaderProps()}
+                          className="px-6 py-3 text-left text-xs font-medium font-bold text-white uppercase tracking-wider"
+                        >
+                          {column.render("Header")}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody
+                  {...getTableBodyProps()}
+                  className="dark:bg-cardColorDark divide-y divide-gray-500"
+                >
+                  {page.map((row, i) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()} key={row}>
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              key={cell}
+                              {...cell.getCellProps()}
+                              className="px-6 py-4 whitespace-nowrap text-sm text-white"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="pagination m-5 ml-20">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>{" "}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {"<"}
+        </button>{" "}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {">"}
+        </button>{" "}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
+        </button>{" "}
+        <span>
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </span>
+        <span>
+          | Go to page:{" "}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0;
+              gotoPage(page);
+            }}
+            style={{ width: "100px", color: "black" }}
+          />
+        </span>{" "}
+      </div>
+    </>
+  );
+}
+function TableTop({ columns, data }) {
+  // Use the state and functions returned from useTable to build your UI
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page, // Instead of using 'rows', we'll use page,
+    // which has only the rows for the active page
+
+    // The rest of these things are super handy, too ;)
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 10 },
+    },
+    usePagination
+  );
+  return (
+    <>
+      <div className="flex flex-col">
+        <div className="-my-2 overflow-x-auto sm:mx-6 lg:mx-2">
+          <div className="py-2 align-middle inline-block min-w-full ">
+            <div className="shadow overflow-hidden border-b border-gray-500 sm:rounded-lg">
+              <table
+                {...getTableProps()}
+                className="min-w-full divide-y divide-gray-500"
+              >
+                <thead className="dark:bg-cardColorDark">
+                  {headerGroups.map((headerGroup) => (
+                    <tr
+                      key={headerGroup}
+                      {...headerGroup.getHeaderGroupProps()}
+                    >
+                      {headerGroup.headers.map((column) => (
+                        <th
+                          key={column}
+                          {...column.getHeaderProps()}
+                          className="px-6 py-3 text-left text-xs font-medium font-bold text-white uppercase tracking-wider"
+                        >
+                          {column.render("Header")}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody
+                  {...getTableBodyProps()}
+                  className="dark:bg-cardColorDark divide-y divide-gray-500"
+                >
+                  {page.map((row, i) => {
+                    prepareRow(row);
+                    return (
+                      <tr {...row.getRowProps()} key={row}>
+                        {row.cells.map((cell) => {
+                          return (
+                            <td
+                              key={cell}
+                              {...cell.getCellProps()}
+                              className="px-6 py-4 whitespace-nowrap text-sm text-white"
+                            >
+                              {cell.render("Cell")}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
 export default function ContestHome(props) {
+  const columnTop = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "name",
+      },
+      {
+        Header: "Start Time",
+        accessor: "startTime",
+      },
+      {
+        Header: "Length",
+        accessor: "length",
+      },
+      {
+        Header: "Time Until",
+        accessor: "timeUntil",
+        Cell: ({ cell: { value } }) => (
+          <Countdown date={value.b}>
+            <Link href={"/contests/" + value.a}>
+              <a>Enter</a>
+            </Link>
+          </Countdown>
+        ),
+      },
+    ],
+    []
+  );
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "name",
+      },
+      {
+        Header: "Start Time",
+        accessor: "startTime",
+      },
+      {
+        Header: "Length",
+        accessor: "length",
+      },
+      {
+        Header: "Standings & Answers",
+        accessor: "standings",
+        Cell: ({ cell: { value } }) => (
+          <Link href={"/contests/" + value + "/standings"}>
+            <a>Standings & Contests</a>
+          </Link>
+        ),
+      },
+      {
+        Header: "Practice",
+        accessor: "practice",
+        Cell: ({ cell: { value } }) => (
+          <Link href={"/contests/" + value}>
+            <a>Practice</a>
+          </Link>
+        ),
+      },
+    ],
+    []
+  );
   const contList = props.contestList;
   var upcomingList = contList.filter((contest) => contest.endTime > Date.now());
   const contestList = contList.filter(
     (contest) => contest.endTime < Date.now() && contest.practice == true
   );
-
-  const classes = useStyles();
+  const rows = [];
   const changeToDate = (epoch) => {
     var offset = new Date().getTimezoneOffset();
     var m = moment(epoch);
     var s = m.utcOffset(-offset).format("M/D/YY, h:mm A UTC(Z)");
     return s;
   };
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(15);
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+  for (let index = 0; index < contestList.length; index++) {
+    rows.push({
+      name: contestList[index].title,
+      startTime: changeToDate(contestList[index].scheduledTime),
+      length: contestList[index].length,
+      standings: contestList[index].id,
+      practice: contestList[index].id,
+    });
+  }
+  const rowsTop = [];
+  for (let index = 0; index < upcomingList.length; index++) {
+    rowsTop.push({
+      name: upcomingList[index].title,
+      startTime: changeToDate(upcomingList[index].scheduledTime),
+      length: upcomingList[index].length,
+      timeUntil: {
+        a: upcomingList[index].id,
+        b: upcomingList[index].scheduledTime,
+      },
+    });
+  }
   return (
-    <div className={classes.body}>
-      <Typography variant="h2" className={classes.title}>
+    <div className="mt-20 m-12">
+      <h1 className="text-center text-5xl font-semibold font-deFont m-5 my-8">
         Upcoming Contests
-      </Typography>
-      {upcomingList.length != 0 ? (
-        <TableContainer component={Paper}>
-          <Table
-            className={classes.table}
-            size="small"
-            aria-label="a dense table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>Name</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>
-                    Start Time
-                  </Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>
-                    Length
-                  </Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>
-                    Time Until
-                  </Typography>
-                </TableCell>
-                <TableCell align="center"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {upcomingList.map((key, val) => (
-                <TableRow key={key} className={classes.tableRow}>
-                  <TableCell component="th" scope="row" align="center">
-                    <Typography className={classes.tableRowCell}>
-                      {key.title}
-                    </Typography>
-                  </TableCell>
-
-                  <TableCell align="center">
-                    <Typography className={classes.tableRowCell}>
-                      {changeToDate(key.scheduledTime)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    <Typography className={classes.tableRowCell}>
-                      {key.length}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Typography className={classes.tableRowCell}>
-                      <Countdown date={key.scheduledTime}>
-                        <Typography className={classes.tableRowCell}>
-                          <a
-                            href={"/contests/" + key.id}
-                            className={classes.linkText}
-                          >
-                            Enter
-                          </a>
-                        </Typography>
-                      </Countdown>
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center"></TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <Typography className={classes.none}>No Upcoming Contests</Typography>
-      )}
-      <Typography variant="h2" className={classes.title}>
+      </h1>
+      <TableTop columns={columnTop} data={rowsTop} />
+      <h1 className="text-center text-5xl font-semibold font-deFont m-5 my-8">
         Past Contests
-      </Typography>
-      {contestList.length != 0 ? (
-        <TableContainer component={Paper}>
-          <Table
-            className={classes.table}
-            size="small"
-            aria-label="custom pagination table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>Name</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>
-                    Start Time
-                  </Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography className={classes.tableHeader}>
-                    Length
-                  </Typography>
-                </TableCell>
-                <TableCell align="center"></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(rowsPerPage > 0
-                ? contestList.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : contestList
-              ).map((key) => (
-                <TableRow key={key} className={classes.tableRow}>
-                  <TableCell component="th" scope="row" align="center">
-                    <Typography className={classes.tableRowCell}>
-                      {key.title}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Typography className={classes.tableRowCell}>
-                      {changeToDate(key.scheduledTime)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    {" "}
-                    <Typography className={classes.tableRowCell}>
-                      {key.length}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    {key.practice ? (
-                      <Typography className={classes.tableRowCell}>
-                        <a
-                          href={"/contests/" + key.id + "/standings"}
-                          className={classes.linkText}
-                        >
-                          Standings & Answers
-                        </a>
-                      </Typography>
-                    ) : (
-                      <Typography className={classes.tableRowCell}>
-                        Standings not released yet.
-                      </Typography>
-                    )}
-                  </TableCell>
-                  <TableCell align="center">
-                    {key.practice ? (
-                      <Typography className={classes.tableRowCell}>
-                        <a
-                          href={"/contests/" + key.id}
-                          className={classes.linkText}
-                        >
-                          Practice
-                        </a>
-                      </Typography>
-                    ) : (
-                      <Typography className={classes.tableRowCell}>
-                        Practice not available yet.
-                      </Typography>
-                    )}
-                  </TableCell>
-                  <TableCell align="center"></TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  rowsPerPageOptions={[1]}
-                  colSpan={5}
-                  count={contestList.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  style={{ border: "none" }}
-                  SelectProps={{
-                    inputProps: {
-                      "aria-label": "rows per page",
-                    },
-                    native: true,
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      ) : (
-        <Typography className={classes.none}>No Contests</Typography>
-      )}
+      </h1>
+      <TableBottom columns={columns} data={rows} />
     </div>
   );
 }

@@ -17,6 +17,10 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/@tailwindcss/typography@0.4.x/dist/typography.min.css"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+          />
 
           <script
             dangerouslySetInnerHTML={{
@@ -31,7 +35,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body className="dark:bg-black min-h-screen">
+        <body className="dark:bg-black min-h-full">
           <Main />
           <NextScript />
         </body>
