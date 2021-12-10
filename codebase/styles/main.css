@@ -3,7 +3,8 @@
 @import "tailwindcss/base";
 
 @layer base {
-  :any-link {
+  :any-link,
+  a {
     font-weight: 700;
     color: rgb(169, 197, 234);
     text-decoration: none;
