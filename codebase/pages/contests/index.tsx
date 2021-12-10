@@ -1,7 +1,7 @@
 import { usePagination, useTable } from "react-table";
 import { API } from "aws-amplify";
 import moment from "moment";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
@@ -314,7 +314,7 @@ export default function ContestHome(props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const allContests = (await API.graphql({
     query: listContests,
   })) as {
@@ -336,6 +336,5 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       contestList: contests,
     },
-    revalidate: 60,
   };
 };
