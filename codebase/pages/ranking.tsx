@@ -1,4 +1,3 @@
-import { createStyles, makeStyles, Theme, Typography } from "@material-ui/core";
 import dynamic from "next/dynamic";
 import { useTable, usePagination } from "react-table";
 const Paper = dynamic(() => import("@material-ui/core/Paper"), {
@@ -9,6 +8,12 @@ import { API } from "aws-amplify";
 import { ListLeaderboardsQuery } from "../src/API";
 import { listLeaderboards } from "../src/graphql/queries";
 import React from "react";
+import {
+  BiChevronLeft,
+  BiChevronRight,
+  BiChevronsLeft,
+  BiChevronsRight,
+} from "react-icons/bi";
 function Table({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -95,16 +100,16 @@ function Table({ columns, data }) {
       </div>
       <div className="pagination m-5 ml-20">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"<<"}
+          <BiChevronsLeft />
         </button>{" "}
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {"<"}
+          <BiChevronLeft size={15} />
         </button>{" "}
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {">"}
+          <BiChevronRight size={15} />
         </button>{" "}
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {">>"}
+          <BiChevronsRight />
         </button>{" "}
         <span>
           Page{" "}

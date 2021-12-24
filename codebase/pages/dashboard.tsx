@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import moment from "moment-timezone";
 import { useUser } from "../context/AuthContext";
-function Home(props) {
+function Dash(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
@@ -268,4 +268,4 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
-export default Home;
+export default Dash;
