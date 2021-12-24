@@ -28,16 +28,29 @@ export default function threetest() {
         <div className=" flex items-center justify-center w-full">
           <div className="pb-10 z-10 w-1/2">
             <div className="relative">
-              <h1 className="text-center relative text-white text-[4rem] font-deFont font-bold z-10">
+              <h1 className="  text-center relative text-white text-[9rem] font-deFont font-bold z-10">
                 mathRanks
               </h1>
-              <h1 className=" blur-[15px] absolute z-0 justify-center inset-0 text-center text-[4rem] font-deFont font-[600] bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-violet-500">
+              <h1 className="blur-[40px] absolute z-0 justify-center inset-0 text-center text-[9rem] font-deFont font-[600] bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-900">
                 mathRanks
               </h1>
-              <h1 className="text-center  text-white text-2xl font-deFont font-normal">
-                A Math Competition Platform Made For Everyone.
+              <h1 className="text-center text-white text-3xl font-deFont font-semibold">
+                A{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-900">
+                  Math Competition Platform
+                </span>{" "}
+                Made For{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-900">
+                  Everyone
+                </span>
+                .
               </h1>
             </div>
+            {/* <div className="text-center mt-5">
+              <button className=" bg-linkColorDark hover:bg-linkColorDarkHover text-black font-bold py-2 px-4 border border-[#A9C5EA] rounded">
+                Go To Dashboard
+              </button>
+            </div> */}
           </div>
           <div className="w-1/2 h-full  top-0 z-0">
             <Canvas>
