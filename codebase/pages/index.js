@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
-import Link from "next/link";
 import * as THREE from "three";
 import { useRouter } from "next/router";
 import { google } from "googleapis";

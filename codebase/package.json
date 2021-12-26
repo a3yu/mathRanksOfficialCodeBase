@@ -30,6 +30,7 @@
     "cognito-express": "^2.0.19",
     "cross-env": "^7.0.3",
     "fs": "^0.0.1-security",
+    "googleapis": "^92.0.0",
     "jose": "^4.3.7",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",
