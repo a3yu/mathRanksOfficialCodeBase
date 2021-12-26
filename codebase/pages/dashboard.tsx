@@ -50,9 +50,9 @@ function Dash(props) {
         "Contest is being graded. Come back later to view the contest."
     ) {
       alert.show(router.query.error);
-      window.history.pushState("", "", "/");
+      window.history.pushState("", "", "/dashboard");
     } else {
-      window.history.pushState("", "", "/");
+      window.history.pushState("", "", "/dashboard");
     }
   }, [router.isReady]);
   return (
