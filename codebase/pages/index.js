@@ -24,7 +24,7 @@ function Box() {
     </mesh>
   );
 }
-export default function threetest(props) {
+export default function Home(props) {
   console.log(props.responseData);
   const router = useRouter();
   return (
