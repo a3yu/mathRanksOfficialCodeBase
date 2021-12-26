@@ -25,8 +25,13 @@ export default function threetest() {
   return (
     <div className="h-full ">
       <div className="min-h-fit h-screen bg-black flex ">
+        <div className="absolute w-full h-full">
+          <Canvas>
+            <Box />
+          </Canvas>
+        </div>
         <div className=" flex items-center justify-center w-full">
-          <div className="pb-10 z-10 w-1/2">
+          <div className="pb-10 z-10">
             <div className="relative">
               <h1 className="  text-center relative text-white text-[9rem] font-deFont font-bold z-10">
                 mathRanks
@@ -44,7 +49,7 @@ export default function threetest() {
                   Everyone
                 </span>
                 .
-              </h1>
+              </h1>{" "}
             </div>
             {/* <div className="text-center mt-5">
               <button className=" bg-linkColorDark hover:bg-linkColorDarkHover text-black font-bold py-2 px-4 border border-[#A9C5EA] rounded">
@@ -52,13 +57,9 @@ export default function threetest() {
               </button>
             </div> */}
           </div>
-          <div className="w-1/2 h-full  top-0 z-0">
-            <Canvas>
-              <Box />
-            </Canvas>
-          </div>
         </div>
       </div>
+      <div className="h-fit"></div>
     </div>
   );
 }
