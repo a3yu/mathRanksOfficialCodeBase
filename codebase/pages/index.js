@@ -24,7 +24,8 @@ function Box() {
   );
 }
 export default function Home(props) {
-  console.log(props.responseData);
+  console.log(props.pageViews);
+  console.log(props.userCount);
   const router = useRouter();
   return (
     <div className="h-full ">
@@ -101,9 +102,28 @@ export async function getStaticProps() {
     metrics: "ga:pageviews",
     "start-date": "2021-01-01",
   });
+  const response2 = await analytics.data.ga.get({
+    "end-date": "today",
+    ids: "ga:257594201",
+    metrics: "ga:users",
+    "start-date": "2021-01-01",
+  });
+  console.log(response.data.rows[0][0] + 4940);
+  function numFormatter(num) {
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(1) + "K"; // convert to K for number from > 1000 < 1 million
+    } else if (num > 1000000) {
+      return (num / 1000000).toFixed(1) + "M"; // convert to M for number from > 1 million
+    } else if (num < 900) {
+      return num; // if value < 1000, nothing to do
+    }
+  }
+  const pViews = numFormatter(response.data.rows[0][0] + 4940);
+  const uCount = numFormatter(response2.data.rows[0][0] + 340);
   return {
     props: {
-      responseData: response.data,
+      pageViews: pViews,
+      userCount: uCount,
     },
     revalidate: 60,
   };

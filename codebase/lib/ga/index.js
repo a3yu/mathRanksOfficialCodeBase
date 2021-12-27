@@ -1,6 +1,6 @@
 export const pageview = (url) => {
   console.log(1);
-  window.gtag("config", "G-RWSZR8TZGE", {
+  window.gtag("config", "UA-213701410-1", {
     page_path: url,
   });
 };
