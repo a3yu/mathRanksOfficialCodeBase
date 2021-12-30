@@ -24,24 +24,24 @@ function Box() {
   );
 }
 export default function Home(props) {
-  console.log(props.pageViews);
-  console.log(props.userCount);
   const router = useRouter();
   return (
-    <div className="h-full ">
-      <div className="min-h-fit h-screen bg-black flex ">
-        <div className="absolute w-full h-full">
-          <Canvas>
-            <Box />
-          </Canvas>
-        </div>
-        <div className=" flex items-center justify-center w-full">
+    <div className="h-full">
+      <div className="min-h-screen bg-black flex ">
+        <div className="flex items-center justify-center overflow-hidden w-full">
           <div className="pb-10 z-10">
             <div className="relative">
-              <h1 className="  text-center relative text-white text-[4.5rem] md:text-[9rem] font-deFont font-bold z-10">
-                mathRanks
-              </h1>
-              <h1 className="blur-[40px] absolute z-0 justify-center inset-0 text-center text-[5rem] md:text-[9rem] font-deFont font-[600] bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-violet-900">
+              <div className="w-screen md:-mb-7 md:mt-10 sm:-mb-5">
+                <Canvas>
+                  <Box />
+                </Canvas>
+              </div>
+              {/* <div className="w-full -mb-3">
+                <Canvas>
+                  <Box />
+                </Canvas>
+              </div> */}
+              <h1 className="text-center relative text-white text-[4.5rem] md:text-[9rem] font-deFont font-bold z-10">
                 mathRanks
               </h1>
               <h1 className="text-center text-white  font-deFont font-semibold text-[1.5rem] md:text-3xl">
@@ -59,22 +59,17 @@ export default function Home(props) {
             <div className="text-center w-full">
               <button
                 onClick={() => router.push("/dashboard")}
-                className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[7.5px] px-5 rounded text-center justify-center mt-7 text-2xl "
+                className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-2xl "
               >
                 Dashboard
               </button>
             </div>
-
-            {/* <div className="text-center mt-5">
-              <button className=" bg-linkColorDark hover:bg-linkColorDarkHover text-black font-bold py-2 px-4 border border-[#A9C5EA] rounded">
-                Go To Dashboard
-              </button>
-            </div> */}
+            <div className=" sm:h-12"></div>
           </div>
         </div>
       </div>
       <div className="bg-white">
-        <h1 className="font-extrabold text-center text-black text-[55px] font-deFont p-6">
+        <h1 className="font-extrabold text-center text-black text-6xl font-deFont p-7 pt-9">
           Trusted and <u>Growing.</u>
         </h1>
         <div className="flex pb-8">
@@ -96,13 +91,76 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      <div className="bg-black">
+      <div className="bg-black mb-10">
         <div>
-          <h1 className="text-left text-white  font-deFont font-bold text-[1.5rem]  m-3">
+          <h1 className="text-center text-white  font-deFont font-extrabold text-6xl m-10">
+            Start{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-              Everyone
-            </span>
+              competing
+            </span>{" "}
+            and{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
+              practicing
+            </span>{" "}
+            .
           </h1>
+          <div className="flex">
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Register
+              </h1>
+              <p className="text-center font-deFont m-4 md:text-lg text-base font-light">
+                To utilize practice contests and compete, you must register.
+                Registration is completely free.
+              </p>
+              <div className="text-center w-full -mt-6">
+                <button
+                  onClick={() => router.push("/signup")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Compete
+              </h1>
+              <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
+                Look out for contests that are occuring soon. When the contest
+                begins, there will be an option to enter the competition
+                environment and submit answers. Results will be published
+                shortly after. If you made a submission, expect your score to be
+                present on the leaderboard and your elo to have changed.
+              </p>{" "}
+              <div className="text-center w-full -mt-6">
+                <button
+                  onClick={() => router.push("/contests")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
+                >
+                  Compete
+                </button>
+              </div>
+            </div>
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Practice
+              </h1>
+              <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
+                Once results are posted, contests will be open for practice.
+                Answers will be automatically graded and saved to your account.
+                Practice does not alter elo or rank.
+              </p>{" "}
+              <div className="text-center w-full -mt-6">
+                <button
+                  onClick={() => router.push("/contests")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
+                >
+                  Practice
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -117,7 +175,6 @@ export async function getStaticProps() {
     },
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
   });
-  console.log(googleAuth);
   const analytics = google.analytics({
     auth: googleAuth,
     version: "v3",

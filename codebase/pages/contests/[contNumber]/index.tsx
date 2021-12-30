@@ -148,12 +148,8 @@ function Contests(props) {
         for (let index = 0; index < currentContest.questionSet; index++) {
           if (localAnswerSet[index] == currentContest.answerSet[index]) {
             statusAns[index] = true;
-            console.log(localAnswerSet[index]);
-            console.log(currentContest.answerSet[index]);
           } else {
             statusAns[index] = false;
-            console.log(localAnswerSet[index]);
-            console.log(currentContest.answerSet[index]);
           }
         }
       }

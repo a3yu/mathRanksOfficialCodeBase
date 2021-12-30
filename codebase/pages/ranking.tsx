@@ -123,7 +123,6 @@ function Table({ columns, data }) {
 }
 export default function Ranking(props) {
   const { leaderBoard } = props;
-  console.log(leaderBoard.users);
   const board = leaderBoard.users;
   const place = leaderBoard.place;
   const ratings = leaderBoard.ratings;

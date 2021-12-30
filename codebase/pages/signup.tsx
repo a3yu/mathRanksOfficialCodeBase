@@ -61,7 +61,6 @@ function Signup() {
           email,
         },
       });
-      console.log("signed up user:", user);
     } catch (error) {
       throw error;
     }
@@ -80,7 +79,6 @@ function Signup() {
       throw error;
     }
   }
-  console.log("The value of the user from:", user);
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

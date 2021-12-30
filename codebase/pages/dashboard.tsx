@@ -39,7 +39,6 @@ function Dash(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log(router.query.error);
   useEffect(() => {
     if (!router.isReady) return;
     if (
