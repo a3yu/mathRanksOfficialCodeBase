@@ -93,7 +93,7 @@ export default function Home(props) {
       </div>
       <div className="bg-black mb-10">
         <div>
-          <h1 className="text-center text-white  font-deFont font-extrabold text-6xl m-10">
+          <h1 className="text-center text-white  font-deFont font-extrabold md:text-6xl  text-5xl m-10 pb-5">
             Start{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
               competing
