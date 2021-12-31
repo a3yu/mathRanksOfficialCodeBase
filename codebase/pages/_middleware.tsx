@@ -11,7 +11,7 @@ export async function middleware(req, ev) {
           "us-east-2_6a3CHuCqx"
         )
       ) {
-        return NextResponse.redirect("/");
+        return NextResponse.redirect("/dashboard");
       } else {
       }
     } catch (err) {}

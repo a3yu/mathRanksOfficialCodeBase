@@ -53,7 +53,6 @@ function ChangePassword() {
     try {
       await Auth.forgotPassword(username);
     } catch (error) {
-      console.log(1);
       throw error;
     }
   }
@@ -66,7 +65,6 @@ function ChangePassword() {
       throw e;
     }
   }
-  console.log(user);
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">

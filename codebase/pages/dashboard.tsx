@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useAlert } from "react-alert";
 import moment from "moment-timezone";
 import { useUser } from "../context/AuthContext";
-function Home(props) {
+function Dash(props) {
   if (process.browser) {
     window.scrollTo(0, 0);
   }
@@ -39,7 +39,6 @@ function Home(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  console.log(router.query.error);
   useEffect(() => {
     if (!router.isReady) return;
     if (
@@ -50,9 +49,9 @@ function Home(props) {
         "Contest is being graded. Come back later to view the contest."
     ) {
       alert.show(router.query.error);
-      window.history.pushState("", "", "/");
+      window.history.pushState("", "", "/dashboard");
     } else {
-      window.history.pushState("", "", "/");
+      window.history.pushState("", "", "/dashboard");
     }
   }, [router.isReady]);
   return (
@@ -268,4 +267,4 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
-export default Home;
+export default Dash;

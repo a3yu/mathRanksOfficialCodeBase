@@ -148,12 +148,8 @@ function Contests(props) {
         for (let index = 0; index < currentContest.questionSet; index++) {
           if (localAnswerSet[index] == currentContest.answerSet[index]) {
             statusAns[index] = true;
-            console.log(localAnswerSet[index]);
-            console.log(currentContest.answerSet[index]);
           } else {
             statusAns[index] = false;
-            console.log(localAnswerSet[index]);
-            console.log(currentContest.answerSet[index]);
           }
         }
       }
@@ -169,7 +165,7 @@ function Contests(props) {
         setActive(false);
       }, timeUntilInactive);
     } else {
-      router.push("/");
+      router.push("/dashboard");
     }
   }
   return (
@@ -240,7 +236,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
       redirect: {
         permanent: false,
-        destination: "/?error=You+are+not+logged+in.",
+        destination: "/dashboard/?error=You+are+not+logged+in.",
       },
       props: {},
     };
@@ -260,7 +256,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
       redirect: {
         permanent: false,
-        destination: "/?error=Contest+does+not+exist.",
+        destination: "/dashboard/?error=Contest+does+not+exist.",
       },
       props: {},
     };
@@ -268,7 +264,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
       redirect: {
         permanent: false,
-        destination: "/?error=Contest+has+not+started.",
+        destination: "/dashboard/?error=Contest+has+not+started.",
       },
       props: {},
     };
@@ -277,7 +273,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       redirect: {
         permanent: false,
         destination:
-          "/?error=Contest+is+being+graded.+Come+back+later+to+view+the+contest.",
+          "/dashboard/?error=Contest+is+being+graded.+Come+back+later+to+view+the+contest.",
       },
       props: {},
     };

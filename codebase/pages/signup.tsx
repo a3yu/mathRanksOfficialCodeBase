@@ -61,7 +61,6 @@ function Signup() {
           email,
         },
       });
-      console.log("signed up user:", user);
     } catch (error) {
       throw error;
     }
@@ -72,7 +71,7 @@ function Signup() {
       await Auth.confirmSignUp(username, code);
       const amplifyUser = await Auth.signIn(username, password);
       if (amplifyUser) {
-        router.push(`/`);
+        router.push(`/dashboard`);
       } else {
         throw new Error("Something went wrong :'(");
       }
@@ -80,7 +79,6 @@ function Signup() {
       throw error;
     }
   }
-  console.log("The value of the user from:", user);
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -190,10 +188,7 @@ function Signup() {
             </div>
           )}
           <div className="mb-2 w-full flex flex-col">
-            <button
-              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 "
-              type="submit"
-            >
+            <button className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded m-0 ">
               {showCode ? "Confirm Code" : "Sign Up"}
             </button>
           </div>

@@ -15,7 +15,6 @@ export default function Navbar() {
   };
   const redirHome = (e) => {
     e.preventDefault();
-    console.log("clicked");
     router.push("/");
   };
   const signUserOut = async () => {
@@ -40,8 +39,9 @@ export default function Navbar() {
               />
             </li>
             <li>
-              <Link href="/">
-                <a>Home</a>
+              {" "}
+              <Link href="/dashboard">
+                <a>Dashboard</a>
               </Link>
             </li>
             <li>
@@ -60,12 +60,6 @@ export default function Navbar() {
               {" "}
               <Link href="/about">
                 <a>About</a>
-              </Link>
-            </li>
-            <li>
-              {" "}
-              <Link href="/sponsors">
-                <a>Sponsors</a>
               </Link>
             </li>
             {!user && (

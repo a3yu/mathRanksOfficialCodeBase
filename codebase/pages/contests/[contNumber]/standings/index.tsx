@@ -120,7 +120,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
 }) => {
   const numberCont = query.contNumber;
-  console.log(numberCont);
   const SSR = withSSRContext({ req });
   const rankingList = (await SSR.API.graphql({
     query: getContestRanking,

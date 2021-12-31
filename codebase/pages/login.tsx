@@ -26,7 +26,7 @@ function Login() {
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     try {
       await Auth.signIn(data.username, data.password);
-      router.push(`/`);
+      router.push(`/dashboard`);
     } catch (error) {
       console.error(error);
       setSignInError(error.message);
@@ -39,7 +39,6 @@ function Login() {
     }
     setOpen(false);
   };
-  console.log(user);
   return (
     <div className="bg-grey-lighter min-h-screen flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -103,10 +102,7 @@ function Login() {
             </div>
           </div>
           <div className="mb-2 w-full flex flex-col">
-            <button
-              className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded"
-              type="submit"
-            >
+            <button className="bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded">
               Login
             </button>
           </div>

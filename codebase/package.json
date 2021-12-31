@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env TAILWIND_MODE=watch NODE_ENV=development next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -25,11 +25,12 @@
     "@mui/styles": "^5.1.1",
     "@mui/x-data-grid": "^4.0.2",
     "@next/bundle-analyzer": "^12.0.7",
-    "@tailwindcss/typography": "^0.4.1",
+    "@tailwindcss/typography": "^0.5.0",
     "aws-amplify": "^4.2.4",
     "cognito-express": "^2.0.19",
     "cross-env": "^7.0.3",
     "fs": "^0.0.1-security",
+    "googleapis": "^92.0.0",
     "jose": "^4.3.7",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",
@@ -50,11 +51,13 @@
     "react-masonry-css": "^1.0.16",
     "react-responsive": "^9.0.0-beta.5",
     "react-table": "^7.7.0",
+    "react-three-fiber": "^6.0.13",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "remark-gfm": "^2.0.0",
     "sass": "^1.38.0",
+    "three": "^0.136.0",
     "tls": "^0.0.1",
     "typescript": "^4.4.4"
   },
@@ -63,6 +66,6 @@
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
     "postcss": "^8.4.4",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^3.0.7"
   }
 }

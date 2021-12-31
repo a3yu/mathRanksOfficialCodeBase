@@ -6,6 +6,12 @@ import Countdown from "react-countdown";
 import { ListContestsQuery } from "../../src/API";
 import { listContests } from "../../src/graphql/queries";
 import React from "react";
+import {
+  BiChevronLeft,
+  BiChevronsLeft,
+  BiChevronRight,
+  BiChevronsRight,
+} from "react-icons/bi";
 import Link from "next/link";
 function TableBottom({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
@@ -92,18 +98,18 @@ function TableBottom({ columns, data }) {
           </div>
         </div>
       </div>
-      <div className="pagination m-5 ml-20">
+      <div className="pagination m-5 ml-15">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"<<"}
+          <BiChevronsLeft />
         </button>{" "}
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {"<"}
+          <BiChevronLeft size={15} />
         </button>{" "}
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {">"}
+          <BiChevronRight size={15} />
         </button>{" "}
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {">>"}
+          <BiChevronsRight />
         </button>{" "}
         <span>
           Page{" "}
