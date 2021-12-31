@@ -91,19 +91,8 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      <div className="bg-black mb-10">
+      <div className="bg-black mb-10 pt-10">
         <div>
-          <h1 className="text-center text-white  font-deFont font-extrabold md:text-6xl  text-5xl m-10 pb-5">
-            Start{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-              competing
-            </span>{" "}
-            and{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-              practicing
-            </span>{" "}
-            .
-          </h1>
           <div className="flex">
             <div className="w-1/3">
               <h1 className="text-center font-bold md:text-4xl text-3xl">
