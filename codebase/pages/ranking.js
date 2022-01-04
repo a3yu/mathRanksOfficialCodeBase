@@ -1,11 +1,13 @@
-import dynamic from "next/dynamic";
-import { useTable, usePagination } from "react-table";
-const Paper = dynamic(() => import("@material-ui/core/Paper"), {
-  ssr: true,
-});
-
+import { useState } from "react";
+import {
+  useTable,
+  usePagination,
+  useFilters,
+  useGlobalFilter,
+  useAsyncDebounce,
+} from "react-table";
+import "regenerator-runtime";
 import { API } from "aws-amplify";
-import { ListLeaderboardsQuery } from "../src/API";
 import { listLeaderboards } from "../src/graphql/queries";
 import React from "react";
 import {
@@ -14,6 +16,32 @@ import {
   BiChevronsLeft,
   BiChevronsRight,
 } from "react-icons/bi";
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) {
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = useState(globalFilter);
+  const onChange = useAsyncDebounce((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
+
+  return (
+    <span className="ml-2">
+      Search:{" "}
+      <input
+        value={value || ""}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={`${count} records...`}
+        className="border-borderCardColor text-black m-2 p-1 rounded"
+      />
+    </span>
+  );
+}
 function Table({ columns, data }) {
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -31,7 +59,11 @@ function Table({ columns, data }) {
     pageCount,
     gotoPage,
     nextPage,
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter,
     previousPage,
+    state,
     setPageSize,
     state: { pageIndex, pageSize },
   } = useTable(
@@ -40,19 +72,29 @@ function Table({ columns, data }) {
       data,
       initialState: { pageIndex: 0, pageSize: 100 },
     },
+
+    useFilters,
+    useGlobalFilter,
     usePagination
   );
   return (
     <>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:mx-6 lg:mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-500 sm:rounded-lg">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 ">
+            <div className="shadow overflow-hidden border-b  sm:rounded-lg border-borderCardColor border-2">
               <table
                 {...getTableProps()}
                 className="min-w-full divide-y divide-gray-500"
               >
                 <thead className="dark:bg-cardColorDark">
+                  <th colSpan={visibleColumns.length} className="text-left">
+                    <GlobalFilter
+                      preGlobalFilteredRows={preGlobalFilteredRows}
+                      globalFilter={state.globalFilter}
+                      setGlobalFilter={setGlobalFilter}
+                    />
+                  </th>
                   {headerGroups.map((headerGroup) => (
                     <tr
                       {...headerGroup.getHeaderGroupProps()}
@@ -62,7 +104,7 @@ function Table({ columns, data }) {
                         <th
                           key={column}
                           {...column.getHeaderProps()}
-                          className="px-6 py-3 text-left text-xs font-medium font-bold text-white uppercase tracking-wider"
+                          className="px-6 py-3 text-left text-xs  font-bold text-white uppercase tracking-wider"
                         >
                           {column.render("Header")}
                         </th>
@@ -153,7 +195,7 @@ export default function Ranking(props) {
   }
   return (
     <div className="mt-20">
-      <h1 className="text-center text-6xl font-semibold font-deFont m-5">
+      <h1 className="text-center text-6xl font-bold  font-deFont m-5">
         Leaderboard
       </h1>
       <Table columns={columns} data={rows} />
@@ -162,12 +204,9 @@ export default function Ranking(props) {
 }
 
 export async function getStaticProps() {
-  const rankingList = (await API.graphql({
+  const rankingList = await API.graphql({
     query: listLeaderboards,
-  })) as {
-    data: ListLeaderboardsQuery;
-    errors: any[];
-  };
+  });
   const leaderboard = rankingList.data.listLeaderboards.items;
 
   return {

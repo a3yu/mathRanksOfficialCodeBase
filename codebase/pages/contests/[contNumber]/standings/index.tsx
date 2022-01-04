@@ -89,9 +89,9 @@ export default function Standings(props) {
   }
   return (
     <div className={classes.body}>
-      <Typography className={classes.title} variant="h1">
+      <h1 className="text-center text-6xl font-bold font-deFont m-5">
         {props.title}
-      </Typography>
+      </h1>
       <Typography className={classes.ansTitle}>
         <Link href={standings.linkAnswer}>Contest Answers</Link>
       </Typography>
@@ -103,6 +103,19 @@ export default function Standings(props) {
           autoHeight={true}
           components={{
             Toolbar: GridToolbar,
+          }}
+          componentsProps={{
+            panel: {
+              sx: {
+                "& .MuiTypography-root": {
+                  color: "dodgerblue",
+                  fontSize: 20,
+                },
+                "& .MuiDataGrid-filterForm": {
+                  bgcolor: "lightblue",
+                },
+              },
+            },
           }}
           className={classes.dataGrid}
           rowsPerPageOptions={[100]}

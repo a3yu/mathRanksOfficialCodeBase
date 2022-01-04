@@ -102,11 +102,12 @@ const MyApp = (props) => {
       </Head>
       <AuthContext>
         <AlertProvider template={AlertTemplate} {...options}>
+          <Navbar />
           <ThemeProvider theme={theme}>
-            <Navbar />
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <Component {...pageProps} />
+
             {noNav.includes(asPath) ? null : <Footer />}
           </ThemeProvider>
         </AlertProvider>
