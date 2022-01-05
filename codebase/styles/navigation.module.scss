@@ -1,4 +1,4 @@
-$black-main: #000000;
+$black-main: #272727;
 $font-color: #ffffff;
 $font-color-hover: #7e7e7e;
 @import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
@@ -26,12 +26,13 @@ $font-color-hover: #7e7e7e;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100;
-
+  z-index: 10;
   li {
     float: left;
   }
-
+  .allDiv {
+    z-index: 10;
+  }
   li a {
     display: block;
     color: $font-color;

@@ -55,7 +55,7 @@ function Dash(props) {
     }
   }, [router.isReady]);
   return (
-    <div className="md:mt-10">
+    <div className="md:mt-14">
       <div className="grid md:grid-cols-11 grid-cols-1">
         <div className="col-span-7 grid-flow-row md:ml-12">
           {user && (
@@ -76,8 +76,8 @@ function Dash(props) {
           )}
           {contestsAnn.slice(0, 4).map((contest) => (
             <div key={contest.id}>
-              <figure className="dark:bg-cardColorDark rounded p-5 m-4 ">
-                <div className="space-y-1">
+              <figure className="dark:bg-cardColorDark rounded p-5 m-4 border-[.5px] border-borderCardColor">
+                <div className="space-y-1 ">
                   <h1 className="text-xl font-bold text-white m-0">
                     {contest.title}
                   </h1>
@@ -101,7 +101,7 @@ function Dash(props) {
         </div>
         <div className="col-span-4 md:mr-12">
           <div>
-            <figure className="dark:bg-cardColorDark rounded p-0 m-4 pt-4 pl-4 pb-1">
+            <figure className="dark:bg-cardColorDark rounded p-0 m-4 pt-4 pl-4 pb-1 border-[.5px] border-borderCardColor">
               <div className="space-y-1">
                 <h1 className="text-2xl font-bold text-white m-0">Key Links</h1>
                 <div className="-ml-5">
@@ -133,7 +133,7 @@ function Dash(props) {
             </figure>
           </div>
           <div>
-            <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+            <figure className="dark:bg-cardColorDark rounded p-5 m-4 border-[.5px] border-borderCardColor">
               <div className="space-y-1">
                 <h1 className="text-2xl font-bold text-white m-0">
                   Upcoming Contests
@@ -166,7 +166,7 @@ function Dash(props) {
             </figure>
           </div>
           <div>
-            <figure className="dark:bg-cardColorDark rounded p-5 m-4">
+            <figure className="dark:bg-cardColorDark rounded p-5 m-4 border-[.5px] border-borderCardColor">
               <div className="space-y-1">
                 <h1 className="text-2xl font-bold text-white m-0">Ranking</h1>
                 <table className="table-auto w-full">
@@ -183,7 +183,7 @@ function Dash(props) {
                         <td className="border-t border-white p-1 text-sm ">
                           {leadPlace[val]}
                         </td>
-                        <td className="border-t border-white p-1 text-sm font-semibold">
+                        <td className="border-t border-white p-1 text-sm ">
                           {user}
                         </td>
                         <td className="border-t border-white p-1 text-sm ">
