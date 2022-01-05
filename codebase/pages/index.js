@@ -142,10 +142,10 @@ export default function Home(props) {
                     Practice.
                   </h1>
                   <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
-                    Couldn't catch the live contest? That's totally fine! We
-                    archive all live contests and allow users to practice on
-                    them long after the contest is over. Answers are graded, but
-                    results do not effect elo.
+                    Couldn&apos;t catch the live contest? That&apos;s totally
+                    fine! We archive all live contests and allow users to
+                    practice on them long after the contest is over. Answers are
+                    graded, but results do not effect elo.
                   </p>{" "}
                   <div className="text-center w-full -mt-6">
                     {/* <button
