@@ -10,9 +10,6 @@ import { useForm } from "react-hook-form";
 import { getContest, getContestAnswer } from "../../../src/graphql/queries";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
-import { Button, Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import { GetServerSideProps } from "next";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { API, withSSRContext } from "aws-amplify";
@@ -24,79 +21,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Countdown from "react-countdown";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      marginTop: 85,
-      margin: 65,
-    },
-    question: {
-      overflowX: "auto",
-    },
-    questionText: {
-      fontWeight: 400,
-      fontSize: "1.3em",
-      width: "100%",
-    },
-    cardContentText: {
-      fontSize: 14,
-      marginTop: -10,
-      marginBottom: -10,
-    },
-    cardHeader: {
-      backgroundColor: "#0048ba",
-      height: 38,
-    },
-    input: {
-      borderColor: "white",
-      "& input[type=number]": {
-        "-moz-appearance": "textfield",
-      },
-      "& input[type=number]::-webkit-outer-spin-button": {
-        "-webkit-appearance": "none",
-        margin: 0,
-      },
-      "& input[type=number]::-webkit-inner-spin-button": {
-        "-webkit-appearance": "none",
-        margin: 0,
-      },
-    },
-    button1: {
-      marginLeft: 12.5,
-    },
-    cardClass: {
-      borderRadius: 0,
-      margin: 20,
-    },
-    paper: {
-      textAlign: "left",
-      color: theme.palette.text.secondary,
-    },
-    title: {
-      color: "#ffffff",
-      fontSize: "1em",
-    },
-    submitAns: {
-      fontFamily: "Segoe UI",
-      fontSize: ".8em",
-      fontWeight: 350,
-      marginBottom: "-.5em",
-      color: "green",
-    },
-    resultText: {
-      fontFamily: "Segoe UI",
-      fontSize: ".9em",
-      fontWeight: 500,
-      marginTop: ".1em",
-      marginBottom: "-.8em",
-    },
-    titleSide: {
-      color: "#ffff",
-      fontSize: "1.35em",
-      fontWeight: 650,
-    },
-  })
-);
 function Contests(props) {
   const router = useRouter();
   var localAnswerSet = props.currentAnswer;
@@ -106,7 +30,6 @@ function Contests(props) {
   const timeUntilInactive = props.currentContest.endTime - Date.now();
   const [index, setIndex] = useState(0);
   const [activeState, setActive] = useState(timeUntilInactive > 0);
-  const classes = useStyles();
   const practice = currentContest.practice;
   const {
     register,
@@ -169,17 +92,17 @@ function Contests(props) {
     }
   }
   return (
-    <div className={classes.container}>
+    <div className="pt-10">
       {currentContest.questionSet.map((key, val) => (
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" key={key}>
           <div key={key}>
-            <Card className={classes.cardClass}>
-              <CardContent className={classes.cardContentText}>
-                <Typography variant="h1" className={classes.titleSide}>
+            <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2 border-[0.5px] border-borderCardColor">
+              <div className="">
+                <h1 className="font-bold font-defont text-xl">
                   Question {val + 1}
-                </Typography>
-                <div className={classes.question}>
-                  <h2 className={classes.questionText}>
+                </h1>
+                <div className="overflow-x-auto py-2">
+                  <h2 className="w-full font-deFont font-normal text-lg">
                     <Latex>{key}</Latex>
                   </h2>
                 </div>
@@ -192,29 +115,25 @@ function Contests(props) {
                     type="text"
                     {...register("" + (val + 1))}
                   />
-                  <Button
-                    className={classes.button1}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    size="small"
+                  <button
+                    className="m-2 bg-linkColorDark hover:bg-linkColorDarkHover text-black py-2 px-4 rounded font-bold"
                     onClick={() => setIndex(val)}
                   >
                     Submit
-                  </Button>
-                  <Typography className={classes.submitAns}>
+                  </button>
+                  <h3 className="font-deFont text-xs text-[#249225]">
                     Your Submitted Answer: {currentAnswerSet[val]}
-                  </Typography>
+                  </h3>
                   {practice && (
-                    <Typography className={classes.resultText}>
+                    <h3 className="font-deFont -mb-3">
                       {statusAns[val] == true && "Correct"}
                       {statusAns[val] == false && "Incorrect"}
                       {statusAns[val] == null && ""}
-                    </Typography>
+                    </h3>
                   )}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </figure>
           </div>
         </form>
       ))}

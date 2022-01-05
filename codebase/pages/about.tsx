@@ -6,7 +6,7 @@ export default function About() {
   }
   return (
     <div className="p-6">
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 mt-12 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7 mt-12 -mb-2 border-[0.5px] border-borderCardColor">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">About mathRanks</h1>
           <p className="text-base font-semibold font-sans dark:text-cardPTextDark">
@@ -18,7 +18,7 @@ export default function About() {
           </p>
         </div>
       </figure>
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2 border-[0.5px] border-borderCardColor">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">
             Participating in Contests
@@ -34,10 +34,10 @@ export default function About() {
           </p>
         </div>
       </figure>
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7 -mb-2 border-[0.5px] border-borderCardColor">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">Future</h1>
-          <p className="text-base font-semibold font-sans dark:text-cardPTextDark">
+          <p className="text-base font-semibold font-sans dark:text-cardPTextDark ">
             mathRanks is growing and ever changing. In the future, we plan to
             implement more community-focused features, refine our scoring and
             point system, and more. If you have any insight, or would like to
@@ -45,7 +45,7 @@ export default function About() {
           </p>
         </div>
       </figure>
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7 border-[0.5px] border-borderCardColor">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">Ranking</h1>
           <Link href="https://github.com/EbTech/Elo-MMR/blob/master/paper/EloMMR.pdf">
