@@ -5,8 +5,8 @@ export default function About() {
     window.scrollTo(0, 0);
   }
   return (
-    <div className="p-6">
-      <figure className="dark:bg-cardColorDark rounded p-5 m-7 mt-12 -mb-2">
+    <div className="p-5">
+      <figure className="dark:bg-cardColorDark rounded p-5 m-7 mt-10 -mb-2">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold text-white m-0">About mathRanks</h1>
           <p className="text-base font-semibold font-sans dark:text-cardPTextDark">

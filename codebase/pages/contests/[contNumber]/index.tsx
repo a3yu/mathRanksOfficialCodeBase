@@ -222,6 +222,7 @@ function Contests(props) {
     </div>
   );
 }
+
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,

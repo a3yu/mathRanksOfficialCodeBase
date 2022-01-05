@@ -30,6 +30,7 @@ export default function AuthContext({ children }: Props): ReactElement {
 
   useEffect(() => {
     Hub.listen("auth", () => {
+      // perform some action to update state whenever an auth event is detected.
       checkUser();
     });
   }, []);
@@ -39,6 +40,7 @@ export default function AuthContext({ children }: Props): ReactElement {
       const amplifyUser = await Auth.currentAuthenticatedUser();
       setUser(amplifyUser);
     } catch (error) {
+      // No current signed in user.
       console.error(error);
       setUser(null);
     }

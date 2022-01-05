@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Canvas, useFrame, useThree } from "react-three-fiber";
 import * as THREE from "three";
 import { useRouter } from "next/router";
 import { google } from "googleapis";
-import Signup from "../components/auth/Signup";
-
 let googleAuth;
 function Box() {
   const base = new THREE.DodecahedronGeometry(100);
@@ -28,140 +26,133 @@ function Box() {
 export default function Home(props) {
   const router = useRouter();
   return (
-    <>
-      <div className="h-full">
-        <div className="min-h-screen bg-[#121212] flex">
-          <div className="flex items-center justify-center overflow-hidden w-full">
-            <div className="pb-10 ">
-              <div className="relative">
-                <div className="w-screen md:-mb-7 md:mt-10 sm:-mb-5">
-                  <Canvas>
-                    <Box />
-                  </Canvas>
-                </div>
-                <h1 className="text-center relative text-white text-[4.5rem] md:text-[9rem] font-deFont font-bold ">
-                  mathRanks
-                </h1>
-                <h1 className="text-center text-white  font-deFont font-semibold text-[1.5rem] md:text-3xl">
-                  A{" "}
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-                    Math Competition Platform
-                  </span>{" "}
-                  Made For{" "}
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-                    Everyone
-                  </span>
-                  .
-                </h1>{" "}
+    <div className="h-full">
+      <div className="min-h-screen bg-black flex ">
+        <div className="flex items-center justify-center overflow-hidden w-full">
+          <div className="pb-10 z-10">
+            <div className="relative">
+              <div className="w-screen md:-mb-7 md:mt-10 sm:-mb-5">
+                <Canvas>
+                  <Box />
+                </Canvas>
               </div>
-              <div className="text-center w-full">
+              {/* <div className="w-full -mb-3">
+                <Canvas>
+                  <Box />
+                </Canvas>
+              </div> */}
+              <h1 className="text-center relative text-white text-[4.5rem] md:text-[9rem] font-deFont font-bold z-10">
+                mathRanks
+              </h1>
+              <h1 className="text-center text-white  font-deFont font-semibold text-[1.5rem] md:text-3xl">
+                A{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
+                  Math Competition Platform
+                </span>{" "}
+                Made For{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
+                  Everyone
+                </span>
+                .
+              </h1>{" "}
+            </div>
+            <div className="text-center w-full">
+              <button
+                onClick={() => router.push("/dashboard")}
+                className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-2xl "
+              >
+                Dashboard
+              </button>
+            </div>
+            <div className=" sm:h-12"></div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white">
+        <h1 className="font-extrabold text-center text-black text-6xl font-deFont p-7 pt-9">
+          Trusted and <u>Growing.</u>
+        </h1>
+        <div className="flex pb-8">
+          <div className="w-1/2">
+            <h2 className="text-2xl font-bold font-deFont text-black text-center ">
+              Page Views
+            </h2>
+            <h2 className="text-5xl font-extrabold font-deFont text-black text-center">
+              {props.pageViews}
+            </h2>
+          </div>
+          <div className="w-1/2">
+            <h2 className="text-2xl font-bold font-deFont text-black text-center">
+              Users
+            </h2>
+            <h2 className="text-5xl font-extrabold font-deFont text-black text-center">
+              {props.userCount}
+            </h2>
+          </div>
+        </div>
+      </div>
+      <div className="bg-black mb-10 pt-10">
+        <div>
+          <div className="flex">
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Register
+              </h1>
+              <p className="text-center font-deFont m-4 md:text-lg text-base font-light">
+                To utilize practice contests and compete, you must register.
+                Registration is completely free.
+              </p>
+              <div className="text-center w-full -mt-6">
                 <button
-                  onClick={() => router.push("/dashboard")}
-                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-2xl "
+                  onClick={() => router.push("/signup")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
                 >
-                  Dashboard
+                  Register
                 </button>
               </div>
-              <div className=" sm:h-12"></div>
             </div>
-          </div>
-        </div>
-        <div className="bg-white">
-          <h1 className="font-extrabold text-center text-black text-6xl font-deFont p-7 pt-9">
-            Trusted and <u>Growing.</u>
-          </h1>
-          <div className="flex pb-8">
-            <div className="w-1/2">
-              <h2 className="text-2xl font-bold font-deFont text-black text-center ">
-                Page Views
-              </h2>
-              <h2 className="text-5xl font-extrabold font-deFont text-black text-center">
-                {props.pageViews}
-              </h2>
-            </div>
-            <div className="w-1/2">
-              <h2 className="text-2xl font-bold font-deFont text-black text-center">
-                Users
-              </h2>
-              <h2 className="text-5xl font-extrabold font-deFont text-black text-center">
-                {props.userCount}
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className="bg-[#121212] mb-10 pt-10 px-5">
-          <div>
-            <div className="flex">
-              <div className="w-1/3">
-                <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-4 py-5 rounded">
-                  <h1 className="text-center font-bold md:text-4xl text-3xl">
-                    Frequent.
-                  </h1>
-                  <p className="text-center font-deFont m-4 md:text-lg text-base font-light">
-                    We noticed that many high quality math competitions are only
-                    held anually or rather infrequently. We are working to hold
-                    around 4-5 high-quality competitions a month to allow
-                    flexibility to those interested in sharpening there math
-                    skills.
-                  </p>
-                  <div className="text-center w-full -mt-6">
-                    {/* <button
-                    onClick={() => router.push("/signup")}
-                    className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
-                  >
-                    Register
-                  </button> */}
-                  </div>
-                </div>
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Compete
+              </h1>
+              <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
+                Look out for contests that are occuring soon. When the contest
+                begins, there will be an option to enter the competition
+                environment and submit answers. Results will be published
+                shortly after. If you made a submission, expect your score to be
+                present on the leaderboard and your elo to have changed.
+              </p>{" "}
+              <div className="text-center w-full -mt-6">
+                <button
+                  onClick={() => router.push("/contests")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
+                >
+                  Compete
+                </button>
               </div>
-              <div className="w-1/3">
-                <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-3 py-5 rounded">
-                  <h1 className="text-center font-bold md:text-4xl text-3xl">
-                    Competition.
-                  </h1>
-                  <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
-                    Seeing your progress is important when developing a skill.
-                    We have employed an elo system to allow users to measure
-                    their progress over time. Additionally, we publish
-                    leaderboards for most competitions when they are finished
-                    and graded.
-                  </p>{" "}
-                  <div className="text-center w-full -mt-6">
-                    {/*  <button
-                    onClick={() => router.push("/contests")}
-                    className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
-                  >
-                    Compete
-                  </button> */}
-                  </div>
-                </div>
-              </div>
-              <div className="w-1/3">
-                <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-4 py-5 rounded">
-                  <h1 className="text-center font-bold md:text-4xl text-3xl">
-                    Practice.
-                  </h1>
-                  <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
-                    Couldn't catch the live contest? That's totally fine! We
-                    archive all live contests and allow users to practice on
-                    them long after the contest is over. Answers are graded, but
-                    results do not effect elo.
-                  </p>{" "}
-                  <div className="text-center w-full -mt-6">
-                    {/* <button
-                    onClick={() => router.push("/contests")}
-                    className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
-                  >
-                    Practice
-                  </button> */}
-                  </div>
-                </div>
+            </div>
+            <div className="w-1/3">
+              <h1 className="text-center font-bold md:text-4xl text-3xl">
+                Practice
+              </h1>
+              <p className="text-center  font-deFont m-4 md:text-lg text-base font-light">
+                Once results are posted, contests will be open for practice.
+                Answers will be automatically graded and saved to your account.
+                Practice does not alter elo or rank.
+              </p>{" "}
+              <div className="text-center w-full -mt-6">
+                <button
+                  onClick={() => router.push("/contests")}
+                  className="bg-white hover:bg-slate-300 text-black font-semibold font-deFont py-[9px] px-5 rounded text-center justify-center mt-7 text-xl "
+                >
+                  Practice
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
