@@ -149,19 +149,7 @@ function ConfirmAccount(props) {
                               className="shadow appearance-none bg-cardColorDark border-[0.5px] border-borderCardColor rounded w-full py-2 px-3 text-white bg-black  leading-tight focus:outline-none focus:shadow-outline"
                               placeholder="Username"
                               type="text"
-                              {...register("username", {
-                                required: true,
-                                minLength: {
-                                  value: 3,
-                                  message:
-                                    "Your username must be between 3 and 20 letters (inclusive).",
-                                },
-                                maxLength: {
-                                  value: 20,
-                                  message:
-                                    "Your username must be between 3 and 20 letters (inclusive).",
-                                },
-                              })}
+                              {...register("username", {})}
                             />
                             <p className="text-red-900 text-xs italic m-1">
                               {errors.username && errors.username.message}
