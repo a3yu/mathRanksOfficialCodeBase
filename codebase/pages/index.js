@@ -6,25 +6,6 @@ import { google } from "googleapis";
 import Signup from "../components/auth/Signup";
 
 let googleAuth;
-function Box() {
-  const base = new THREE.DodecahedronGeometry(100);
-  const boxRef = useRef();
-  useFrame(() => {
-    boxRef.current.rotation.y += 0.0007;
-    boxRef.current.rotation.x += 0.0007;
-  });
-  useThree(({ camera }) => {
-    camera.position.z = 1.75;
-  });
-  return (
-    <mesh ref={boxRef}>
-      <hemisphereLight args={[0x00ff4d, 0xfe4466, 2]} />
-      <directionalLight args={[0xffffff, 1]} />
-      <icosahedronBufferGeometry attach="geometry" />
-      <meshStandardMaterial wireframe color={0x31529f} />
-    </mesh>
-  );
-}
 export default function Home(props) {
   const router = useRouter();
   return (
@@ -32,13 +13,8 @@ export default function Home(props) {
       <div className="h-full">
         <div className="min-h-screen bg-[#121212] flex">
           <div className="flex items-center justify-center overflow-hidden w-full">
-            <div className="pb-10 ">
+            <div className="pb-10 pt-10">
               <div className="relative">
-                <div className="w-screen md:-mb-7 md:mt-10 sm:-mb-5">
-                  <Canvas>
-                    <Box />
-                  </Canvas>
-                </div>
                 <h1 className="text-center relative text-white text-[4.5rem] md:text-[9rem] font-deFont font-bold ">
                   mathRanks
                 </h1>
@@ -91,8 +67,8 @@ export default function Home(props) {
         </div>
         <div className="bg-[#121212] mb-10 pt-10 px-5">
           <div>
-            <div className="flex">
-              <div className="w-1/3">
+            <div className="md:flex ">
+              <div className="md:w-1/3 w-full">
                 <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-4 py-5 rounded">
                   <h1 className="text-center font-bold md:text-4xl text-3xl">
                     Frequent.
@@ -114,7 +90,7 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="md:w-1/3 w-full">
                 <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-3 py-5 rounded">
                   <h1 className="text-center font-bold md:text-4xl text-3xl">
                     Competition.
@@ -136,7 +112,7 @@ export default function Home(props) {
                   </div>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="md:w-1/3 w-full">
                 <div className="bg-cardColorDark border-[0.5px] border-borderCardColor m-4 py-5 rounded">
                   <h1 className="text-center font-bold md:text-4xl text-3xl">
                     Practice.

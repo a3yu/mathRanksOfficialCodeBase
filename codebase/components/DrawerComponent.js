@@ -3,7 +3,10 @@ import { IconButton, makeStyles } from "@material-ui/core";
 import Link from "next/link";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useUser } from "../context/AuthContext";
-
+import Signup from "./auth/Signup";
+import Login from "./auth/Login";
+import Confirm from "./auth/confirmAccount";
+import ChangePassword from "./auth/changePassword";
 const useStyles = makeStyles(() => ({
   link: {
     textDecoration: "none",
@@ -31,10 +34,17 @@ const useStyles = makeStyles(() => ({
     fontWeight: 600,
     color: "#a9c5ea",
     textDecoration: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
 }));
 
 function DrawerComponent() {
+  const [signup, setSignup] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [change, setChange] = useState(false);
   const { user } = useUser();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -42,8 +52,54 @@ function DrawerComponent() {
     await Auth.signOut();
     router.push(`/`);
   };
+  function switchModal() {
+    setSignup(!signup);
+    setLogin(!login);
+  }
+  function goToConfirm() {
+    setSignup(false);
+    setLogin(false);
+    setConfirm(true);
+  }
+  function goToChange() {
+    setSignup(false);
+    setLogin(false);
+    setConfirm(false);
+    setChange(true);
+  }
+  const loginButton = (e) => {
+    e.preventDefault();
+    setSignup(false);
+    setLogin(!login);
+  };
+  const signupButton = (e) => {
+    e.preventDefault();
+    setLogin(false);
+    setSignup(!signup);
+  };
   return (
     <div>
+      <div className="z-30 absolute">
+        <Signup
+          show={signup}
+          onClose={() => setSignup(false)}
+          onSwitch={switchModal}
+          goToConfirm={goToConfirm}
+        />
+        <Login
+          show={login}
+          onClose={() => setLogin(false)}
+          onSwitch={switchModal}
+          goToConfirm={goToConfirm}
+          goToChange={goToChange}
+        />
+        <Confirm
+          show={confirm}
+          onClose={() => setConfirm(false)}
+          onSwitch={switchModal}
+        />
+        <ChangePassword show={change} onClose={() => setChange(false)} />
+      </div>
       <IconButton onClick={() => setOpen(!open)}>
         <MenuIcon className={classes.icon} />
       </IconButton>
@@ -82,14 +138,14 @@ function DrawerComponent() {
         {!user && (
           <ul className={classes.list}>
             <li>
-              <Link href="/login">
-                <a className={classes.account}>Login</a>
-              </Link>
+              <a onClick={loginButton} className={classes.account}>
+                Login
+              </a>
             </li>
             <li>
-              <Link href="/signup">
-                <a className={classes.account}>Sign Up</a>
-              </Link>
+              <a onClick={signupButton} className={classes.account}>
+                Sign Up
+              </a>
             </li>
           </ul>
         )}
