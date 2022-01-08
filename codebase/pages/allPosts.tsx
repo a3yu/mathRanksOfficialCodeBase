@@ -14,10 +14,10 @@ function AllPosts(props) {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div>
+    <div className="md:mt-14">
       {contestsAnn.map((contest) => (
         <div key={contest.id}>
-          <figure className="dark:bg-cardColorDark rounded p-5 m-4 ">
+          <figure className="dark:bg-cardColorDark rounded p-5 m-4 border-[0.5px] border-borderCardColor ">
             <div className="space-y-1">
               <h1 className="text-xl font-bold text-white m-0">
                 {contest.title}
