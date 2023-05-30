@@ -208,7 +208,7 @@ function Dash(props) {
 }
 
 export async function getStaticProps() {
-  const allContests = (await API.graphql({
+  /* const allContests = (await API.graphql({
     query: listContests,
   })) as {
     data: ListContestsQuery;
@@ -255,14 +255,48 @@ export async function getStaticProps() {
   const leaderboard = rankingList.data.listLeaderboards.items;
   const users = leaderboard[0].users;
   const ratings = leaderboard[0].ratings;
-  const place = leaderboard[0].place;
+  const place = leaderboard[0].place; */
+
   return {
     props: {
-      contestsAnn: itemsPost,
-      contestsCal: calendar,
-      leaderboard: users,
-      leadRating: ratings,
-      leadPlace: place,
+      contestsAnn: [
+        {
+          id: 1,
+          sort: 1,
+          contestContentAnn:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+          title: "Lorem ipsum dolor #1",
+        },
+        {
+          id: 1,
+          sort: 2,
+          contestContentAnn:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+          title: "Lorem ipsum dolor #2",
+        },
+        {
+          id: 1,
+          sort: 3,
+          contestContentAnn:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+          title: "Lorem ipsum dolor #3",
+        },
+      ],
+      contestsCal: [
+        {
+          title: "example 1",
+          contestID: "00001",
+          scheduledTime: 1685526820000,
+        },
+        {
+          title: "example 2",
+          contestID: "00002",
+          scheduledTime: 1685576920000,
+        },
+      ],
+      leaderboard: ["John", "Tom"],
+      leadRating: [150, 100],
+      leadPlace: [1, 2],
     },
     revalidate: 60,
   };

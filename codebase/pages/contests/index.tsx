@@ -321,7 +321,7 @@ export default function ContestHome(props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allContests = (await API.graphql({
+  /*  const allContests = (await API.graphql({
     query: listContests,
   })) as {
     data: ListContestsQuery;
@@ -336,12 +336,44 @@ export const getStaticProps: GetStaticProps = async () => {
       return 1;
     }
     return 0;
-  });
+  }); */
 
   return {
     props: {
-      contestList: contests,
+      contestList: [
+        {
+          title: "example 1",
+          id: 2,
+          contestID: "00001",
+          length: "1 Hour",
+          scheduledTime: 1685526820000,
+          endTime: 1685586920000,
+          practice: 0,
+          sort: 0,
+        },
+        {
+          title: "example 2",
+          id: 1,
+          length: "1 Hour",
+          contestID: "00002",
+          scheduledTime: 1685576920000,
+          endTime: 1685586920000,
+          practice: 0,
+          sort: 1,
+        },
+        {
+          title: "example 2",
+          id: 1,
+          length: "1 Hour",
+          contestID: "00002",
+          scheduledTime: 1675576920000,
+          endTime: 1675586920000,
+          practice: 1,
+          sort: 1,
+        },
+      ],
     },
+
     revalidate: 60,
   };
 };

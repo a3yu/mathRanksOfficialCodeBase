@@ -146,7 +146,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }) => {
-  const SSR = withSSRContext({ req });
+  const contNum = query.contNumber;
+  const contNumber = String(contNum);
+  /*  const SSR = withSSRContext({ req });
   const { Auth } = withSSRContext({ req });
   try {
     const user = await Auth.currentAuthenticatedUser();
@@ -159,8 +161,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       props: {},
     };
   }
-  const contNum = query.contNumber;
-  const contNumber = String(contNum);
   const currContest = (await SSR.API.graphql({
     query: getContest,
     authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -232,12 +232,23 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
-  const answerFinal = answer.userAnswerSet;
+  const answerFinal = answer.userAnswerSet; */
   return {
     props: {
-      currentContest: contest,
-      currentAnswer: answerFinal,
-      username: user.username,
+      currentContest: {
+        title: "example 2",
+        id: 1,
+        length: "1 Hour",
+        contestID: "00002",
+        scheduledTime: 1675576920000,
+        endTime: 1675586920000,
+        practice: 1,
+        sort: 1,
+        questionSet: ["What is 1+1", "What is the meaning of life?"],
+        answerSet: ["2", "42"],
+      },
+      currentAnswer: [1, 42],
+      username: "Fake User",
       contID: contNumber,
     },
   };

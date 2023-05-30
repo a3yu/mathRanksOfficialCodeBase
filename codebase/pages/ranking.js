@@ -204,14 +204,21 @@ export default function Ranking(props) {
 }
 
 export async function getStaticProps() {
-  const rankingList = await API.graphql({
+  /*   const rankingList = await API.graphql({
     query: listLeaderboards,
   });
-  const leaderboard = rankingList.data.listLeaderboards.items;
+  const leaderboard = rankingList.data.listLeaderboards.items; */
+
+  const example = {
+    ID: 1,
+    users: ["tom", "bob", "bill"],
+    ratings: [2378, 1273, 902],
+    place: [1, 2, 3],
+  };
 
   return {
     props: {
-      leaderBoard: leaderboard[0],
+      leaderBoard: example,
     },
     revalidate: 60 * 60,
   };

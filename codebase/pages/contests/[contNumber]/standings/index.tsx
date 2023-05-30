@@ -132,7 +132,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }) => {
-  const numberCont = query.contNumber;
+  /*   const numberCont = query.contNumber;
   const SSR = withSSRContext({ req });
   const rankingList = (await SSR.API.graphql({
     query: getContestRanking,
@@ -159,11 +159,16 @@ export const getServerSideProps: GetServerSideProps = async ({
       Location: "/",
     });
     res.end();
-  }
+  } */
   return {
     props: {
-      standings: cRanking,
-      title: title,
+      standings: {
+        users: ["Tom", "Bob"],
+        ratings: ["1000", "500"],
+        place: [1, 2],
+        linkAnswer: "Google.com",
+      },
+      title: "Title Example 1",
     },
   };
 };

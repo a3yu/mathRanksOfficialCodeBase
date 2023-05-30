@@ -174,9 +174,9 @@ export async function getStaticProps() {
       return num; // if value < 1000, nothing to do
     }
   }
-  const pV = parseInt(response.data.rows[0][0]) + 4940;
+  const pV = parseInt(response.data.rows[0][0]);
   const pViews = numFormatter(pV);
-  const uC = parseInt(response2.data.rows[0][0]) + 340;
+  const uC = parseInt(response2.data.rows[0][0]);
   const uCount = numFormatter(uC);
   return {
     props: {
